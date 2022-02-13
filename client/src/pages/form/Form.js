@@ -1,16 +1,78 @@
 import React, { useState } from "react";
+import { FaAngleDoubleDown, FaAngleDoubleUp } from "react-icons/fa";
+
 import "./form.css";
 
 export default function Form() {
+  const [companyoverview, setCompanyoverview] = useState(false);
   const [jobdetail, setJobdetail] = useState(false);
   const [contact, setContact] = useState(false);
-  const [secondarycontact, setSecondarycontact] = useState(false);
   const [stipenddetail, setStipenddetail] = useState(false);
+
+  const [secondarycontact, setSecondarycontact] = useState(false);
   const [modebutton, setModebutton] = useState("");
   const [ppo, setPpo] = useState("");
   return (
     <>
       <div>
+        <div className="container col-lg-8 col-md-12 category p-0 ">
+          <div
+            className="upper"
+            onClick={() => {
+              if (companyoverview) {
+                setCompanyoverview(false);
+              } else {
+                setCompanyoverview(true);
+              }
+            }}
+          >
+            <div className="category-heading">
+              <h3>COMPANY OVERVIEW</h3>
+              <div className="mx-4">
+                {companyoverview === true ? (
+                  <FaAngleDoubleUp />
+                ) : (
+                  <FaAngleDoubleDown />
+                )}
+              </div>
+            </div>
+          </div>
+          {companyoverview === true ? (
+            <div className="lower">
+              <div className="form-floating mb-3">
+                <input
+                  type="text"
+                  className="form-control"
+                  id="floatingInput"
+                  placeholder="Name"
+                />
+                <label for="floatingInput">Name of Company</label>
+              </div>
+              <div className="form-floating mb-3">
+                <input
+                  type="url"
+                  className="form-control"
+                  id="floatingInput"
+                  placeholder="Website"
+                />
+                <label for="floatingInput">Website</label>
+              </div>
+
+              <div className="form-floating mb-3">
+                <input
+                  type="text"
+                  className="form-control"
+                  id="floatingInput"
+                  placeholder="Sector"
+                />
+                <label for="floatingInput">Sector</label>
+              </div>
+            </div>
+          ) : (
+            <div></div>
+          )}
+        </div>
+
         <div className="container col-lg-8 col-md-12 category p-0 ">
           <div
             className="upper"
@@ -22,20 +84,19 @@ export default function Form() {
               }
             }}
           >
-            {/* <p>June 10</p> */}
-            <h3>JOB DETAILS</h3>
+            <div className="category-heading">
+              <h3>JOB DETAILS</h3>
+              <div className="mx-4">
+                {jobdetail === true ? (
+                  <FaAngleDoubleUp />
+                ) : (
+                  <FaAngleDoubleDown />
+                )}
+              </div>
+            </div>
           </div>
           {jobdetail === true ? (
             <div className="lower">
-              {/* <div className="form-floating mb-3">
-                <input
-                  type="email"
-                  className="form-control"
-                  id="floatingInput"
-                  placeholder="name@example.com"
-                />
-                <label for="floatingInput">Email address</label>
-              </div> */}
               <div className="form-floating mb-3">
                 <input
                   type="text"
@@ -74,27 +135,29 @@ export default function Form() {
               </div>
 
               <div className="optionbox mb-3">
-                <span className="mx-2">Mode of Intern: </span>
-                <button
-                  type="button"
-                  className={
-                    "btn mx-3 px-3 " +
-                    (modebutton === "Virtual" ? "btn-primary" : "")
-                  }
-                  onClick={() => setModebutton("Virtual")}
-                >
-                  Virtual
-                </button>
-                <button
-                  type="button "
-                  className={
-                    "btn mx-3 px-3 " +
-                    (modebutton === "Physical" ? "btn-primary" : "")
-                  }
-                  onClick={() => setModebutton("Physical")}
-                >
-                  Physical
-                </button>
+                <div className="optionbox-title">Mode of Intern: </div>
+                <div>
+                  <button
+                    type="button"
+                    className={
+                      "optionbutton btn " +
+                      (modebutton === "Virtual" ? "btn-primary" : "")
+                    }
+                    onClick={() => setModebutton("Virtual")}
+                  >
+                    Virtual
+                  </button>
+                  <button
+                    type="button "
+                    className={
+                      "optionbutton btn " +
+                      (modebutton === "Physical" ? "btn-primary" : "")
+                    }
+                    onClick={() => setModebutton("Physical")}
+                  >
+                    Physical
+                  </button>
+                </div>
               </div>
               {/* <p>June 10</p>
               <h3>
@@ -130,20 +193,20 @@ export default function Form() {
               }
             }}
           >
+            <div className="category-heading">
+              <h3>STIPEND DETAILS</h3>
+              <div className="mx-4">
+                {stipenddetail === true ? (
+                  <FaAngleDoubleUp />
+                ) : (
+                  <FaAngleDoubleDown />
+                )}
+              </div>
+            </div>
             {/* <p>June 10</p> */}
-            <h3>STIPEND DETAILS</h3>
           </div>
           {stipenddetail === true ? (
             <div className="lower">
-              {/* <div className="form-floating mb-3">
-                <input
-                  type="email"
-                  className="form-control"
-                  id="floatingInput"
-                  placeholder="name@example.com"
-                />
-                <label for="floatingInput">Email address</label>
-              </div> */}
               <div className="form-floating mb-3">
                 <input
                   type="text"
@@ -184,25 +247,27 @@ export default function Form() {
               </div>
 
               <div className="optionbox mb-3">
-                <span className="mx-2">PPO Provision: </span>
-                <button
-                  type="button"
-                  className={
-                    "btn mx-3 px-3 " + (ppo === "Yes" ? "btn-primary" : "")
-                  }
-                  onClick={() => setPpo("Yes")}
-                >
-                  Yes
-                </button>
-                <button
-                  type="button "
-                  className={
-                    "btn mx-3 px-3 " + (ppo === "No" ? "btn-primary" : "")
-                  }
-                  onClick={() => setPpo("No")}
-                >
-                  No
-                </button>
+                <div className="optionbox-title">PPO Provision: </div>
+                <div>
+                  <button
+                    type="button"
+                    className={
+                      "optionbutton btn " + (ppo === "Yes" ? "btn-primary" : "")
+                    }
+                    onClick={() => setPpo("Yes")}
+                  >
+                    Yes
+                  </button>
+                  <button
+                    type="button "
+                    className={
+                      "optionbutton btn " + (ppo === "No" ? "btn-primary" : "")
+                    }
+                    onClick={() => setPpo("No")}
+                  >
+                    No
+                  </button>
+                </div>
               </div>
               {ppo === "Yes" ? (
                 <div className="form-floating mb-3">
@@ -235,8 +300,13 @@ export default function Form() {
               }
             }}
           >
+            <div className="category-heading">
+              <h3>CONTACT DETAILS</h3>
+              <div className="mx-4">
+                {contact === true ? <FaAngleDoubleUp /> : <FaAngleDoubleDown />}
+              </div>
+            </div>
             {/* <p>June 10</p> */}
-            <h3>CONTACT DETAILS</h3>
           </div>
           {contact === true ? (
             <div className="lower">
@@ -279,27 +349,31 @@ export default function Form() {
               </div>
 
               <div className="mb-3 optionbox">
-                <span className="mx-2">Add Secondary Contact Details: </span>
-                <button
-                  type="button"
-                  className={
-                    "btn mx-3 px-3 " +
-                    (secondarycontact === "Yes" ? "btn-primary" : "")
-                  }
-                  onClick={() => setSecondarycontact("Yes")}
-                >
-                  Yes
-                </button>
-                <button
-                  type="button "
-                  className={
-                    "btn mx-3 px-3 " +
-                    (secondarycontact === "No" ? "btn-primary" : "")
-                  }
-                  onClick={() => setSecondarycontact("No")}
-                >
-                  No
-                </button>
+                <div className="optionbox-title">
+                  Add Secondary Contact Details:{" "}
+                </div>
+                <div>
+                  <button
+                    type="button"
+                    className={
+                      "optionbutton btn " +
+                      (secondarycontact === "Yes" ? "btn-primary" : "")
+                    }
+                    onClick={() => setSecondarycontact("Yes")}
+                  >
+                    Yes
+                  </button>
+                  <button
+                    type="button "
+                    className={
+                      "optionbutton btn " +
+                      (secondarycontact === "No" ? "btn-primary" : "")
+                    }
+                    onClick={() => setSecondarycontact("No")}
+                  >
+                    No
+                  </button>
+                </div>
               </div>
               {secondarycontact === "Yes" ? (
                 <div>
