@@ -19,11 +19,13 @@ export default function Form() {
           <div
             className="upper"
             onClick={() => {
-              if (companyoverview) {
-                setCompanyoverview(false);
-              } else {
-                setCompanyoverview(true);
-              }
+              setTimeout(() => {
+                if (companyoverview) {
+                  setCompanyoverview(false);
+                } else {
+                  setCompanyoverview(true);
+                }
+              }, 200);
             }}
           >
             <div className="category-heading">
@@ -77,11 +79,13 @@ export default function Form() {
           <div
             className="upper"
             onClick={() => {
-              if (jobdetail) {
-                setJobdetail(false);
-              } else {
-                setJobdetail(true);
-              }
+              setTimeout(() => {
+                if (jobdetail) {
+                  setJobdetail(false);
+                } else {
+                  setJobdetail(true);
+                }
+              }, 200);
             }}
           >
             <div className="category-heading">
@@ -186,11 +190,13 @@ export default function Form() {
           <div
             className="upper"
             onClick={() => {
-              if (stipenddetail) {
-                setStipenddetail(false);
-              } else {
-                setStipenddetail(true);
-              }
+              setTimeout(() => {
+                if (stipenddetail) {
+                  setStipenddetail(false);
+                } else {
+                  setStipenddetail(true);
+                }
+              }, 200);
             }}
           >
             <div className="category-heading">
@@ -289,15 +295,18 @@ export default function Form() {
             <div></div>
           )}
         </div>
+
         <div className="container col-lg-8 col-md-12 category p-0 ">
           <div
             className="upper"
             onClick={() => {
-              if (contact) {
-                setContact(false);
-              } else {
-                setContact(true);
-              }
+              setTimeout(() => {
+                if (contact) {
+                  setContact(false);
+                } else {
+                  setContact(true);
+                }
+              }, 200);
             }}
           >
             <div className="category-heading">
@@ -306,7 +315,6 @@ export default function Form() {
                 {contact === true ? <FaAngleDoubleUp /> : <FaAngleDoubleDown />}
               </div>
             </div>
-            {/* <p>June 10</p> */}
           </div>
           {contact === true ? (
             <div className="lower">
