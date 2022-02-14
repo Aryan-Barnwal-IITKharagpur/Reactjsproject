@@ -1,0 +1,17 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+.semiContainer{
+    border-radius: 10px 30px 30px 10px;
+    height: 100%;
+    width: 50%;
+    background-image: url("../../public/Images/Signup_cover.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
+}
