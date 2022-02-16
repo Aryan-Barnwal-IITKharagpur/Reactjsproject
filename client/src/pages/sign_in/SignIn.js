@@ -8,7 +8,7 @@ import "./SignIn.css"
 export default function signIn() {
   return (
     <div className="mainBody">
-      <div className="container">
+      <div className="mainBodyContainer">
       <SemiContainer />
       <SignupForm />
       </div>

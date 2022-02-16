@@ -3,7 +3,7 @@ import "../Styles/SignupForm.css"
 
 function SignupForm() {
     return (
-        <div className="formbody mx-5">
+        <div className="formbody ">
             <h3 className='mx-3 formHeading' ><strong>SIGN-UP </strong></h3>
            
             <form className='signUpform'>

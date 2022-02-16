@@ -4,14 +4,14 @@
     box-sizing: border-box;
 }
 .mainBody{
-    height: 100vh;
+    height: 120vh;
     width: 100vw;
     background-color: rgb(208, 221, 233);
     align-items: center;
    display: flex;
    justify-content: center;
 }
-.container{
+.mainBodyContainer{
     height: 80vh;
     width: 80vw;
     display: flex;
@@ -22,4 +22,12 @@
     padding: 0px;
     box-shadow: 0px 1px 20px rgb(77, 73, 73);
     
+}
+@media only screen and (max-width: 1000px) {
+    .mainBodyContainer{
+        border-radius: 30px;
+        flex-direction: column;
+        height: auto;
+    }
+
 }

@@ -38,3 +38,19 @@ border: 1px solid rgba( 255, 255, 255, 0.18 );
     /* text-align: center; */
     font-family: 'Merriweather Sans', sans-serif;
 }
+.hiddenButton{
+    width: 30%;
+    position: absolute;
+    bottom: 30px;
+    color: white;
+    border: 1px solid white;
+    display:none;
+    
+}
+
+@media only screen and (max-width: 1000px) {
+    .hiddenButton{
+        display: inline;
+        width: auto;
+    }
+  }
