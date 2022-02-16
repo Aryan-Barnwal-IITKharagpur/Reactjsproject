@@ -1,0 +1,87 @@
+.cd-box2 {
+  border-radius: 20px;
+  background-color: rgba(203, 237, 250, 0.322);
+  font-family: "Montserrat", sans-serif;
+}
+
+.cd-heading1 {
+  color: #3498db;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  padding: 25px 0 0px 10px;
+}
+
+.cd-heading2 {
+  display: inline-block;
+  clip: rect(0px, 0px, 300px, 0px);
+  color: #575757;
+  font-size: 1.6rem;
+  font-weight: 600;
+  padding-left: 10px;
+}
+
+.cd-heading3 {
+  padding: 30px 0 0 10px;
+  color: black;
+  font-size: 1rem;
+  opacity: 0.6;
+  font-weight: 600;
+  letter-spacing: 0.7px;
+}
+
+.cd-button-div {
+  justify-content: space-around;
+  text-align: center;
+  flex: 50%;
+}
+.button-inf {
+  display: flex;
+  flex-direction: row;
+  font-size: 30px;
+  text-align: center;
+  margin-top: 3.5rem;
+}
+
+.cd-button {
+  box-sizing: border-box;
+  appearance: none;
+  background-color: transparent;
+  border: 2px solid;
+  border-radius: 0.6em;
+  cursor: pointer;
+  /* display: flex; */
+  align-self: center;
+  font-size: 1.2rem;
+  font-weight: 400;
+  line-height: 1;
+  margin: 10px;
+  padding: 0.8em 0.6em;
+  text-decoration: none;
+  text-align: center;
+  text-transform: uppercase;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  width: 14rem;
+  border-color: #3498db;
+  color: #fff;
+  box-shadow: 0 0 40px 40px #3498db inset, 0 0 0 0 #3498db;
+  transition: all 150ms ease-in-out;
+}
+.cd-button:hover {
+  color: black;
+  outline: 0;
+  box-shadow: 0 0 10px 0 #3498db inset, 0 0 10px 4px #3498db;
+}
+.cd-button:focus {
+  color: rgba(0, 0, 0, 0.5);
+  outline: 0;
+}
+@media (max-width: 600px) {
+  .button-inf {
+    flex-direction: column;
+  }
+  .cd-button {
+    width: 300px;
+  }
+}
