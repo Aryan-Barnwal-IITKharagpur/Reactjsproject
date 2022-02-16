@@ -3,7 +3,7 @@ import Glassmorphism from '../../Components/Glassmorphism'
 import Loader from '../../Components/Loader'
 import SemiContainer from '../../Components/SemiContainer'
 import SignupForm from '../../Components/SignupForm'
-import "./SignIn.css"
+import "./signIn.css"
 
 export default function signIn() {
   return (
@@ -14,4 +14,4 @@ export default function signIn() {
       </div>
     </div>
   )
-}
+  }
