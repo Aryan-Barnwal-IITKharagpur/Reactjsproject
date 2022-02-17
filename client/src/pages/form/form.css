@@ -27,6 +27,7 @@
 .category-heading {
   display: flex;
   justify-content: space-between;
+  text-transform: uppercase;
 }
 
 .category p {
@@ -77,4 +78,66 @@
 .optionbox-title {
   margin: 0 10px 0 10px;
   padding: 10px 0;
+}
+.form-check {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 17px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.form-check input {
+  /* position: absolute; */
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 22px;
+  width: 22px;
+  border: 1px solid;
+  background-color: rgb(250, 248, 248);
+}
+.form-check:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+.form-check input:checked ~ .checkmark {
+  background-color: #2196f3;
+}
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.form-check input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.form-check .checkmark:after {
+  left: 7px;
+  top: 3px;
+  width: 7px;
+  height: 11px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+.eligible-options {
+  background-color: #7ab4e41e;
+}
+.eligible-type {
+  background-color: white;
+  padding: 20px;
 }
