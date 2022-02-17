@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Company_dashboard.css";
 import Header from "../../Components/Header";
 import { Link } from "react-router-dom";
+import Form from "./../form/Form";
 
-export default function Company_dashboard() {
+export default function Company_dashboard(props) {
   return (
     <>
       <Header />
@@ -30,15 +31,29 @@ export default function Company_dashboard() {
             <div className="flex-container button-inf">
               <div className="cd-button-div">
                 <Link to="/form">
-                  <button className=" cd-button " to="/form">
+                  <button
+                    className=" cd-button "
+                    to="/form"
+                    onClick={() => {
+                      props.setType("INF");
+                      // <Form type={props.type} />;
+                    }}
+                  >
                     {" "}
                     FILL INF
                   </button>
                 </Link>
               </div>
               <div className="cd-button-div ">
-                <Link to="/form">
-                  <button className=" cd-button " to="/form">
+                <Link to="/form" type="JNF">
+                  <button
+                    className=" cd-button "
+                    to="/form"
+                    onClick={() => {
+                      props.setType("JNF");
+                      // setType("JNF");
+                    }}
+                  >
                     {" "}
                     FILL JNF
                   </button>
