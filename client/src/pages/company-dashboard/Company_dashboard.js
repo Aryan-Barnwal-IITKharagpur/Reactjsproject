@@ -2,12 +2,13 @@ import React from "react";
 import "./Company_dashboard.css";
 import Header from "../../Components/Header";
 import { Link } from "react-router-dom";
+import CardContainer from "../../Components/CardContainer";
 
 export default function Company_dashboard() {
   return (
     <>
       <Header />
-      <div className="container my-4 p-3">
+      <div className="container my-4 p-3 mainContainer">
         <div className="row">
           <div className="container col-lg-8 col-md-12 col-sm-12 p-4 cd-box2">
             <div>
@@ -46,9 +47,10 @@ export default function Company_dashboard() {
               </div>
             </div>
           </div>
-          <div className="container col-lg-4 col-md-12 col-sm-12">Hell0</div>
+          <div className="container col-lg-4 col-md-12 col-sm-12 imageContainer"></div>
         </div>
       </div>
+      <CardContainer />
     </>
   );
 }
