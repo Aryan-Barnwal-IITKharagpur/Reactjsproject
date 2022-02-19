@@ -20,7 +20,7 @@
 .cardContainer{
     margin-right: 0;
     box-sizing: border-box;
-    background-image:linear-gradient(to right,#0094FF,#161695);
+    background-image:linear-gradient(#0099FF,#161695);
     margin: 0px;
 }
 .cardTitle{
