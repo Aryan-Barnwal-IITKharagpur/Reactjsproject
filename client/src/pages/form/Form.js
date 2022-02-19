@@ -7,6 +7,9 @@ import { msc2 } from "../../constants/Msc2";
 import { msc3 } from "../../constants/Msc3";
 import { mtech } from "../../constants/Mtech";
 import { phd } from "../../constants/Phd";
+import { skill } from "../../constants/Skill";
+import { testtype } from "../../constants/TypeofTest";
+import { otherround } from "../../constants/OtherRounds";
 import "./form.css";
 
 export default function Form(props) {
@@ -23,6 +26,10 @@ export default function Form(props) {
   const [msc3div, setmsc3div] = useState(false);
   const [mtechdiv, setmtechdiv] = useState(false);
   const [phddiv, setphddiv] = useState(false);
+  const [skilldiv, setskilldiv] = useState(false);
+  const [selectiondiv, setselectiondiv] = useState(false);
+  const [typeoftestdiv, settypeoftestdiv] = useState(false);
+  const [otherrounddiv, setotherrounddiv] = useState(false);
 
   const [secondarycontact, setSecondarycontact] = useState(false);
   const [modebutton, setModebutton] = useState("");
@@ -50,9 +57,12 @@ export default function Form(props) {
   const [contactdesignation2, setcontactdesignation2] = useState("");
   const [contactemail2, setcontactemail2] = useState("");
   const [mobile2, setmobile2] = useState("");
-  // const [, set] = useState("");
-  // const [, set] = useState("");
-  // const [, set] = useState("");
+  const [otherskill, setotherskill] = useState("");
+  const [resumeshort, setresumeshort] = useState("");
+  const [typeoftest, settypeoftest] = useState("");
+  const [total_rounds, settotal_rounds] = useState(0);
+  const [no_of_offers, setno_of_offers] = useState("");
+  const [eligible_criteria, seteligible_criteria] = useState("");
 
   const [btecharray, setbtecharray] = useState([]);
   const [dual_mtecharray, setdual_mtecharray] = useState([]);
@@ -61,6 +71,9 @@ export default function Form(props) {
   const [msc3array, setmsc3array] = useState([]);
   const [mtecharray, setmtecharray] = useState([]);
   const [phdarray, setphdarray] = useState([]);
+  const [skillarray, setskillarray] = useState([]);
+  const [other_roundarray, setother_roundarray] = useState([]);
+  const [contactdetail, setcontactdetail] = useState([]);
 
   function handleChangeBtech(e) {
     var updatedList = [...btecharray];
@@ -125,13 +138,94 @@ export default function Form(props) {
     }
     setphdarray(() => updatedList);
   }
+  function handleChangeSkill(e) {
+    var updatedList = [...skillarray];
+    if (e.target.checked) {
+      updatedList = [...skillarray, e.target.value];
+    } else {
+      updatedList = skillarray.filter((item) => item !== e.target.value);
+    }
+    setskillarray(() => updatedList);
+  }
+  function handleChangeOtherRound(e) {
+    var updatedList = [...other_roundarray];
+    if (e.target.checked) {
+      updatedList = [...other_roundarray, e.target.value];
+    } else {
+      updatedList = other_roundarray.filter((item) => item !== e.target.value);
+    }
+    setother_roundarray(() => updatedList);
+  }
+  function handleSubmit(e) {
+    const company_overview = {
+      name: name,
+      website: website,
+      sector: sector,
+    };
+    const job_detail = {
+      designation: designation,
+      place_of_posting: place_of_posting,
+      description: description,
+      duration: duration,
+      mode: mode,
+    };
+    const stipend_detail = {
+      ctc: ctc,
+      ctc_breakup: ctc_breakup,
+      bond_detail: bond_detail,
+      stipend: stipend,
+      ppo_provision: ppo_provision,
+      ctc_ppo: ctc_ppo,
+    };
+    const eligible_btech = {
+      btech: btecharray,
+      dd_mtech: dual_mtecharray,
+      msc2: msc2array,
+      msc3: msc3array,
+      mtech: mtecharray,
+      mba: mbaarray,
+      phd: phdarray,
+    };
+    if (otherskill !== "") {
+      var newarray = skillarray;
+      newarray.push(otherskill);
+      setskillarray(() => newarray);
+    }
+    const skill_based = skillarray;
+    const selection_pr = {
+      resume_short_listing: resumeshort,
+      type_of_test: typeoftest,
+      other_round: other_roundarray,
+      total_rounds: total_rounds,
+      no_of_offers: no_of_offers,
+      eligible_criteria: eligible_criteria,
+    };
+    var tempcontact = [
+      {
+        name: contactname1,
+        designation: contactdesignation1,
+        email: contactemail1,
+        mobile: mobile1,
+      },
+    ];
+    setcontactdetail(() => tempcontact);
+    if (secondarycontact === "Yes") {
+      var temp = {
+        name: contactname2,
+        designation: contactdesignation2,
+        email: contactemail2,
+        mobile: mobile2,
+      };
+      tempcontact.push(temp);
+      setcontactdetail(() => tempcontact);
+    }
+    const contact_detail = contactdetail;
+  }
 
   return (
     <>
       <div>
-        {/* {console.log(btecharray)}
-        {console.log(dual_mtecharray)}
-        {console.log(msc3array)} */}
+        {/* COMPANY OVERVIEW */}
         <div className="container col-lg-8 col-md-12 category p-0 ">
           <div
             className="upper"
@@ -162,7 +256,6 @@ export default function Form(props) {
                 <input
                   type="text"
                   className="form-control"
-                  id="floatingInput"
                   placeholder="Name"
                   onChange={(e) => setname(() => e.target.value)}
                 />
@@ -172,7 +265,6 @@ export default function Form(props) {
                 <input
                   type="url"
                   className="form-control"
-                  id="floatingInput"
                   placeholder="Website"
                   onChange={(e) => setwebsite(() => e.target.value)}
                 />
@@ -183,7 +275,6 @@ export default function Form(props) {
                 <input
                   type="text"
                   className="form-control"
-                  id="floatingInput"
                   placeholder="Sector"
                   onChange={(e) => setsector(() => e.target.value)}
                 />
@@ -194,7 +285,7 @@ export default function Form(props) {
             <div></div>
           )}
         </div>
-
+        {/* JOB DETAILS */}
         <div className="container col-lg-8 col-md-12 category p-0 ">
           <div
             className="upper"
@@ -225,7 +316,6 @@ export default function Form(props) {
                 <input
                   type="text"
                   className="form-control"
-                  id="floatingInput"
                   placeholder="Designation"
                   onChange={(e) => setDesignation(() => e.target.value)}
                 />
@@ -235,7 +325,6 @@ export default function Form(props) {
                 <input
                   type="text"
                   className="form-control"
-                  id="floatingInput"
                   placeholder="Place"
                   onChange={(e) => setplace_of_posting(() => e.target.value)}
                 />
@@ -255,7 +344,6 @@ export default function Form(props) {
                 <input
                   type="text"
                   className="form-control"
-                  id="floatingInput"
                   placeholder="Duration"
                   onChange={(e) => setduration(() => e.target.value)}
                 />
@@ -293,29 +381,12 @@ export default function Form(props) {
                   </button>
                 </div>
               </div>
-              {/* <p>June 10</p>
-              <h3>
-                A family saga with a supernatural twist, set in a German town,
-                where the disappearance of two young children exposes...
-              </h3>
-
-              <p>June 10</p>
-              <h3>
-                A family saga with a supernatural twist, set in a German town,
-                where the disappearance of two young children exposes...
-              </h3>
-
-              <p>June 10</p>
-              <h3>
-                A family saga with a supernatural twist, set in a German town,
-                where the disappearance of two young children exposes...
-              </h3> */}
             </div>
           ) : (
             <div></div>
           )}
         </div>
-
+        {/* STIPEND DETAILS */}
         <div className="container col-lg-8 col-md-12 category p-0 ">
           <div
             className="upper"
@@ -349,7 +420,6 @@ export default function Form(props) {
                     <input
                       type="text"
                       className="form-control"
-                      id="floatingInput"
                       placeholder="ctc"
                       onChange={(e) => setctc(() => e.target.value)}
                     />
@@ -359,7 +429,6 @@ export default function Form(props) {
                     <input
                       type="text"
                       className="form-control"
-                      id="floatingInput"
                       placeholder="ctcbreakup"
                       onChange={(e) => setctc_breakup(() => e.target.value)}
                     />
@@ -382,7 +451,6 @@ export default function Form(props) {
                     <input
                       type="text"
                       className="form-control"
-                      id="floatingInput"
                       placeholder="stipend"
                       onChange={(e) => setstipend(() => e.target.value)}
                     />
@@ -425,7 +493,6 @@ export default function Form(props) {
                       <input
                         type="text"
                         className="form-control"
-                        id="floatingInput"
                         placeholder="ctc if provided"
                         onChange={(e) => setctc_ppo(() => e.target.value)}
                       />
@@ -443,7 +510,7 @@ export default function Form(props) {
             <div></div>
           )}
         </div>
-
+        {/* Contact Detail */}
         <div className="container col-lg-8 col-md-12 category p-0 ">
           <div
             className="upper"
@@ -470,7 +537,6 @@ export default function Form(props) {
                 <input
                   type="text"
                   className="form-control"
-                  id="floatingInput"
                   placeholder="name"
                   onChange={(e) => setcontactname1(() => e.target.value)}
                 />
@@ -480,7 +546,6 @@ export default function Form(props) {
                 <input
                   type="text"
                   className="form-control"
-                  id="floatingInput"
                   placeholder="designation"
                   onChange={(e) => setcontactdesignation1(() => e.target.value)}
                 />
@@ -490,7 +555,6 @@ export default function Form(props) {
                 <input
                   type="email"
                   className="form-control"
-                  id="floatingInput"
                   placeholder="name@example.com"
                   onChange={(e) => setcontactemail1(() => e.target.value)}
                 />
@@ -501,7 +565,6 @@ export default function Form(props) {
                 <input
                   type="text"
                   className="form-control"
-                  id="floatingInput"
                   placeholder="mobile"
                   onChange={(e) => setmobile1(() => e.target.value)}
                 />
@@ -542,7 +605,6 @@ export default function Form(props) {
                     <input
                       type="text"
                       className="form-control"
-                      id="floatingInput"
                       placeholder="name"
                       onChange={(e) => setcontactname2(() => e.target.value)}
                     />
@@ -552,7 +614,6 @@ export default function Form(props) {
                     <input
                       type="text"
                       className="form-control"
-                      id="floatingInput"
                       placeholder="designation"
                       onChange={(e) =>
                         setcontactdesignation2(() => e.target.value)
@@ -564,7 +625,6 @@ export default function Form(props) {
                     <input
                       type="email"
                       className="form-control"
-                      id="floatingInput"
                       placeholder="name@example.com"
                       onChange={(e) => setcontactemail2(() => e.target.value)}
                     />
@@ -575,7 +635,6 @@ export default function Form(props) {
                     <input
                       type="text"
                       className="form-control"
-                      id="floatingInput"
                       placeholder="mobile"
                       onChange={(e) => setmobile2(() => e.target.value)}
                     />
@@ -590,6 +649,7 @@ export default function Form(props) {
             <div></div>
           )}
         </div>
+        {/* Eligible Courses */}
         <div className="container col-lg-8 col-md-12 category p-0 ">
           <div
             className="upper"
@@ -947,91 +1007,305 @@ export default function Form(props) {
                     <div></div>
                   )}
                 </div>
-
-                {/* <div>
-                  <div className="eligible-heading">
-                    2-Year M. Tech Programs
-                  </div>
-                  <div className="eligible-sub-heading">
-                    Admitted through GATE
-                  </div>
-                  {mtech.map((item) => {
-                    return (
-                      <div className="form-check">
-                        <input
-                          className="form-check-input"
-                          type="checkbox"
-                          value={item}
-                          id="flexCheckDefault"
-                        />
-                        <label className="form-check-label">{item}</label>
-                      </div>
-                    );
-                  })}
-                </div>
-                <div>
-                  <div className="eligible-heading">2-Year MBA Programs</div>
-                  <div className="eligible-sub-heading">
-                    Admitted through CAT
-                  </div>
-                  {mbacourse.map((item) => {
-                    return (
-                      <div className="form-check">
-                        <input
-                          className="form-check-input"
-                          type="checkbox"
-                          value={item}
-                          id="flexCheckDefault"
-                        />
-                        <label className="form-check-label">{item}</label>
-                      </div>
-                    );
-                  })}
-                </div>
-                <div>
-                  <div className="eligible-heading">2-Year M.Sc. Programs</div>
-                  <div className="eligible-sub-heading">
-                    Admitted through JAM
-                  </div>
-                  {msc2.map((item) => {
-                    return (
-                      <div className="form-check">
-                        <input
-                          className="form-check-input"
-                          type="checkbox"
-                          value={item}
-                          id="flexCheckDefault"
-                        />
-                        <label className="form-check-label">{item}</label>
-                      </div>
-                    );
-                  })}
-                </div>
-                <div>
-                  <div className="eligible-heading">PhD Programs</div>
-                  <div className="eligible-sub-heading">
-                    Admitted through GATE/NET
-                  </div>
-                  {phd.map((item) => {
-                    return (
-                      <div className="form-check">
-                        <input
-                          className="form-check-input"
-                          type="checkbox"
-                          value={item}
-                          id="flexCheckDefault"
-                        />
-                        <label className="form-check-label">{item}</label>
-                      </div>
-                    );
-                  })}
-                </div> */}
               </div>
             </div>
           ) : (
             <div></div>
           )}
         </div>
+        {/* Skill based hiring */}
+        <div className="container col-lg-8 col-md-12 category p-0 ">
+          <div
+            className="upper"
+            onClick={() => {
+              setTimeout(() => {
+                if (skilldiv) {
+                  setskilldiv(false);
+                } else {
+                  setskilldiv(true);
+                }
+              }, 200);
+            }}
+          >
+            <div className="category-heading">
+              <h3>SKILL BASED HIRING</h3>
+              <div className="mx-4">
+                {skilldiv === true ? (
+                  <FaAngleDoubleUp />
+                ) : (
+                  <FaAngleDoubleDown />
+                )}
+              </div>
+            </div>
+            {skilldiv ? (
+              <p style={{ fontSize: "13px" }}>
+                Students with certified technical expertise in the following
+                skills (from Coursera, Udemy etc.)
+              </p>
+            ) : (
+              <div></div>
+            )}
+          </div>
+          {skilldiv === true ? (
+            <div className="lower">
+              {skilldiv ? (
+                <div className="eligible-options m-2 p-2">
+                  {skill.map((item) => {
+                    return (
+                      <div className="m-3 ">
+                        <label className="container form-check">
+                          {item}
+                          <input
+                            type="checkbox"
+                            value={item}
+                            onChange={(e) => handleChangeSkill(e)}
+                          />
+                          <span className="checkmark "></span>
+                        </label>
+                      </div>
+                    );
+                  })}
+                  <div className="form-floating mb-3">
+                    <input
+                      type="text"
+                      className="form-control"
+                      placeholder="other skill"
+                      onChange={(e) => setotherskill(() => e.target.value)}
+                    />
+                    <label for="floatingInput">
+                      Other Skills (Please specify)
+                    </label>
+                  </div>
+                </div>
+              ) : (
+                <div></div>
+              )}
+            </div>
+          ) : (
+            <div></div>
+          )}
+        </div>
+        {/* Selection Procedure */}
+        <div className="container col-lg-8 col-md-12 category p-0 ">
+          <div
+            className="upper"
+            onClick={() => {
+              setTimeout(() => {
+                if (selectiondiv) {
+                  setselectiondiv(false);
+                } else {
+                  setselectiondiv(true);
+                }
+              }, 200);
+            }}
+          >
+            <div className="category-heading">
+              <h3>SELECTION PROCEDURE</h3>
+
+              <div className="mx-4">
+                {selectiondiv === true ? (
+                  <FaAngleDoubleUp />
+                ) : (
+                  <FaAngleDoubleDown />
+                )}
+              </div>
+            </div>
+          </div>
+          {selectiondiv === true ? (
+            <div className="lower">
+              {selectiondiv ? (
+                <div>
+                  <div className="mb-3 optionbox">
+                    <div className="optionbox-title">
+                      <h3>Resume Shortlisting:</h3>{" "}
+                    </div>
+                    <div>
+                      <button
+                        type="button"
+                        className={
+                          "optionbutton btn " +
+                          (resumeshort === "Yes" ? "btn-primary" : "")
+                        }
+                        onClick={() => setresumeshort(() => "Yes")}
+                      >
+                        Yes
+                      </button>
+                      <button
+                        type="button "
+                        className={
+                          "optionbutton btn " +
+                          (resumeshort === "No" ? "btn-primary" : "")
+                        }
+                        onClick={() => setresumeshort("No")}
+                      >
+                        No
+                      </button>
+                    </div>
+                  </div>
+                  <div className="eligible-type">
+                    <div
+                      onClick={() => {
+                        setTimeout(() => {
+                          if (typeoftestdiv) {
+                            settypeoftestdiv(false);
+                          } else {
+                            settypeoftestdiv(true);
+                          }
+                        }, 200);
+                      }}
+                    >
+                      <div className="eligible-heading d-flex justify-content-between">
+                        <h3>Type of Test</h3>
+                        {typeoftestdiv === true ? (
+                          <FaAngleDoubleUp />
+                        ) : (
+                          <FaAngleDoubleDown />
+                        )}
+                      </div>
+                    </div>
+                    {typeoftestdiv ? (
+                      <div className="eligible-options m-2 p-2">
+                        {testtype.map((item) => {
+                          console.log(typeoftest);
+                          return (
+                            <div className="m-3 ">
+                              <label className="container form-check">
+                                {item}
+                                <input
+                                  type="checkbox"
+                                  checked={typeoftest === item ? true : false}
+                                  value={item}
+                                  onClick={(e) => {
+                                    if (e.target.value === typeoftest) {
+                                      settypeoftest(() => "");
+                                    } else {
+                                      settypeoftest(() => e.target.value);
+                                    }
+                                  }}
+                                />
+                                <span className="checkmark "></span>
+                              </label>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    ) : (
+                      <div></div>
+                    )}
+                  </div>
+                  <div className="eligible-type my-2">
+                    <div
+                      onClick={() => {
+                        setTimeout(() => {
+                          if (otherrounddiv) {
+                            setotherrounddiv(false);
+                          } else {
+                            setotherrounddiv(true);
+                          }
+                        }, 200);
+                      }}
+                    >
+                      <div className="eligible-heading d-flex justify-content-between">
+                        <h3>Other Qualification Rounds</h3>
+                        {otherrounddiv === true ? (
+                          <FaAngleDoubleUp />
+                        ) : (
+                          <FaAngleDoubleDown />
+                        )}
+                      </div>
+                    </div>
+                    {otherrounddiv ? (
+                      <div className="eligible-options m-2 p-2">
+                        {otherround.map((item) => {
+                          return (
+                            <div className="m-3 ">
+                              <label className="container form-check">
+                                {item}
+                                <input
+                                  type="checkbox"
+                                  value={item}
+                                  onChange={(e) => handleChangeOtherRound(e)}
+                                />
+                                <span className="checkmark "></span>
+                              </label>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    ) : (
+                      <div></div>
+                    )}
+                  </div>
+                  <div className="mb-3 optionbox">
+                    <div className="optionbox-title pt-3 pb-0">
+                      <h3>Total number of rounds </h3>
+                    </div>
+                    <div>
+                      <div className="form-floating">
+                        <input
+                          type="number"
+                          className="form-control"
+                          placeholder="Total Rounds"
+                          onChange={(e) =>
+                            settotal_rounds(() => e.target.value)
+                          }
+                        />
+                        {/* <label for="floatingInput">Total number of rounds</label> */}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="mb-3 optionbox">
+                    <div
+                      className="optionbox-title p-0"
+                      style={{ width: "60%" }}
+                    >
+                      <div>
+                        <h3>
+                          Number of offers available for IIT(ISM) students{" "}
+                        </h3>
+                      </div>
+                      <div>
+                        <p>(Range would be sufficient)</p>
+                      </div>
+                    </div>
+                    <div>
+                      <div className="form-floating">
+                        <input
+                          type="text"
+                          className="form-control"
+                          placeholder="Number of offers"
+                          onChange={(e) =>
+                            setno_of_offers(() => e.target.value)
+                          }
+                        />
+                        {/* <label for="floatingInput">Total number of rounds</label> */}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="form-floating">
+                    <input
+                      type="text"
+                      className="form-control"
+                      placeholder="Eligibility Criteria"
+                      onChange={(e) =>
+                        seteligible_criteria(() => e.target.value)
+                      }
+                    />
+                    <label for="floatingInput">
+                      Eligibilty Criteria (if any)
+                    </label>
+                  </div>
+                </div>
+              ) : (
+                <div></div>
+              )}
+            </div>
+          ) : (
+            <div></div>
+          )}
+        </div>
+        <button onClick={(e) => handleSubmit(e)}>Submit</button>
       </div>
     </>
   );
