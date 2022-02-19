@@ -157,6 +157,8 @@ export default function Form(props) {
     setother_roundarray(() => updatedList);
   }
   function handleSubmit(e) {
+    const date = new Date();
+    const type = props.type;
     const company_overview = {
       name: name,
       website: website,
@@ -225,6 +227,13 @@ export default function Form(props) {
   return (
     <>
       <div>
+        <div>
+          {props.type === "INF" ? (
+            <div>Internship Notification Form</div>
+          ) : (
+            <div>Job Notification Form</div>
+          )}
+        </div>
         {/* COMPANY OVERVIEW */}
         <div className="container col-lg-8 col-md-12 category p-0 ">
           <div
