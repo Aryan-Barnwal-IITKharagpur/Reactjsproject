@@ -9,7 +9,7 @@ import { mtech } from "../../constants/Mtech";
 import { phd } from "../../constants/Phd";
 import { skill } from "../../constants/Skill";
 import { testtype } from "../../constants/TypeofTest";
-import { otherround } from "./OtherRounds";
+import { otherround } from "../../constants/OtherRounds";
 import "./form.css";
 
 export default function Form(props) {

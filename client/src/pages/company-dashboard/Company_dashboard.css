@@ -1,17 +1,14 @@
-.mainContainer{
+.mainContainer {
   height: 80vh;
-  
 }
-.row{
+.row {
   height: 100%;
- 
 }
 .cd-box2 {
   border-radius: 20px;
   background-color: rgba(255, 255, 255, 0.322);
   font-family: "Montserrat", sans-serif;
   height: 100%;
-
 }
 
 .cd-heading1 {
@@ -87,13 +84,12 @@
   color: rgba(0, 0, 0, 0.5);
   outline: 0;
 }
-.iamgeContainer{
+.imageContainer {
   background-color: #3498db;
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
   border-radius: 30px;
-  
 }
 @media (max-width: 600px) {
   .button-inf {
@@ -102,7 +98,7 @@
   .cd-button {
     width: 300px;
   }
-  .iamgeContainer{
+  .imageContainer {
     display: none;
   }
 }
