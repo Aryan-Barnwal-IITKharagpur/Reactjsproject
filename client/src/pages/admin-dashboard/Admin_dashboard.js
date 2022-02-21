@@ -1,5 +1,6 @@
 import React from 'react'
 import CardContainer from '../../Components/CardContainer.jsx'
+import Footer from '../../Components/Footer.jsx'
 import Header from '../../Components/Header.js'
 import ListingSection from '../../Components/ListingSection.jsx'
 import StatsCard from '../../Components/StatsCard.jsx'
@@ -24,7 +25,7 @@ export default function Admin_dashboard() {
                        extensive prebuilt components, and powerful JavaScript plugins.</p>
                    <div className="d-grid gap-2 d-sm-flex justify-content-sm-center mb-5">
                        <button type="button"
-                           className="btn btn-lg px-4 me-sm-3 bg-light border d-flex align-items-center">Fill INF
+                           className="btn btn-lg px-4 me-sm-3 bg-light border d-flex align-items-center">View Details
                            &nbsp;
                            <svg style={{height:'20px'}} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                                {/* <!--! Font Awesome Pro 6.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --> */}
@@ -32,7 +33,7 @@ export default function Admin_dashboard() {
                                    d="M438.6 278.6l-160 160C272.4 444.9 264.2 448 256 448s-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L338.8 288H32C14.33 288 .0016 273.7 .0016 256S14.33 224 32 224h306.8l-105.4-105.4c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l160 160C451.1 245.9 451.1 266.1 438.6 278.6z" />
                            </svg>
                        </button>
-                       <button type="button" className="btn btn-lg px-4 bg-light border d-flex align-items-center">Fill JNF
+                       <button type="button" className="btn btn-lg px-4 bg-light border d-flex align-items-center">Stats
                            &nbsp;
                            <svg style={{height:"20px"}} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                                {/* <!--! Font Awesome Pro 6.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --> */}
@@ -61,6 +62,7 @@ export default function Admin_dashboard() {
    <div className="container m-3 p-4">
      <h4>Cards will be shown here </h4>
    </div>
+   <Footer />
    
     
     

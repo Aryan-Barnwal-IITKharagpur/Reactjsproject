@@ -1,5 +1,7 @@
 import React from 'react'
 import {Form, FormControl, Button} from 'react-bootstrap';
+import { FaSearch } from "react-icons/fa";
+
 import "../Styles/ListingSection.css";
 
 export default function ListingSection() {
@@ -8,7 +10,7 @@ export default function ListingSection() {
     <div className="SearchBarContainer mx-5">
         <div className="searchBar ">
     <Form className="d-flex">
-    <Button variant="outline-primary searchBarButton">Search
+    <Button variant="outline-primary searchBarButton"><FaSearch />
 </Button>
         <FormControl
           type="search"
