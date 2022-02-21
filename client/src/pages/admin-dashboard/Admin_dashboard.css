@@ -18,3 +18,7 @@
     width: 300px;
     height: 200px;
  }
+ .responseCard{
+    color: black;
+    display: flex;
+ }

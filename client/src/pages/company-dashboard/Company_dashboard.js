@@ -30,7 +30,7 @@ export default function Company_dashboard() {
 
             <div className="button-inf">
               <div className="cd-button-div">
-                <Link to="/form">
+                <Link to="/INF_form">
                   <button className=" cd-button " to="/form">
                     {" "}
                     FILL INF
@@ -38,7 +38,7 @@ export default function Company_dashboard() {
                 </Link>
               </div>
               <div className="cd-button-div ">
-                <Link to="/form">
+                <Link to="/JNF_form">
                   <button className=" cd-button " to="/form">
                     {" "}
                     FILL JNF

@@ -17,7 +17,9 @@ function App() {
         path="/company_dashboard"
         element={<Company_dashboard type={type} setType={setType} />}
       />
-      <Route path="/form" element={<Form type={type} setType={setType} />} />
+      {/* <Route path="/form" element={<Form type={type} setType={setType} />} /> */}
+      <Route path="/INF_form" element={<Form type="INF" setType={setType} />} />
+      <Route path="/JNF_form" element={<Form type="JNF" setType={setType} />} />
       {/* <Route path="/about" element={<Form />} />
       <Route path="/contact" element={<Form />} /> */}
     </Routes>

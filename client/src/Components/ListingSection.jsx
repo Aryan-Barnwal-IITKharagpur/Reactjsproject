@@ -10,7 +10,7 @@ export default function ListingSection() {
     <div className="SearchBarContainer mx-5">
         <div className="searchBar ">
     <Form className="d-flex">
-    <Button variant="outline-primary searchBarButton"><FaSearch />
+    <Button variant="outline-primary searchBarButton" id='btn1'><FaSearch />
 </Button>
         <FormControl
           type="search"
@@ -21,6 +21,9 @@ export default function ListingSection() {
         
       </Form>
       </div>
+      <Button variant="outline-primary searchBarButton" id='btn2'>INF</Button>
+      <Button variant="outline-primary searchBarButton" id='btn3'>JNF</Button>
+
       <div className="filterBar p-4">
 <span>Filterbar</span>
 

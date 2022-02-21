@@ -229,9 +229,14 @@ export default function Form(props) {
       <div>
         <div>
           {props.type === "INF" ? (
-            <div>Internship Notification Form</div>
+            <div className="formHeader text-center" >Internship Notification Form
+            <hr />
+            <span>Fill the below details to subit a INF to CDC</span>
+            </div>
           ) : (
-            <div>Job Notification Form</div>
+            <div className="formHeader text-center">Job Notification Form
+            <hr />
+            <span>Fill the below details to subit a JNF to CDC</span></div>
           )}
         </div>
         {/* COMPANY OVERVIEW */}

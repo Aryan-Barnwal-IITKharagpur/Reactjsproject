@@ -6,8 +6,38 @@
   padding: 0;
   -webkit-box-sizing: inherit;
   box-sizing: inherit;
+ 
 }
-
+.formHeader{
+  height: 300px;
+  width: 80%;
+  margin: 0px auto;
+  border-radius: 0px 0px 10px 10px ;
+  color: white;
+  font-family: Roboto,sans-serif;
+  font-size: 5vw;
+  text-shadow: 5px 5px 13px black;
+  padding: auto 20px ;display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-image: url(../../../public/Images/formHeaderCover.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+.formHeader span{
+  font-size: 1vw;
+}
+.formHeader span::after{
+  content: "";
+  background-color: white;
+  right: 15%;
+  left: 15%;
+  position: absolute;
+  top: 170px;
+  height: 2px;
+}
 .category {
   left: 50%;
   -webkit-box-sizing: border-box;
@@ -140,4 +170,18 @@
 .eligible-type {
   background-color: white;
   padding: 20px;
+}
+
+@media only screen and (max-width: 700px) {
+  .formHeader{
+      width: 100%;
+      font-size: 7vw;
+  }
+  .formHeader span{
+    font-size: 2.5vw;
+  }
+  .formHeader span::after{
+    top: 160px;
+    height: 1px;
+  }
 }
