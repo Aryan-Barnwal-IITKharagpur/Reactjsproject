@@ -15,10 +15,16 @@
     color: rgb(50, 42, 42);
  }
  .card{
-    width: 300px;
+    width: 200px;
     height: 200px;
  }
  .responseCard{
     color: black;
     display: flex;
+ }
+ .form-floating, .form-select{
+    width: 80%;
+    margin: 10px auto;
+    border-radius: 5px;
+    height: 60px;
  }

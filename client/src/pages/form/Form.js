@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Button } from "react-bootstrap";
 import { FaAngleDoubleDown, FaAngleDoubleUp } from "react-icons/fa";
 import { btech } from "../../constants/Btech";
 import { dual_mtech } from "../../constants/Dual_Mtech";
@@ -1319,7 +1320,7 @@ export default function Form(props) {
             <div></div>
           )}
         </div>
-        <button onClick={(e) => handleSubmit(e)}>Submit</button>
+        <Button onClick={(e) => handleSubmit(e)} variant="outline-primary mx-4">Submit</Button>{' '}
       </div>
     </>
   );

@@ -1,10 +1,13 @@
 import React from 'react'
+import { useState } from 'react';
 import {Form, FormControl, Button} from 'react-bootstrap';
 import { FaSearch } from "react-icons/fa";
 
 import "../Styles/ListingSection.css";
 
 export default function ListingSection() {
+
+  const [showJNFINF,setShowJNFINF]=useState("JNF");
   return (
     <>
     <div className="SearchBarContainer mx-5">
@@ -21,8 +24,8 @@ export default function ListingSection() {
         
       </Form>
       </div>
-      <Button variant="outline-primary searchBarButton" id='btn2'>INF</Button>
-      <Button variant="outline-primary searchBarButton" id='btn3'>JNF</Button>
+      <Button onClick={()=>setShowJNFINF("INF")} variant="outline-primary searchBarButton" id='btn2'>INF</Button>
+      <Button onClick={()=>setShowJNFINF("JNF")} variant="outline-primary searchBarButton" id='btn3'>JNF</Button>
 
       <div className="filterBar p-4">
 <span>Filterbar</span>
@@ -31,6 +34,7 @@ export default function ListingSection() {
 
 
     </div>
+    {(showJNFINF=="JNF") ? <div className="container">JNF</div> : <div className="container">INF</div>}
     
     </>
   )

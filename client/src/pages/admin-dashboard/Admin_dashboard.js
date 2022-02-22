@@ -12,12 +12,16 @@ export default function Admin_dashboard() {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
+  const [hrname,sethrName]= useState("");
+  const [email,setEmail]=useState("");
+  const [companyName,setCompanyName]= useState("");
+  const [internTimePeriod,setInternTimePeriod]= useState("");
   const [internView,setInternView]=useState(false);
 
   return (
     <>
-    {console.log(internView)}
+    
+    {/* modal for automated email */}
     <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Automated Invitation Form</Modal.Title>
@@ -27,7 +31,7 @@ export default function Admin_dashboard() {
                   type="text"
                   className="form-control"
                   placeholder="Name"
-                  // onChange={(e) => setname(() => e.target.value)}
+                  onChange={(e) => setCompanyName(() => e.target.value)}
                 />
                 <label for="floatingInput">Name of Company</label>
               </div>
@@ -36,7 +40,7 @@ export default function Admin_dashboard() {
                   type="text"
                   className="form-control"
                   placeholder="Name"
-                  // onChange={(e) => setname(() => e.target.value)}
+                  onChange={(e) => setEmail(() => e.target.value)}
                 />
                 <label for="floatingInput">Email Adress</label>
               </div>
@@ -45,7 +49,7 @@ export default function Admin_dashboard() {
                   type="text"
                   className="form-control"
                   placeholder="Name"
-                  // onChange={(e) => setname(() => e.target.value)}
+                  onChange={(e) => sethrName(() => e.target.value)}
                 />
                 <label for="floatingInput">Name of HR</label>
               </div>
@@ -55,16 +59,16 @@ export default function Admin_dashboard() {
                 <option  value="1">For Internship</option>
                 <option  value="2">For Jobs</option>
               </select>
-              {internView== "1" ? <select class="form-select" aria-label="Default select example">
+              {internView== "1" ? <select
+              onChange={(e) => setInternTimePeriod(() => e.target.value)}
+              class="form-select" aria-label="Default select example">
                 <option selected>Select Duration</option>
                 <option value="1">2 months</option>
                 <option value="2">6 months</option>
               </select>
               :
               <></>
-
-              }
-              
+              }    
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close
@@ -74,6 +78,8 @@ export default function Admin_dashboard() {
           </Button>
         </Modal.Footer>
       </Modal>
+
+
     <Header />
     <div className="row">
        <div className="col">
@@ -135,119 +141,3 @@ export default function Admin_dashboard() {
     </>
   )
 }
-// <!DOCTYPE html>
-// <html lang="en">
- 
-// <head>
-//    <meta charset="UTF-8">
-//    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-//    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-//    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-//        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-//    <link rel="stylesheet" href="index.css">
-//    <script src="https://kit.fontawesome.com/20970c5fb1.js" crossorigin="anonymous"></script>
-//    <title>Document</title>
-// </head>
- 
-// <body>
-//    <!-- header  -->
-//    <div class="bg-light">
-//        <nav class="navbar navbar-light sticky fixed container">
-//            <div class="container-fluid py-3">
-//                <a class="navbar-brand" href="#">
-//                    <img src="https://www.nicepng.com/png/full/258-2589833_about-srijan-srijan-iit-ism-dhanbad-logo.png"
-//                        alt="" width="30" height="24" class="d-inline-block align-text-top">
-//                    Career Development Center
-//                </a>
-//            </div>
-//        </nav>
-//    </div>
- 
-   
- 
-  
- 
-//    <!-- card section  -->
-//    <div class="d-flex justify-content-center pt-4 my-5">
-//        <div class="d-flex flex-wrap container justify-content-center">
-//            <!-- card  -->
-//            <div class="card shadow-lg my-3 mx-2 rounded-3">
-//                <div class="rounded-top" style="height: 10px; background-color:brown;"></div>
-//                <div class="p-3">
-//                    <h3>INF #1</h3>
-//                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-//                    <button class="btn bg-light border px-4 ">Edit</button>
-//                </div>
-//            </div>
-//            <!-- card  -->
-//            <div class="card shadow-lg my-3 mx-2 rounded-3">
-//                <div class="rounded-top" style="height: 10px; background-color:rgb(108, 165, 42);"></div>
-//                <div class="p-3">
-//                    <h3>INF #1</h3>
-//                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-//                    <button class="btn bg-light border px-4">Edit</button>
-//                </div>
-//            </div>
-//            <!-- card  -->
-//            <div class="card shadow-lg my-3 mx-2 rounded-3">
-//                <div class="rounded-top" style="height: 10px; background-color:brown;"></div>
-//                <div class="p-3">
-//                    <h3>INF #1</h3>
-//                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-//                    <button class="btn bg-light border px-4 ">Edit</button>
-//                </div>
-//            </div>
-//            <!-- card  -->
-//            <div class="card shadow-lg my-3 mx-2 rounded-3">
-//                <div class="rounded-top" style="height: 10px; background-color:rgb(42, 85, 165);"></div>
-//                <div class="p-3">
-//                    <h3>INF #1</h3>
-//                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-//                    <button class="btn bg-light border px-4">Edit</button>
-//                </div>
-//            </div>
-//            <!-- card  -->
-//            <div class="card shadow-lg my-3 mx-2 rounded-3">
-//                <div class="rounded-top" style="height: 10px; background-color:rgb(165, 147, 42);"></div>
-//                <div class="p-3">
-//                    <h3>INF #1</h3>
-//                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-//                    <button class="btn bg-light border px-4">Edit</button>
-//                </div>
-//            </div>
-//            <!-- card  -->
-//            <div class="card shadow-lg my-3 mx-2 rounded-3">
-//                <div class="rounded-top" style="height: 10px; background-color:rgb(165, 147, 42);"></div>
-//                <div class="p-3">
-//                    <h3>INF #1</h3>
-//                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-//                    <button class="btn bg-light border px-4">Edit</button>
-//                </div>
-//            </div>
-//            <!-- card  -->
-//            <div class="card shadow-lg my-3 mx-2 rounded-3">
-//                <div class="rounded-top" style="height: 10px; background-color:rgb(151, 42, 165);"></div>
-//                <div class="p-3">
-//                    <h3>INF #1</h3>
-//                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-//                    <button class="btn bg-light border px-4">Edit</button>
-//                </div>
-//            </div>
-//            <!-- card  -->
-//            <div class="card shadow-lg my-3 mx-2 rounded-3">
-//                <div class="rounded-top" style="height: 10px; background-color:brown;"></div>
-//                <div class="p-3">
-//                    <h3>INF #1</h3>
-//                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-//                    <button class="btn bg-light border px-4 ">Edit</button>
-//                </div>
-//            </div>
-//        </div>
-//    </div>
-// </body>
- 
-// </html>
- 
-
- 
-
