@@ -2,6 +2,8 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const passport = require("passport");
+const PDFDocument = require('pdfkit');
+const fs = require('fs');
 // const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
 const LocalStrategy = require("passport-local");
@@ -13,7 +15,7 @@ const DataInfJnf = require("./models/data_inf_jnf")
 const connectDB=require('./database/connection');
 const dotenv = require('dotenv');
 dotenv.config();
-connectDB();
+// connectDB();
 
 // mongoose.connect("mongodb+srv://admin:pdr2tPwMBQ40jcen@cluster0.ztdvu.mongodb.net/Indulge?retryWrites=true&w=majority", (err) => {
 //     if (err) console.log(err);
@@ -45,8 +47,19 @@ app.use('/pdf',require('./routes/pdf'));
 app.get("/", function (req, res) {
     res.send("okk");
   });
+//   function pdfff(){
+
+
+    // let pdfDoc = new PDFDocument;
+    // pdfDoc.pipe(fs.createWriteStream('SampleDocument.pdf'));
+    // pdfDoc.text("My Sample PDF Document");
+    // pdfDoc.end();
+    // }
+    // pdfff();
+
 
 app.listen(3000, function () {
     console.log("running");
+
 });
 

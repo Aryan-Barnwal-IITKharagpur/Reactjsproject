@@ -14,8 +14,8 @@ route.post("/save", function (req, res) {
   //   email_id: req.body.email_id,
   // }
 
-    const user = new User(req.body);
-    user.save().then(() => res.send(user));
+    const auth = new Auth(req.body);
+    auth.save().then(() => res.send("Saved"));
   });
   module.exports=route
 
