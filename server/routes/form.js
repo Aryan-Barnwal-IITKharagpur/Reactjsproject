@@ -1,6 +1,7 @@
 const express=require('express');
 const route=express.Router();
 const {FormData}=require('../models/data_inf_jnf');
+var mongoose = require("mongoose")
 route.get("/", function (req, res) {
     res.send("okk check");
   });

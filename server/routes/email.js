@@ -6,6 +6,7 @@ const nodemailer = require("nodemailer");
 //     res.send("okk");
 //   });
 route.post("/send_invite",function(req,res){
+  console.log(req.body);
         const testAccount={
             user:"indulge1239@gmail.com",
             pass:"Indulge@12#"
@@ -31,9 +32,9 @@ route.post("/send_invite",function(req,res){
       for(var i=0;i<5;i++)
       pass+=String.fromCharCode(65+26*Math.random());
       const subject=` Invitation to register for ${req.body.invitation_type} season-2021-22 , IIT ISM Dhanbad `;
-      const html =`<div>HR Manager,<br>${company_name}.<br>
+      const html =`<div>HR Manager,<br>${req.body.company_name}.<br>
       It is indeed our pleasure that your esteemed organization is participating in the internship/placement season at IIT (ISM) Dhanbad.
-      Kindly visit our website blahblah.ac.in and log in with the following credentials:<br>
+      Kindly visit our website indulge.ac.in and log in with the following credentials:<br>
       Username:${user_id}<br>
       Password:${pass}<br>
       Thank you for your kind cooperation.</div>`
