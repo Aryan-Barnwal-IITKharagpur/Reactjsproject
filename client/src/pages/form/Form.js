@@ -12,6 +12,7 @@ import { phd } from "../../constants/Phd";
 import { skill } from "../../constants/Skill";
 import { testtype } from "../../constants/TypeofTest";
 import { otherround } from "../../constants/OtherRounds";
+import "animate.css";
 import "./form.css";
 
 export default function Form(props) {
@@ -271,18 +272,18 @@ export default function Form(props) {
             <div className="formHeader text-center">
               Internship Notification Form
               <hr />
-              <span>Fill the below details to subit a INF to CDC</span>
+              <span>Fill the below details to submit an INF to CDC</span>
             </div>
           ) : (
             <div className="formHeader text-center">
               Job Notification Form
               <hr />
-              <span>Fill the below details to subit a JNF to CDC</span>
+              <span>Fill the below details to submit a JNF to CDC</span>
             </div>
           )}
         </div>
         {/* COMPANY OVERVIEW */}
-        <div className="container col-lg-8 col-md-12 category p-0 ">
+        <div className="animate__animated animate__fadeInLeft container col-lg-8 col-md-12 category p-0 ">
           <div
             className="upper"
             onClick={() => {
@@ -342,7 +343,7 @@ export default function Form(props) {
           )}
         </div>
         {/* JOB DETAILS */}
-        <div className="container col-lg-8 col-md-12 category p-0 ">
+        <div className="animate__animated animate__fadeInRight container col-lg-8 col-md-12 category p-0 ">
           <div
             className="upper"
             onClick={() => {
@@ -443,7 +444,7 @@ export default function Form(props) {
           )}
         </div>
         {/* STIPEND DETAILS */}
-        <div className="container col-lg-8 col-md-12 category p-0 ">
+        <div className="animate__animated animate__fadeInLeft container col-lg-8 col-md-12 category p-0 ">
           <div
             className="upper"
             onClick={() => {
@@ -567,7 +568,7 @@ export default function Form(props) {
           )}
         </div>
         {/* Contact Detail */}
-        <div className="container col-lg-8 col-md-12 category p-0 ">
+        <div className="animate__animated animate__fadeInRight container col-lg-8 col-md-12 category p-0 ">
           <div
             className="upper"
             onClick={() => {
@@ -706,7 +707,7 @@ export default function Form(props) {
           )}
         </div>
         {/* Eligible Courses */}
-        <div className="container col-lg-8 col-md-12 category p-0 ">
+        <div className="animate__animated animate__fadeInLeft container col-lg-8 col-md-12 category p-0 ">
           <div
             className="upper"
             onClick={() => {
@@ -1070,7 +1071,7 @@ export default function Form(props) {
           )}
         </div>
         {/* Skill based hiring */}
-        <div className="container col-lg-8 col-md-12 category p-0 ">
+        <div className="animate__animated animate__fadeInRight container col-lg-8 col-md-12 category p-0 ">
           <div
             className="upper"
             onClick={() => {
@@ -1142,7 +1143,7 @@ export default function Form(props) {
           )}
         </div>
         {/* Selection Procedure */}
-        <div className="container col-lg-8 col-md-12 category p-0 ">
+        <div className="animate__animated animate__fadeInLeft container col-lg-8 col-md-12 category p-0 ">
           <div
             className="upper"
             onClick={() => {
@@ -1361,9 +1362,14 @@ export default function Form(props) {
             <div></div>
           )}
         </div>
-        <Button onClick={(e) => handleSubmit(e)} variant="outline-primary mx-4">
-          Submit
-        </Button>{" "}
+        <div className="d-flex justify-content-center m-3">
+          <Button
+            onClick={(e) => handleSubmit(e)}
+            variant="outline-primary mx-4"
+          >
+            Submit
+          </Button>{" "}
+        </div>
       </div>
     </>
   );
