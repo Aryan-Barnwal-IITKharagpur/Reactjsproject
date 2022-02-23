@@ -28,3 +28,66 @@
     border-radius: 5px;
     height: 60px;
  }
+ .SearchBarContainer{
+   border: 1px solid gray;
+   border-radius:50px;
+   height: 70px;
+   display: flex;
+   
+
+}
+.searchBar{
+   width: 40%;
+   height: 100%;
+}
+.searchform{
+   /* border-radius: 50px 0px 0px 50px; */
+   height: 67px; 
+   border: none;
+}
+
+.filterBar{
+   height: 70px;
+   
+
+}
+.searchBarButton{
+   width: 10%;
+   border: none;
+}
+#btn1{
+   border-radius: 50px 0px 0px 50px;
+}
+#btn2, #btn3{
+   /* background-color: rgb(218, 211, 211); */
+   border-left: 1px solid gray;
+   border-right: 1px solid gray;
+   border-radius: 0px 0px;
+   font-size: larger;
+}
+.dataContainer{
+   width: 90%;
+   margin: 10px auto;
+   border-radius: 10px;
+   border: 1px solid rgb(190, 189, 189);
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   height: 70px;
+   transition: 0.3s;
+}
+.dataContainer:hover{
+   box-shadow: 0 1px 2px 0 rgb(60 64 67 / 30%), 0 2px 6px 2px rgb(60 64 67 / 15%);
+}
+.mainData{
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+.dataBadge{
+   height: 20px;
+}
+.dataIcons{
+   font-size: large;
+
+}
