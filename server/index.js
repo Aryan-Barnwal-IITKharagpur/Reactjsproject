@@ -14,7 +14,7 @@ const LocalStrategy = require("passport-local");
 const methodOverride = require("method-override");
 // Models
 const Auth = require("./models/auth");
-const DataInfJnf = require("./models/data_inf_jnf")
+const DataInfJnf = require("./models/form")
 
 const connectDB=require('./database/connection');
 const dotenv = require('dotenv');

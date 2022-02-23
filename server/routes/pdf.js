@@ -155,7 +155,7 @@ route.post("/uploadToDrive", async function (req, res) {
   const pdf_id=data.id;
   const url= await generateUrl(pdf_id);
   await deleteFromserver();
-  res.send(url);
+  res.send({url,pdf_id});
   
   // 
   // res.send(file_name);

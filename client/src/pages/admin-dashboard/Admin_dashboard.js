@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import axios from "axios";
+// import Base from "../../base.js";
 import { Button, Card, Modal } from "react-bootstrap";
 import CardContainer from "../../Components/CardContainer.jsx";
 import Footer from "../../Components/Footer.jsx";
@@ -10,7 +11,7 @@ import "./Admin_dashboard.css";
 
 export default function Admin_dashboard() {
   const [show, setShow] = useState(false);
-
+  const [data, setData] = useState([]);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const [hrname, sethrName] = useState("");
@@ -30,7 +31,7 @@ export default function Admin_dashboard() {
       invitation_type: internView == false ? "JNF" : "INF",
     };
     const response = await axios.post(
-      "http://localhost:3000/email/send_invite",
+      `http://localhost:3000/email/send_invite`,
       email_data
     );
 
@@ -42,9 +43,21 @@ export default function Admin_dashboard() {
       hr_name: hrname,
       email_id: email,
     };
-    const result= await axios.post('http://localhost:3000/user/save', user_data);
+    const result = await axios.post(
+      "http://localhost:3000/user/save",
+      user_data
+    );
     console.log(result);
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await axios.get("http://localhost:3000/form/getAll");
+      setData(result.data);
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <>

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 import { Button } from "react-bootstrap";
 import { FaAngleDoubleDown, FaAngleDoubleUp } from "react-icons/fa";
 import { btech } from "../../constants/Btech";
@@ -157,7 +158,7 @@ export default function Form(props) {
     }
     setother_roundarray(() => updatedList);
   }
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     const date = new Date();
     const type = props.type;
     const company_overview = {
@@ -180,7 +181,7 @@ export default function Form(props) {
       ppo_provision: ppo_provision,
       ctc_ppo: ctc_ppo,
     };
-    const eligible_btech = {
+    const eligible_branch = {
       btech: btecharray,
       dd_mtech: dual_mtecharray,
       msc2: msc2array,
@@ -203,6 +204,12 @@ export default function Form(props) {
       no_of_offers: no_of_offers,
       eligible_criteria: eligible_criteria,
     };
+    // const selection_pr = {
+    //   resume_short_listing: resumeshort,
+    //   type_of_test: typeoftest,
+    //   other_round: other_roundarray
+    // };
+
     var tempcontact = [
       {
         name: contactname1,
@@ -223,6 +230,37 @@ export default function Form(props) {
       setcontactdetail(() => tempcontact);
     }
     const contact_detail = contactdetail;
+
+    let formData = {
+      type: props.type,
+      company_overview: company_overview,
+      job_detail: job_detail,
+      stipend_detail: stipend_detail,
+      contact_detail: contactdetail,
+      eligible_branch: eligible_branch,
+      skill_based: skill_based,
+      selection_pr: selection_pr,
+      // total_rounds:total_rounds,
+      // no_of_offers:no_of_offers,
+      // eligible_criteria:eligible_criteria,
+      doc_link: "Strin",
+      DateTime: date,
+      pdf_id: "",
+      pdf_viewlink: "",
+      pdf_downloadlink: "",
+    };
+    const response = await axios.post(
+      "http://localhost:3000/pdf/uploadToDrive",
+      formData
+    );
+    formData.pdf_viewlink = response.data.url.webViewLink;
+    formData.pdf_downloadlink = response.data.url.webContentLink;
+    formData.pdf_id = response.data.pdf_id;
+    const result = await axios.post(
+      "http://localhost:3000/form/save",
+      formData
+    );
+    console.log(response.data, result);
   }
 
   return (
@@ -230,14 +268,17 @@ export default function Form(props) {
       <div>
         <div>
           {props.type === "INF" ? (
-            <div className="formHeader text-center" >Internship Notification Form
-            <hr />
-            <span>Fill the below details to subit a INF to CDC</span>
+            <div className="formHeader text-center">
+              Internship Notification Form
+              <hr />
+              <span>Fill the below details to subit a INF to CDC</span>
             </div>
           ) : (
-            <div className="formHeader text-center">Job Notification Form
-            <hr />
-            <span>Fill the below details to subit a JNF to CDC</span></div>
+            <div className="formHeader text-center">
+              Job Notification Form
+              <hr />
+              <span>Fill the below details to subit a JNF to CDC</span>
+            </div>
           )}
         </div>
         {/* COMPANY OVERVIEW */}
@@ -1320,7 +1361,9 @@ export default function Form(props) {
             <div></div>
           )}
         </div>
-        <Button onClick={(e) => handleSubmit(e)} variant="outline-primary mx-4">Submit</Button>{' '}
+        <Button onClick={(e) => handleSubmit(e)} variant="outline-primary mx-4">
+          Submit
+        </Button>{" "}
       </div>
     </>
   );
