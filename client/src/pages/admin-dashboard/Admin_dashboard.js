@@ -1,13 +1,14 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 // import Base from "../../base.js";
-import { Button, Card, Modal } from "react-bootstrap";
-import CardContainer from "../../Components/CardContainer.jsx";
+import { Button, Card, Modal,Form, FormControl, Badge } from "react-bootstrap";
+import { FaGlobe, FaList, FaSearch } from "react-icons/fa";
 import Footer from "../../Components/Footer.jsx";
 import Header from "../../Components/Header.js";
-import ListingSection from "../../Components/ListingSection.jsx";
+// import ListingSection from "../../Components/ListingSection.jsx";
 import StatsCard from "../../Components/StatsCard.jsx";
 import "./Admin_dashboard.css";
+import { Link } from "react-router-dom";
 
 export default function Admin_dashboard() {
   const [show, setShow] = useState(false);
@@ -28,7 +29,7 @@ export default function Admin_dashboard() {
     const email_data = {
       company_name: companyName,
       email_id: email,
-      invitation_type: internView == false ? "JNF" : "INF",
+      invitation_type: internView === false ? "JNF" : "INF",
     };
     const response = await axios.post(
       `http://localhost:3000/email/send_invite`,
@@ -58,6 +59,8 @@ export default function Admin_dashboard() {
 
     fetchData();
   }, []);
+
+  const [showJNFINF,setShowJNFINF]=useState("JNF");
 
   return (
     <>
@@ -102,7 +105,7 @@ export default function Admin_dashboard() {
           <option value="1">For Internship</option>
           <option value="2">For Jobs</option>
         </select>
-        {internView == "1" ? (
+        {internView === "1" ? (
           <select
             onChange={(e) => setInternTimePeriod(() => e.target.value)}
             class="form-select"
@@ -182,15 +185,49 @@ export default function Admin_dashboard() {
       <hr />
       <StatsCard />
       <hr />
-      <ListingSection />
+      {/* <ListingSection /> */}
       <div className="responseContainer m-3 p-4">
-        {/* map function for returning all the responses (INF JNF combined) in form of horizontal cards   */}
+        <div className="SearchBarContainer mx-5">
+          <div className="searchBar ">
+            <Form className="d-flex">
+              <Button variant="outline-primary searchBarButton" id='btn1'><FaSearch />
+              </Button>
+              <FormControl
+                type="search"
+                placeholder="Search"
+                className="me-2 searchform"
+                aria-label="Search"
+              />
 
-        {/* {allResponses.map((response) => {
-       return( <Card />)
-     })} */}
+            </Form>
+          </div>
+          <Button onClick={() => setShowJNFINF("INF")} variant="outline-primary searchBarButton" id='btn2'>INF</Button>
+          <Button onClick={() => setShowJNFINF("JNF")} variant="outline-primary searchBarButton" id='btn3'>JNF</Button>
 
-        <div className="responseCard"></div>
+          <div className="filterBar p-4">
+            <span>Filterbar</span>
+
+          </div>
+
+
+        </div>
+        <div className="dataContainer ">
+          <div className="mainData">
+              <div className="lead p-4"><strong>Google</strong></div>
+              <Badge bg="secondary dataBadge">JNF</Badge>{' '}
+              </div>
+              <div className="dataButtons">
+              <a href="https//:googlecom">  <FaGlobe className="dataIcons m-3" /></a>
+                <FaList className="dataIcons m-3"/>
+              </div>
+            </div>
+        {/* {(showJNFINF == "JNF") ? <div className="container ">JNF</div> : <div className="container">INF</div>} */}
+        {/* {data.map((data) => {
+          return (
+            
+            
+            )
+        })} */}
       </div>
       <Footer />
     </>
