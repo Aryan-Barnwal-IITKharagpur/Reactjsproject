@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 // import Base from "../../base.js";
-import { Button, Card, Modal,Form, FormControl, Badge } from "react-bootstrap";
-import { FaGlobe, FaList, FaSearch } from "react-icons/fa";
+import { Button, Card, Modal, Form, FormControl, Badge, Dropdown } from "react-bootstrap";
+import { FaDownload, FaGlobe, FaList, FaSearch } from "react-icons/fa";
 import Footer from "../../Components/Footer.jsx";
 import Header from "../../Components/Header.js";
 import FormModal from "../../Components/FormModal.js"
@@ -10,6 +10,7 @@ import FormModal from "../../Components/FormModal.js"
 import StatsCard from "../../Components/StatsCard.jsx";
 import "./Admin_dashboard.css";
 import { Link } from "react-router-dom";
+import ShowList from "../../Components/ShowList.jsx";
 
 export default function Admin_dashboard() {
   const [data, setData] = useState([]);
@@ -17,10 +18,7 @@ export default function Admin_dashboard() {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  //for opening/closing response modal
-  const [modal, setModal] = useState(false);
-  const handleModalClose = () => setModal(false);
-  const handleModalShow = () => setModal(true);
+  
 
   const [hrname, sethrName] = useState("");
   const [email, setEmail] = useState("");
@@ -68,7 +66,7 @@ export default function Admin_dashboard() {
     fetchData();
   }, []);
 
-  const [showJNFINF,setShowJNFINF]=useState("JNF");
+  const [showJNFINF, setShowJNFINF] = useState("JNF");
 
   return (
     <>
@@ -194,6 +192,7 @@ export default function Admin_dashboard() {
       <StatsCard />
       <hr />
       {/* <ListingSection /> */}
+     
       <div className="responseContainer m-3 p-4">
         <div className="SearchBarContainer mx-5">
           <div className="searchBar ">
@@ -209,48 +208,39 @@ export default function Admin_dashboard() {
 
             </Form>
           </div>
-          <Button onClick={() => setShowJNFINF("INF")} variant="outline-primary searchBarButton" id='btn2'>INF</Button>
-          <Button onClick={() => setShowJNFINF("JNF")} variant="outline-primary searchBarButton" id='btn3'>JNF</Button>
-
+          <Button 
+          onClick={() => { document.getElementById("btn2").style.backgroundColor="#0257d8";
+                          document.getElementById("btn2").style.color="white";
+                          document.getElementById("btn3").style.backgroundColor="white";
+                          setShowJNFINF("INF")}} variant="outline-primary searchBarButton" id='btn2'>
+          INF
+          </Button>
+          <Button 
+          onClick={() => {document.getElementById("btn3").style.backgroundColor="#0257d8";
+                          document.getElementById("btn3").style.color="white";  
+                          document.getElementById("btn2").style.backgroundColor="white ";
+                          setShowJNFINF("JNF")}} 
+          variant="outline-primary searchBarButton" id='btn3'>
+          JNF
+          </Button>
           <div className="filterBar p-4">
-            <span>Filterbar</span>
+            <span>Sorting options</span>
 
           </div>
 
 
         </div>
+
         
-        {/* {(showJNFINF == "JNF") ? <div className="container ">JNF</div> : <div className="container">INF</div>} */}
         {data.map((data) => {
-          return (<>
-            <div className="dataContainer ">
-          <div className="mainData">
-              <div className="lead p-4"><strong>{data.company_overview.name}</strong></div>
-              <Badge bg="secondary dataBadge">{data.type}</Badge>{' '}
-              </div>
-              <div className="dataButtons">
-              <a href={data.company_overview.name}>  
-              <FaGlobe className="dataIcons m-3" />
-              </a>
-                <FaList onClick={handleModalShow} className="dataIcons m-3"/>
-              </div>
-            </div>   
-            <Modal show={modal} onHide={handleModalClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>{data.company_overview.name}</Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleModalClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleModalClose}>
-            Save Changes
-          </Button>
-        </Modal.Footer>
-      </Modal>
-            </>         
-            )
+          return (
+            (showJNFINF=== data.type) ? <ShowList key={data._id} show={"JNF"} {...data}  /> : <></>
+          // (showJNFINF === "JNF") ?  
+          // ((data.type==="JNF") ? <ShowList key={data._id} show={"JNF"} {...data}  /> :
+          // <span>No JNF to be shown</span>) : 
+          // ((data.type==="INF") ? <ShowList key={data._id} show={"INF"} {...data} /> :
+          // <span> No INF to be shown</span>)
+          )
         })}
       </div>
       <Footer />
