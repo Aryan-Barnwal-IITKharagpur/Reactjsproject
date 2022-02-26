@@ -5,16 +5,23 @@ import { Button, Card, Modal,Form, FormControl, Badge } from "react-bootstrap";
 import { FaGlobe, FaList, FaSearch } from "react-icons/fa";
 import Footer from "../../Components/Footer.jsx";
 import Header from "../../Components/Header.js";
+import FormModal from "../../Components/FormModal.js"
 // import ListingSection from "../../Components/ListingSection.jsx";
 import StatsCard from "../../Components/StatsCard.jsx";
 import "./Admin_dashboard.css";
 import { Link } from "react-router-dom";
 
 export default function Admin_dashboard() {
-  const [show, setShow] = useState(false);
   const [data, setData] = useState([]);
+  //for opening/closing automated mail form  
+  const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  //for opening/closing response modal
+  const [modal, setModal] = useState(false);
+  const handleModalClose = () => setModal(false);
+  const handleModalShow = () => setModal(true);
+
   const [hrname, sethrName] = useState("");
   const [email, setEmail] = useState("");
   const [companyName, setCompanyName] = useState("");
@@ -54,6 +61,7 @@ export default function Admin_dashboard() {
   useEffect(() => {
     const fetchData = async () => {
       const result = await axios.get("http://localhost:3000/form/getAll");
+      console.log(result.data)
       setData(result.data);
     };
 
@@ -171,7 +179,7 @@ export default function Admin_dashboard() {
               style={{ width: "700px", height: "500px" }}
             >
               <img
-                src="https://source.unsplash.com/random/700x900"
+                src="https://images.unsplash.com/photo-1535957998253-26ae1ef29506?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=436&q=80"
                 className="img-fluid border rounded-3 shadow-lg mb-4"
                 alt="Example image"
                 width="700"
@@ -211,23 +219,39 @@ export default function Admin_dashboard() {
 
 
         </div>
-        <div className="dataContainer ">
+        
+        {/* {(showJNFINF == "JNF") ? <div className="container ">JNF</div> : <div className="container">INF</div>} */}
+        {data.map((data) => {
+          return (<>
+            <div className="dataContainer ">
           <div className="mainData">
-              <div className="lead p-4"><strong>Google</strong></div>
-              <Badge bg="secondary dataBadge">JNF</Badge>{' '}
+              <div className="lead p-4"><strong>{data.company_overview.name}</strong></div>
+              <Badge bg="secondary dataBadge">{data.type}</Badge>{' '}
               </div>
               <div className="dataButtons">
-              <a href="https//:googlecom">  <FaGlobe className="dataIcons m-3" /></a>
-                <FaList className="dataIcons m-3"/>
+              <a href={data.company_overview.name}>  
+              <FaGlobe className="dataIcons m-3" />
+              </a>
+                <FaList onClick={handleModalShow} className="dataIcons m-3"/>
               </div>
-            </div>
-        {/* {(showJNFINF == "JNF") ? <div className="container ">JNF</div> : <div className="container">INF</div>} */}
-        {/* {data.map((data) => {
-          return (
-            
-            
+            </div>   
+            <Modal show={modal} onHide={handleModalClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Modal heading</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>{data.company_overview.name}</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleModalClose}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleModalClose}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
+            </>         
             )
-        })} */}
+        })}
       </div>
       <Footer />
     </>
