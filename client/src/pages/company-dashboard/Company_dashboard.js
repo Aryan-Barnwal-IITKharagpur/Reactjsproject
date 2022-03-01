@@ -9,8 +9,8 @@ import Loader from "../../Components/Loader.jsx";
 export default function Company_dashboard() {
   return (
     <div className="company-dashboard-container">
+      <Header />
       <Hero_section />
-      <Loader />
       <CardContainer />
     </div>
   );

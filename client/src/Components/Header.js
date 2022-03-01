@@ -1,49 +1,56 @@
 import React from "react";
-import { Navbar, Nav, Container,Form, FormControl, Button } from "react-bootstrap";
+import { Navbar, Nav, Container, Form, FormControl, NavDropdown } from "react-bootstrap";
+import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
+import Drawer from '@mui/material/Drawer';
+import ChangePassForm from './ChangePassForm'
 
 export default function Header() {
+
+  const [state, setState] = React.useState({
+    changePass: false,
+  });
+
+  const toggleDrawer = (anchor, open) => (event) => {
+    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+      return;
+    }
+    setState({ ...state, [anchor]: open });
+  };
+
+  const list = (anchor) => (
+    <Box
+      sx={{ anchor: 'changePass', 'width': 500, 'height': 150 }}
+      role="presentation"
+    >
+      <ChangePassForm />
+    </Box>
+  );
+
   return (
-    // <Navbar bg="light" expand="lg">
-    //   <Container>
-    //     <Navbar.Brand href="#home">CDC IITISM Dhanbad</Navbar.Brand>
-    //     <Navbar.Toggle aria-controls="basic-navbar-nav" />
-    //     <Navbar.Collapse id="basic-navbar-nav " className="justify-content-end">
-    //       <Nav className="me-auto">
-    //         <Nav.Link href="#about">About </Nav.Link>
-    //         <Nav.Link href="#contact">Contact</Nav.Link>
-    //       </Nav>
-    //     </Navbar.Collapse>
-    //   </Container>
-    // </Navbar>
-    <Navbar bg="light" expand="lg">
-  <Container className="navbarContainer">
-      <Navbar.Brand href="#home" className="navbarBrand"><strong>CDC</strong> </Navbar.Brand>
-    <Navbar.Toggle aria-controls="basic-navbar-nav" />
-    <Navbar.Collapse id="basic-navbar-nav">
-      <Nav className="me-auto">
-        <Nav.Link href="#home">Home</Nav.Link>
-        <Nav.Link href="#about">About</Nav.Link>
-        <Nav.Link href="#Contacts">Contacts</Nav.Link>
-        {/* <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-          <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-          <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-          <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-          <NavDropdown.Divider />
-          <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
-        </NavDropdown> */}
-      </Nav>
-      <Form className="d-flex">
-        <FormControl
-          type="search"
-          placeholder="Search"
-          className="me-2"
-          aria-label="Search"
-        />
-        <Button variant="outline-primary">Search</Button>
-      </Form>
-    </Navbar.Collapse>
-    
-  </Container>
-</Navbar>
+    <Navbar className="p-3 sticky-top" expand="lg">
+      <Container className="navbarContainer">
+        <Navbar.Brand href="#home" className="navbarBrand"><strong>Career Development Center <br /></strong><span className="fw-light fs-5">IIT ISM Dhanbad</span></Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <div className="me-auto"></div>
+          <Nav className="">
+            <NavDropdown className="fs-4" title="Amazon" id="basic-nav-dropdown">
+              <NavDropdown.Item><React.Fragment key="changePass">
+                <Button onClick={toggleDrawer("changePass", true)}>Change Password</Button>
+                <Drawer
+                  anchor="right"
+                  open={state["changePass"]}
+                  onClose={toggleDrawer("changePass", false)}
+                >
+                  {list("changePass")}
+                </Drawer>
+              </React.Fragment></NavDropdown.Item>
+            </NavDropdown>
+          </Nav>
+        </Navbar.Collapse>
+
+      </Container>
+    </Navbar>
   );
 }

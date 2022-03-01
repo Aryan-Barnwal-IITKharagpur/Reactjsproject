@@ -11,6 +11,8 @@ import StatsCard from "../../Components/StatsCard.jsx";
 import "./Admin_dashboard.css";
 import { Link } from "react-router-dom";
 import ShowList from "../../Components/ShowList.jsx";
+import Box from '@mui/material/Box';
+import Drawer from '@mui/material/Drawer';
 
 export default function Admin_dashboard() {
   const [data, setData] = useState([]);
@@ -18,7 +20,7 @@ export default function Admin_dashboard() {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  
+
 
   const [hrname, sethrName] = useState("");
   const [email, setEmail] = useState("");
@@ -32,8 +34,8 @@ export default function Admin_dashboard() {
       pass: "Indulge@12#",
     };
     const email_data = {
-      user:testAccount.user,
-      pass:testAccount.pass,
+      user: testAccount.user,
+      pass: testAccount.pass,
       company_name: companyName,
       email_id: email,
       invitation_type: internView === false ? "JNF" : "INF",
@@ -42,7 +44,7 @@ export default function Admin_dashboard() {
       `http://localhost:3000/email/send_invite`,
       email_data
     );
-    localStorage.setItem('company_user_id',response.data.user_id)
+    localStorage.setItem('company_user_id', response.data.user_id)
 
     console.log(response.data);
     const user_data = {
@@ -58,11 +60,12 @@ export default function Admin_dashboard() {
     );
     console.log(result);
   };
+
   useEffect(() => {
     const fetchData = async () => {
       const result = await axios.get("http://localhost:3000/form/getAll");
       console.log(result.data)
-      const total=result.data.length;
+      const total = result.data.length;
       console.log(total);
       setData(result.data);
     };
@@ -141,7 +144,7 @@ export default function Admin_dashboard() {
         </Modal.Footer>
       </Modal>
 
-      <Header />
+      
       <div className="row">
         <div className="col">
           {/* <!-- hero section  --> */}
@@ -196,10 +199,10 @@ export default function Admin_dashboard() {
         </div>
       </div>
       <hr />
-      <StatsCard total={data.length}/>
+      <StatsCard total={data.length} />
       <hr />
       {/* <ListingSection /> */}
-     
+
       <div className="responseContainer m-3 p-4">
         <div className="SearchBarContainer mx-5">
           <div className="searchBar ">
@@ -215,20 +218,24 @@ export default function Admin_dashboard() {
 
             </Form>
           </div>
-          <Button 
-          onClick={() => { document.getElementById("btn2").style.backgroundColor="#0257d8";
-                          document.getElementById("btn2").style.color="white";
-                          document.getElementById("btn3").style.backgroundColor="white";
-                          setShowJNFINF("INF")}} variant="outline-primary searchBarButton" id='btn2'>
-          INF
+          <Button
+            onClick={() => {
+              document.getElementById("btn2").style.backgroundColor = "#0257d8";
+              document.getElementById("btn2").style.color = "white";
+              document.getElementById("btn3").style.backgroundColor = "white";
+              setShowJNFINF("INF")
+            }} variant="outline-primary searchBarButton" id='btn2'>
+            INF
           </Button>
-          <Button 
-          onClick={() => {document.getElementById("btn3").style.backgroundColor="#0257d8";
-                          document.getElementById("btn3").style.color="white";  
-                          document.getElementById("btn2").style.backgroundColor="white ";
-                          setShowJNFINF("JNF")}} 
-          variant="outline-primary searchBarButton" id='btn3'>
-          JNF
+          <Button
+            onClick={() => {
+              document.getElementById("btn3").style.backgroundColor = "#0257d8";
+              document.getElementById("btn3").style.color = "white";
+              document.getElementById("btn2").style.backgroundColor = "white ";
+              setShowJNFINF("JNF")
+            }}
+            variant="outline-primary searchBarButton" id='btn3'>
+            JNF
           </Button>
           <div className="filterBar p-4">
             <span>Sorting options</span>
@@ -238,15 +245,15 @@ export default function Admin_dashboard() {
 
         </div>
 
-        
+
         {data.map((data) => {
           return (
-            (showJNFINF=== data.type) ? <ShowList key={data._id} show={"JNF"} {...data}  /> : <></>
-          // (showJNFINF === "JNF") ?  
-          // ((data.type==="JNF") ? <ShowList key={data._id} show={"JNF"} {...data}  /> :
-          // <span>No JNF to be shown</span>) : 
-          // ((data.type==="INF") ? <ShowList key={data._id} show={"INF"} {...data} /> :
-          // <span> No INF to be shown</span>)
+            (showJNFINF === data.type) ? <ShowList key={data._id} show={"JNF"} {...data} /> : <></>
+            // (showJNFINF === "JNF") ?  
+            // ((data.type==="JNF") ? <ShowList key={data._id} show={"JNF"} {...data}  /> :
+            // <span>No JNF to be shown</span>) : 
+            // ((data.type==="INF") ? <ShowList key={data._id} show={"INF"} {...data} /> :
+            // <span> No INF to be shown</span>)
           )
         })}
       </div>
