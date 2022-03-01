@@ -78,6 +78,8 @@ export default function Form(props) {
   const [other_roundarray, setother_roundarray] = useState([]);
   const [contactdetail, setcontactdetail] = useState([]);
 
+  const [prevData,setPrevData]=useState({});
+  
   function handleChangeBtech(e) {
     var updatedList = [...btecharray];
     if (e.target.checked) {

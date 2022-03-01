@@ -32,12 +32,11 @@ route.post("/download", function (req, res) {
 });
 
 route.post("/uploadToDrive", async function (req, res) {
-  const CLIENT_ID =
-    "566774882475-lnodlg2brm4tu3r71s9hin3m6l52eaek.apps.googleusercontent.com";
-  const CLIENT_SECRET = "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";
-  const REDIRECT_URI = "https://developers.google.com/oauthplayground";
-  const REFRESH_TOKEN =
-    "1//04PbLbl35100sCgYIARAAGAQSNwF-L9IrCjbu7FP6Uec9MdpP-3_ytelx1Tou0suecRi03RUBfshp9at-E7j_sHFu2Jeia7VkeXM";
+  const CLIENT_ID =process.env.CLIENT_ID;
+    // "566774882475-lnodlg2brm4tu3r71s9hin3m6l52eaek.apps.googleusercontent.com";
+  const CLIENT_SECRET = process.env.CLIENT_SECRET;
+  const REDIRECT_URI = process.env.REDIRECT_URI;
+  const REFRESH_TOKEN =process.env.REFRESH_TOKEN;
 
   const oauth2Client = new google.auth.OAuth2(
     CLIENT_ID,

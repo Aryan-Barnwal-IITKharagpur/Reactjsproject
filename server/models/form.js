@@ -1,6 +1,7 @@
 var mongoose = require("mongoose");
 
 var DataInfJnfSchema = new mongoose.Schema({
+  company_user_id:String,
   type: String,
   company_overview: {
     name: String,

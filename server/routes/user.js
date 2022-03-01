@@ -34,6 +34,12 @@ route.post("/save", function (req, res) {
     const user = new User(req.body);
      user.save().then(() => res.send("Saved"));;
   });
+  route.post("/change_password", async function (req, res) {
+    console.log(req.body);
+    await User.updateOne({user_d:req.body.user_id},{password:req.body.password})
+      // const user = new User(req.body);
+      //  user.save().then(() => res.send("Saved"));;
+    });
   module.exports=route
 
  

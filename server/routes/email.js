@@ -7,12 +7,18 @@ const nodemailer = require("nodemailer");
 //   });
 route.post("/send_invite",function(req,res){
   console.log(req.body);
-        const testAccount={
-            user:"indulge1239@gmail.com",
-            pass:"Indulge@12#"
-        }
+  const testAccount={
+    user:process.env.EMAIL_ID,
+    pass:process.env.PASSWORD
+}
+if(req.body.user===testAccount.user&&req.body.pass===testAccount.pass)
+        {
       let transporter = nodemailer.createTransport({
-       service:'gmail',
+        host: "smtp.ethereal.email",
+        // port: 587,
+        port:465,
+        secure: true, // true for 465, false for other ports
+        service:'gmail',
         auth: {
           user: testAccount.user, // generated ethereal user
           pass: testAccount.pass, // generated ethereal password
@@ -59,6 +65,11 @@ route.post("/send_invite",function(req,res){
            res.send(response);
           }
       })
+    }
+    else
+    {
+      res.send("INVALID REQUEST")
+    }
     
  })
 

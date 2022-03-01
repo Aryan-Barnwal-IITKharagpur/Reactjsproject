@@ -32,6 +32,8 @@ export default function Admin_dashboard() {
       pass: "Indulge@12#",
     };
     const email_data = {
+      user:testAccount.user,
+      pass:testAccount.pass,
       company_name: companyName,
       email_id: email,
       invitation_type: internView === false ? "JNF" : "INF",
@@ -40,6 +42,7 @@ export default function Admin_dashboard() {
       `http://localhost:3000/email/send_invite`,
       email_data
     );
+    localStorage.setItem('company_user_id',response.data.user_id)
 
     console.log(response.data);
     const user_data = {

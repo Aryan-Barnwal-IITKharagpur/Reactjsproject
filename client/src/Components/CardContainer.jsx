@@ -15,7 +15,9 @@ function CardContainer() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await axios.get("http://localhost:3000/form/getSome");
+      // const company_user_id=localStorage.getItem('company_user_id');
+      const company_user_id="bdsjchjue3wc7494";
+      const result = await axios.post("http://localhost:3000/form/getSome",{company_user_id});
       console.log(result.data);
       setData(result.data);
     };
