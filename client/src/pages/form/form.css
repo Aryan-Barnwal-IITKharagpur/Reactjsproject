@@ -7,9 +7,8 @@
   -webkit-box-sizing: inherit;
   box-sizing: inherit;
 }
-body{
+body {
   /* background-image: url("../../../public/Images/admin_cover.jpg"); */
-
 }
 .formHeader {
   height: 300px;
@@ -189,6 +188,12 @@ body{
     top: 160px;
     height: 1px;
   }
+}
+.animate__animated.animate__fadeInLeft {
+  --animate-duration: 1.5s;
+}
+.animate__animated.animate__fadeInRight {
+  --animate-duration: 1.5s;
 }
 /* .submitButton{
   margin: 20px;
