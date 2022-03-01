@@ -2,6 +2,8 @@ import React,{useState} from 'react'
 import { Button, Dropdown, Modal, Badge } from 'react-bootstrap'
 import { FaGlobe, FaList, FaDownload } from 'react-icons/fa'
 import "../Styles/ShowList.css"
+import "../Styles/FormModal.css"
+import FormModal from './FormModal'
 
 export default function ShowList( data) {
     //for opening/closing response modal
@@ -30,11 +32,13 @@ export default function ShowList( data) {
       </Dropdown>
     </div>
   </div>
-  <Modal show={modal} onHide={handleModalClose}>
-    <Modal.Header closeButton>
+  <Modal className="showModal" show={modal} onHide={handleModalClose}>
+    <Modal.Header className='modalHeader' closeButton>
       <Modal.Title>Details</Modal.Title>
     </Modal.Header>
-    <Modal.Body>{data.company_overview.name}</Modal.Body>
+    <Modal.Body className='modalBody'>
+      <FormModal data={data}/>
+    </Modal.Body>
     <Modal.Footer>
       <Button variant="secondary" onClick={handleModalClose}>
         Close

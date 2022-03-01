@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 // import { props } from "../constants/props";
 import "../Styles/FormModal.css";
-import { FilledForm } from "../constants/FilledForm";
+// import { props } from "../constants/props";
 
 export default function FormModal(props) {
-  // get filled form from unique id
+ console.log(props)
   return (
     <div>
       <div>
@@ -12,19 +12,19 @@ export default function FormModal(props) {
         <div className="headingdiv row">
           <div className="modalHeading col-sm-6">Name of Company:</div>
           <div className="headingValue col-sm-6">
-            {FilledForm.company_overview.name}
+            {props.data.company_overview.name}
           </div>
         </div>
         <div className="headingdiv">
           <div className="modalHeading col-sm-6">Sector: </div>
           <div className="headingValue col-sm-6">
-            {FilledForm.company_overview.sector}
+            {props.data.company_overview.sector}
           </div>
         </div>
         <div className="headingdiv">
           <div className="modalHeading col-sm-6">Website: </div>
           <div className="headingValue col-sm-6">
-            {FilledForm.company_overview.website}
+            {props.data.company_overview.website}
           </div>
         </div>
       </div>
@@ -34,35 +34,35 @@ export default function FormModal(props) {
         <div className="headingdiv">
           <div className="modalHeading col-sm-6">Designation: </div>
           <div className="headingValue col-sm-6">
-            {FilledForm.job_detail.designation}
+            {props.data.job_detail.designation}
           </div>
         </div>
 
         <div className="headingdiv">
           <div className="modalHeading col-sm-6">Place of Posting: </div>
           <div className="headingValue col-sm-6">
-            {FilledForm.job_detail.place_of_posting}
+            {props.data.job_detail.place_of_posting}
           </div>
         </div>
 
         <div className="headingdiv">
           <div className="modalHeading col-sm-6">Description: </div>
           <div className="headingValue col-sm-6">
-            {FilledForm.job_detail.description}
+            {props.data.job_detail.description}
           </div>
         </div>
         <div className="headingdiv">
           <div className="modalHeading col-sm-6">Duration : </div>
           <div className="headingValue col-sm-6">
             {" "}
-            {FilledForm.job_detail.duration}
+            {props.data.job_detail.duration}
           </div>
         </div>
-        {FilledForm.type === "INF" ? (
+        {props.type === "INF" ? (
           <div className="headingdiv">
             <div className="modalHeading col-sm-6">Mode of Internship: </div>
             <div className="headingValue col-sm-6">
-              {FilledForm.job_detail.mode}
+              {props.data.job_detail.mode}
             </div>
           </div>
         ) : (
@@ -70,7 +70,7 @@ export default function FormModal(props) {
         )}
       </div>
       <hr />
-      <div>
+      {/* <div>
         <div className="categoryName">Contact Details: </div>
         <div>
           <div className="lead">Primary Contact detail</div>
@@ -78,59 +78,59 @@ export default function FormModal(props) {
             <div className="headingdiv">
               <div className="modalHeading col-sm-6">Name: </div>
               <div className="headingValue col-sm-6">
-                {FilledForm.contact_detail[0].name}
+                {props.data.contact_detail[0].name}
               </div>
             </div>
 
             <div className="headingdiv">
               <div className="modalHeading col-sm-6">Designation: </div>
               <div className="headingValue col-sm-6">
-                {FilledForm.contact_detail[0].designation}
+                {props.data.contact_detail[0].designation}
               </div>
             </div>
 
             <div className="headingdiv">
               <div className="modalHeading col-sm-6">Email: </div>
               <div className="headingValue col-sm-6">
-                {FilledForm.contact_detail[0].email}
+                {props.data.contact_detail[0].email}
               </div>
             </div>
             <div className="headingdiv">
               <div className="modalHeading col-sm-6">Mobile: </div>
               <div className="headingValue col-sm-6">
-                {FilledForm.contact_detail[0].mobile}
+                {props.data.contact_detail[0].mobile}
               </div>
             </div>
           </div>
         </div>
-        {FilledForm.contact_detail.length === 2 ? (
+        {props.data.contact_detail.length === 2 ? (
           <div>
             <div className="lead">Secondary Contact detail</div>
             <div>
               <div className="headingdiv">
                 <div className="modalHeading col-sm-6">Name: </div>
                 <div className="headingValue col-sm-6">
-                  {FilledForm.contact_detail[1].name}
+                  {props.data.contact_detail[1].name}
                 </div>
               </div>
 
               <div className="headingdiv">
                 <div className="modalHeading col-sm-6">Designation : </div>
                 <div className="headingValue col-sm-6">
-                  {FilledForm.contact_detail[1].designation}
+                  {props.data.contact_detail[1].designation}
                 </div>
               </div>
 
               <div className="headingdiv">
                 <div className="modalHeading col-sm-6">Email: </div>
                 <div className="headingValue col-sm-6">
-                  {FilledForm.contact_detail[1].email}
+                  {props.data.contact_detail[1].email}
                 </div>
               </div>
               <div className="headingdiv">
                 <div className="modalHeading col-sm-6">Mobile: </div>
                 <div className="headingValue col-sm-6">
-                  {FilledForm.contact_detail[1].mobile}
+                  {props.data.contact_detail[1].mobile}
                 </div>
               </div>
             </div>
@@ -138,14 +138,14 @@ export default function FormModal(props) {
         ) : (
           <div></div>
         )}
-      </div>
+      </div> */}
       <hr />
       <div>
         <div className="categoryName">Eligible Courses and Discipline</div>
         <div>
           <div className="courseType">4-Year B.Tech Programs</div>
           <div>
-            {FilledForm.eligible_branch.btech.map((branch) => {
+            {props.data.eligible_branch.btech.map((branch) => {
               return <div className="branchName">{branch}</div>;
             })}
           </div>
@@ -155,7 +155,7 @@ export default function FormModal(props) {
             5-Year Dual Degree/ Integrated M.Tech Programs
           </div>
           <div>
-            {FilledForm.eligible_branch.dd_mtech.map((branch) => {
+            {props.data.eligible_branch.dd_mtech.map((branch) => {
               return <div className="branchName">{branch}</div>;
             })}
           </div>
@@ -163,7 +163,7 @@ export default function FormModal(props) {
         <div>
           <div className="courseType">3-Year MSc. Tech Programs</div>
           <div>
-            {FilledForm.eligible_branch.msc3.map((branch) => {
+            {props.data.eligible_branch.msc3.map((branch) => {
               return <div className="branchName">{branch}</div>;
             })}
           </div>
@@ -171,7 +171,7 @@ export default function FormModal(props) {
         <div>
           <div className="courseType">2-Year MSc. Tech Programs</div>
           <div>
-            {FilledForm.eligible_branch.msc2.map((branch) => {
+            {props.data.eligible_branch.msc2.map((branch) => {
               return <div className="branchName">{branch}</div>;
             })}
           </div>
@@ -179,7 +179,7 @@ export default function FormModal(props) {
         <div>
           <div className="courseType">2-Year MBA Programs</div>
           <div>
-            {FilledForm.eligible_branch.mba.map((branch) => {
+            {props.data.eligible_branch.mba.map((branch) => {
               return <div className="branchName">{branch}</div>;
             })}
           </div>
@@ -187,7 +187,7 @@ export default function FormModal(props) {
         <div>
           <div className="courseType">2-Year M.Tech Programs</div>
           <div>
-            {FilledForm.eligible_branch.mtech.map((branch) => {
+            {props.data.eligible_branch.mtech.map((branch) => {
               return <div className="branchName">{branch}</div>;
             })}
           </div>
@@ -195,7 +195,7 @@ export default function FormModal(props) {
         <div>
           <div className="courseType">PhD Programs</div>
           <div>
-            {FilledForm.eligible_branch.phd.map((branch) => {
+            {props.data.eligible_branch.phd.map((branch) => {
               return <div className="branchName">{branch}</div>;
             })}
           </div>
@@ -205,7 +205,7 @@ export default function FormModal(props) {
       <div>
         <div className="categoryName">Skills Requirement:</div>
         <div>
-          {FilledForm.skill_based.map((skill) => {
+          {props.data.skill_based.map((skill) => {
             return <div className="skill">{skill}</div>;
           })}
         </div>
@@ -217,14 +217,14 @@ export default function FormModal(props) {
           <div className="headingdiv">
             <div className="modalHeading col-sm-6">Resume Shortlisting : </div>
             <div className="headingValue col-sm-6">
-              {FilledForm.selection_pr.resume_short_listing}
+              {props.data.selection_pr.resume_short_listing}
             </div>
           </div>
 
           <div className="headingdiv">
             <div className="modalHeading col-sm-6">Type of Test : </div>
             <div className="headingValue col-sm-6">
-              {FilledForm.selection_pr.type_of_test}
+              {props.data.selection_pr.type_of_test}
             </div>
           </div>
 
@@ -232,7 +232,7 @@ export default function FormModal(props) {
             <div className="modalHeading col-sm-6">
               Other Qualification Rounds :{" "}
             </div>
-            {FilledForm.selection_pr.other_round.map((round) => {
+            {props.data.selection_pr.other_round.map((round) => {
               <div className="headingValue col-sm-6">{round}</div>;
             })}
           </div>
@@ -241,7 +241,7 @@ export default function FormModal(props) {
               Total Number of rounds:{" "}
             </div>
             <div className="headingValue col-sm-6">
-              {FilledForm.selection_pr.total_rounds}
+              {props.data.selection_pr.total_rounds}
             </div>
           </div>
           <div className="headingdiv">
@@ -250,7 +250,7 @@ export default function FormModal(props) {
               sufficient)
             </div>
             <div className="headingValue col-sm-6">
-              {FilledForm.selection_pr.no_of_offers}
+              {props.data.selection_pr.no_of_offers}
             </div>
           </div>
           <div className="headingdiv">
@@ -258,7 +258,7 @@ export default function FormModal(props) {
               Eligibility Criteria (if any)
             </div>
             <div className="headingValue col-sm-6">
-              {FilledForm.selection_pr.eligible_criteria}
+              {props.data.selection_pr.eligible_criteria}
             </div>
           </div>
         </div>

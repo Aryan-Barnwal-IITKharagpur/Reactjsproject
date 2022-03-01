@@ -47,7 +47,8 @@ function Inf_Jnf_Card(props) {
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <FormModal unique_id={FilledForm.unique_id} />
+                    <FormModal  data={props.data}/>
+                    {console.log(props.data)}
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
