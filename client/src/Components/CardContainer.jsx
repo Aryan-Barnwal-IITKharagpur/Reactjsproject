@@ -26,11 +26,6 @@ function CardContainer() {
 
           })}
 
-          
-          {/* <Inf_Jnf_Card type="INF" name="Amazon" profile="Software Development" desc="A very good description here very nice detailed long description" />
-          <Inf_Jnf_Card type="INF" name="Amazon" profile="Software Development" desc="A very good description here very nice detailed long description" />
-          <Inf_Jnf_Card type="INF" name="Amazon" profile="Software Development" desc="A very good description here very nice detailed long description" /> */}
-
         </div>
       </div>
     </>

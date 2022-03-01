@@ -3,7 +3,7 @@ import "../Styles/Loader.css"
 
  function Loader() {
   return (
-    <div class="spinner"></div>
+    <div class="spinner-7"></div>
   )
 }
 export default Loader;

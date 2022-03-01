@@ -8,13 +8,18 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import { FaWindows } from 'react-icons/fa';
+import {Link} from 'react-router-dom';
 
 
 function Inf_Jnf_Card(props) {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-
+    const handleUpdate=()=>{
+        
+    };
+    const url="/JNF_form/"+ props.data._id
     return (
         <>
             <Card sx={{ minWidth: 275 }} className="mx-3 my-3">
@@ -54,9 +59,11 @@ function Inf_Jnf_Card(props) {
                     <Button variant="secondary" onClick={handleClose}>
                         Close
                     </Button>
-                    <Button variant="primary" onClick={handleClose}>
-                        Save Changes
+                    <Link to={url}>
+                    <Button  variant="primary" onClick={()=>{handleClose(); handleUpdate();}}>
+                        Update
                     </Button>
+                    </Link>
                 </Modal.Footer>
             </Modal>
         </>

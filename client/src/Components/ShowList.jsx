@@ -27,7 +27,7 @@ export default function ShowList( data) {
         </Dropdown.Toggle>
         <Dropdown.Menu>
           <Dropdown.Item href={data.pdf_downloadlink}>Download for Students</Dropdown.Item>
-          <Dropdown.Item href={data.pdf_viewlink}>View</Dropdown.Item>
+          <Dropdown.Item href={data.pdf_viewlink}>View for Students</Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
     </div>
