@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useParams } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import { FaAngleDoubleDown, FaAngleDoubleUp } from "react-icons/fa";
 import { btech } from "../../constants/Btech";
@@ -17,6 +18,63 @@ import "./form.css";
 
 export default function Form(props) {
   // console.log(props.type);
+
+  const [prevData, setPrevData] = useState({
+    user_id: "",
+    type: "",
+    company_overview: {
+      name: "",
+      website: "",
+      sector: "",
+    },
+    job_detail: {
+      designation: "",
+      place_of_posting: "",
+      description: "",
+      duration: "",
+      mode: "",
+    },
+    stipend_detail: {
+      ctc: "",
+      ctc_breakup: "",
+      bond_detail: "",
+      stipend: "",
+      ppo_provision: "",
+      ctc_ppo: "",
+    },
+    contact_detail: [
+      {
+        name: "",
+        designation: "",
+        email: "",
+        mobile: "",
+      },
+    ],
+    eligible_branch: {
+      btech: [""],
+      dd_mtech: [""],
+      msc2: [""],
+      msc3: [""],
+      mtech: [""],
+      mba: [""],
+      phd: [""],
+    },
+    skill_based: [""],
+    selection_pr: {
+      resume_short_listing: "",
+      type_of_test: "",
+      other_round: [""],
+      total_rounds: 0,
+      no_of_offers: "",
+      eligible_criteria: "",
+    },
+    doc_link: "",
+    DateTime: "",
+    pdf_id: "",
+    pdf_link: "",
+  });
+  const { obj_id } = useParams();
+  const [allData, setAllData] = useState({});
   const [companyoverview, setCompanyoverview] = useState(false);
   const [jobdetail, setJobdetail] = useState(false);
   const [contact, setContact] = useState(false);
@@ -34,52 +92,107 @@ export default function Form(props) {
   const [typeoftestdiv, settypeoftestdiv] = useState(false);
   const [otherrounddiv, setotherrounddiv] = useState(false);
 
-  const [secondarycontact, setSecondarycontact] = useState(false);
-  const [modebutton, setModebutton] = useState("");
-  const [ppo, setPpo] = useState("");
+  const [secondarycontact, setSecondarycontact] = useState();
 
-  const [name, setname] = useState("");
-  const [website, setwebsite] = useState("");
-  const [sector, setsector] = useState("");
-  const [designation, setDesignation] = useState("");
-  const [place_of_posting, setplace_of_posting] = useState("");
-  const [description, setdescription] = useState("");
-  const [duration, setduration] = useState("");
+  const [modebutton, setModebutton] = useState(prevData.job_detail.mode);
+  const [ppo, setPpo] = useState(prevData.stipend_detail.ppo_provision);
+
+  const [name, setname] = useState(prevData.company_overview.name);
+  const [website, setwebsite] = useState(prevData.company_overview.website);
+  const [sector, setsector] = useState(prevData.company_overview.sector);
+  const [designation, setDesignation] = useState(
+    prevData.job_detail.designation
+  );
+  const [place_of_posting, setplace_of_posting] = useState(
+    prevData.job_detail.place_of_posting
+  );
+  const [description, setdescription] = useState(
+    prevData.job_detail.description
+  );
+  const [duration, setduration] = useState(prevData.job_detail.duration);
   const [mode, setmode] = useState("");
-  const [ctc, setctc] = useState("");
-  const [ctc_breakup, setctc_breakup] = useState("");
-  const [bond_detail, setbond_detail] = useState("");
-  const [stipend, setstipend] = useState("");
+  const [ctc, setctc] = useState(prevData.stipend_detail.ctc);
+  const [ctc_breakup, setctc_breakup] = useState(
+    prevData.stipend_detail.ctc_breakup
+  );
+  const [bond_detail, setbond_detail] = useState(
+    prevData.stipend_detail.bond_detail
+  );
+  const [stipend, setstipend] = useState(prevData.stipend_detail.stipend);
   const [ppo_provision, setppo_provision] = useState("");
-  const [ctc_ppo, setctc_ppo] = useState("");
-  const [contactname1, setcontactname1] = useState("");
-  const [contactdesignation1, setcontactdesignation1] = useState("");
-  const [contactemail1, setcontactemail1] = useState("");
-  const [mobile1, setmobile1] = useState("");
+  const [ctc_ppo, setctc_ppo] = useState(prevData.stipend_detail.ctc_ppo);
+  const [contactname1, setcontactname1] = useState(
+    prevData.contact_detail[0].name
+  );
+  const [contactdesignation1, setcontactdesignation1] = useState(
+    prevData.contact_detail[0].designation
+  );
+  const [contactemail1, setcontactemail1] = useState(
+    prevData.contact_detail[0].email
+  );
+  const [mobile1, setmobile1] = useState(prevData.contact_detail[0].mobile);
   const [contactname2, setcontactname2] = useState("");
   const [contactdesignation2, setcontactdesignation2] = useState("");
   const [contactemail2, setcontactemail2] = useState("");
   const [mobile2, setmobile2] = useState("");
   const [otherskill, setotherskill] = useState("");
-  const [resumeshort, setresumeshort] = useState("");
-  const [typeoftest, settypeoftest] = useState("");
-  const [total_rounds, settotal_rounds] = useState(0);
-  const [no_of_offers, setno_of_offers] = useState("");
-  const [eligible_criteria, seteligible_criteria] = useState("");
+  const [resumeshort, setresumeshort] = useState(
+    prevData.selection_pr.resume_short_listing
+  );
+  const [typeoftest, settypeoftest] = useState(
+    prevData.selection_pr.type_of_test
+  );
+  const [total_rounds, settotal_rounds] = useState(
+    prevData.selection_pr.total_rounds
+  );
+  const [no_of_offers, setno_of_offers] = useState(
+    prevData.selection_pr.no_of_offers
+  );
+  const [eligible_criteria, seteligible_criteria] = useState(
+    prevData.selection_pr.eligible_criteria
+  );
 
-  const [btecharray, setbtecharray] = useState([]);
-  const [dual_mtecharray, setdual_mtecharray] = useState([]);
-  const [mbaarray, setmbaarray] = useState([]);
-  const [msc2array, setmsc2array] = useState([]);
-  const [msc3array, setmsc3array] = useState([]);
-  const [mtecharray, setmtecharray] = useState([]);
-  const [phdarray, setphdarray] = useState([]);
-  const [skillarray, setskillarray] = useState([]);
-  const [other_roundarray, setother_roundarray] = useState([]);
+  const [btecharray, setbtecharray] = useState(prevData.eligible_branch.btech);
+  const [dual_mtecharray, setdual_mtecharray] = useState(
+    prevData.eligible_branch.dd_mtech
+  );
+  const [mbaarray, setmbaarray] = useState(prevData.eligible_branch.mba);
+  const [msc2array, setmsc2array] = useState(prevData.eligible_branch.msc2);
+  const [msc3array, setmsc3array] = useState(prevData.eligible_branch.msc3);
+  const [mtecharray, setmtecharray] = useState(prevData.eligible_branch.mtech);
+  const [phdarray, setphdarray] = useState(prevData.eligible_branch.phd);
+  const [skillarray, setskillarray] = useState(prevData.skill_based);
+  const [other_roundarray, setother_roundarray] = useState(
+    prevData.selection_pr.other_round
+  );
   const [contactdetail, setcontactdetail] = useState([]);
+  // setotherskill(() => {
+  //   for (var i = 0; i < skillarray.length; i++) {
+  //     if (skill.includes(skillarray[i]) === false) {
+  //       return skillarray[i];
+  //     }
+  //     return "";
+  //   }
+  // });
+  function findotherskill() {
+    for (var i = 0; i < skillarray.length; i++) {
+      if (skill.includes(skillarray[i]) === false) {
+        setotherskill(skillarray[i]);
+        return skillarray[i];
+      }
+      return "";
+    }
+  }
+  function findsecondarycontact() {
+    if (prevData.contact_detail.length === 2) {
+      setSecondarycontact(() => "Yes");
+      setcontactname2(() => prevData.contact_detail[1].name);
+      setcontactdesignation2(() => prevData.contact_detail[1].designation);
+      setcontactemail2(() => prevData.contact_detail[1].email);
+      setmobile2(() => prevData.contact_detail[1].mobile);
+    }
+  }
 
-  const [prevData,setPrevData]=useState({});
-  
   function handleChangeBtech(e) {
     var updatedList = [...btecharray];
     if (e.target.checked) {
@@ -207,11 +320,6 @@ export default function Form(props) {
       no_of_offers: no_of_offers,
       eligible_criteria: eligible_criteria,
     };
-    // const selection_pr = {
-    //   resume_short_listing: resumeshort,
-    //   type_of_test: typeoftest,
-    //   other_round: other_roundarray
-    // };
 
     var tempcontact = [
       {
@@ -243,10 +351,7 @@ export default function Form(props) {
       eligible_branch: eligible_branch,
       skill_based: skill_based,
       selection_pr: selection_pr,
-      // total_rounds:total_rounds,
-      // no_of_offers:no_of_offers,
-      // eligible_criteria:eligible_criteria,
-      doc_link: "Strin",
+      doc_link: "",
       DateTime: date,
       pdf_id: "",
       pdf_viewlink: "",
@@ -265,7 +370,21 @@ export default function Form(props) {
     );
     console.log(response.data, result);
   }
-
+  useEffect(() => {
+    // console.log(obj_id);
+    findotherskill();
+    findsecondarycontact();
+    async function fetchPrevData() {
+      // const url = "localhost:3000/getpreviousdata";
+      // const response = await axios.post(url, obj_id);
+      // setPrevData(() => response);
+      // const response2 = await axios.get("localhost:3000/getAll");
+      // console.log(response2);
+      // setAllData(() => response2);
+    }
+    fetchPrevData();
+    // prevData.eligible_branch.btech;
+  }, []);
   return (
     <>
       <div>
@@ -317,6 +436,7 @@ export default function Form(props) {
                   className="form-control"
                   placeholder="Name"
                   onChange={(e) => setname(() => e.target.value)}
+                  value={name}
                 />
                 <label for="floatingInput">Name of Company</label>
               </div>
@@ -326,6 +446,7 @@ export default function Form(props) {
                   className="form-control"
                   placeholder="Website"
                   onChange={(e) => setwebsite(() => e.target.value)}
+                  value={website}
                 />
                 <label for="floatingInput">Website</label>
               </div>
@@ -336,6 +457,7 @@ export default function Form(props) {
                   className="form-control"
                   placeholder="Sector"
                   onChange={(e) => setsector(() => e.target.value)}
+                  value={sector}
                 />
                 <label for="floatingInput">Sector</label>
               </div>
@@ -359,7 +481,11 @@ export default function Form(props) {
             }}
           >
             <div className="category-heading">
-              <h3>JOB DETAILS</h3>
+              {props.type === "INF" ? (
+                <h3>INTERNSHIP DETAILS</h3>
+              ) : (
+                <h3>JOB DETAILS</h3>
+              )}
               <div className="mx-4">
                 {jobdetail === true ? (
                   <FaAngleDoubleUp />
@@ -377,69 +503,82 @@ export default function Form(props) {
                   className="form-control"
                   placeholder="Designation"
                   onChange={(e) => setDesignation(() => e.target.value)}
+                  value={designation}
                 />
                 <label for="floatingInput">Designation</label>
               </div>
-              <div className="form-floating mb-3">
+              <div className="form-floating mb-2">
                 <input
                   type="text"
                   className="form-control"
                   placeholder="Place"
                   onChange={(e) => setplace_of_posting(() => e.target.value)}
+                  value={place_of_posting}
                 />
                 <label for="floatingInput">Place of Posting</label>
               </div>
-              <div className="form-floating mb-3">
+              <div className="form-floating mb-3 ">
                 <textarea
                   type="text"
                   className="form-control textbox"
                   placeholder="Description"
                   style={{ height: 100 }}
                   onChange={(e) => setdescription(() => e.target.value)}
+                  value={description}
                 ></textarea>
                 <label>Description</label>
               </div>
-              <div className="form-floating mb-3">
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Duration"
-                  onChange={(e) => setduration(() => e.target.value)}
-                />
-                <label for="floatingInput">Duration</label>
-              </div>
-
-              <div className="optionbox mb-3">
-                <div className="optionbox-title">Mode of Intern: </div>
-                <div>
-                  <button
-                    type="button"
-                    className={
-                      "optionbutton btn " +
-                      (modebutton === "Virtual" ? "btn-primary" : "")
-                    }
-                    onClick={() => {
-                      setModebutton("Virtual");
-                      setmode(() => "Virtual");
-                    }}
-                  >
-                    Virtual
-                  </button>
-                  <button
-                    type="button "
-                    className={
-                      "optionbutton btn " +
-                      (modebutton === "Physical" ? "btn-primary" : "")
-                    }
-                    onClick={() => {
-                      setModebutton("Physical");
-                      setmode(() => "Physical");
-                    }}
-                  >
-                    Physical
-                  </button>
+              {props.type === "INF" ? (
+                <div className="form-floating my-5 ">
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Duration"
+                    onChange={(e) => setduration(() => e.target.value)}
+                    value={duration}
+                  />
+                  <label for="floatingInput">Duration</label>
                 </div>
-              </div>
+              ) : (
+                <div></div>
+              )}
+
+              {props.type === "INF" ? (
+                <div className="optionbox mb-3 ">
+                  <div className="optionbox-title">Mode of Intern: </div>
+                  {/* {setModebutton(() => prevData.job_detail.mode)} */}
+                  <div>
+                    <button
+                      type="button"
+                      className={
+                        "optionbutton btn " +
+                        (modebutton === "Virtual" ? "btn-primary" : "")
+                      }
+                      onClick={() => {
+                        setModebutton("Virtual");
+                        setmode(() => "Virtual");
+                      }}
+                    >
+                      Virtual
+                    </button>
+                    <button
+                      type="button "
+                      className={
+                        "optionbutton btn " +
+                        (modebutton === "Physical" ? "btn-primary" : "")
+                      }
+                      onClick={() => {
+                        setModebutton("Physical");
+                        setmode(() => "Physical");
+                      }}
+                    >
+                      Physical
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <div></div>
+              )}
             </div>
           ) : (
             <div></div>
@@ -460,7 +599,9 @@ export default function Form(props) {
             }}
           >
             <div className="category-heading">
-              <h3>STIPEND DETAILS</h3>
+              <h3>
+                {props.type === "INF" ? "STIPEND DETAILS" : "SALARY DETAILS"}
+              </h3>
               <div className="mx-4">
                 {stipenddetail === true ? (
                   <FaAngleDoubleUp />
@@ -469,7 +610,6 @@ export default function Form(props) {
                 )}
               </div>
             </div>
-            {/* <p>June 10</p> */}
           </div>
           {stipenddetail === true ? (
             <div className="lower">
@@ -481,6 +621,7 @@ export default function Form(props) {
                       className="form-control"
                       placeholder="ctc"
                       onChange={(e) => setctc(() => e.target.value)}
+                      value={ctc}
                     />
                     <label for="floatingInput">CTC</label>
                   </div>
@@ -490,6 +631,7 @@ export default function Form(props) {
                       className="form-control"
                       placeholder="ctcbreakup"
                       onChange={(e) => setctc_breakup(() => e.target.value)}
+                      value={ctc_breakup}
                     />
                     <label for="floatingInput">CTC breakup</label>
                   </div>
@@ -500,6 +642,7 @@ export default function Form(props) {
                       placeholder="bond detail"
                       style={{ height: 100 }}
                       onChange={(e) => setbond_detail(() => e.target.value)}
+                      value={bond_detail}
                     ></textarea>
                     <label>Bond Detail</label>
                   </div>
@@ -512,6 +655,7 @@ export default function Form(props) {
                       className="form-control"
                       placeholder="stipend"
                       onChange={(e) => setstipend(() => e.target.value)}
+                      value={stipend}
                     />
                     <label for="floatingInput">Stipend(Per Month)</label>
                   </div>
@@ -554,6 +698,7 @@ export default function Form(props) {
                         className="form-control"
                         placeholder="ctc if provided"
                         onChange={(e) => setctc_ppo(() => e.target.value)}
+                        value={ctc_ppo}
                       />
                       <label for="floatingInput">
                         CTC details, if PPO is provided{" "}
@@ -571,6 +716,7 @@ export default function Form(props) {
         </div>
         {/* Contact Detail */}
         <div className="animate__animated animate__fadeInRight container col-lg-8 col-md-12 category p-0 ">
+          {/* {findsecondarycontact()} */}
           <div
             className="upper"
             onClick={() => {
@@ -598,6 +744,7 @@ export default function Form(props) {
                   className="form-control"
                   placeholder="name"
                   onChange={(e) => setcontactname1(() => e.target.value)}
+                  value={contactname1}
                 />
                 <label for="floatingInput">Name</label>
               </div>
@@ -607,6 +754,7 @@ export default function Form(props) {
                   className="form-control"
                   placeholder="designation"
                   onChange={(e) => setcontactdesignation1(() => e.target.value)}
+                  value={contactdesignation1}
                 />
                 <label for="floatingInput">Designation</label>
               </div>
@@ -616,6 +764,7 @@ export default function Form(props) {
                   className="form-control"
                   placeholder="name@example.com"
                   onChange={(e) => setcontactemail1(() => e.target.value)}
+                  value={contactemail1}
                 />
                 <label for="floatingInput">Email address</label>
               </div>
@@ -626,6 +775,7 @@ export default function Form(props) {
                   className="form-control"
                   placeholder="mobile"
                   onChange={(e) => setmobile1(() => e.target.value)}
+                  value={mobile1}
                 />
                 <label for="floatingInput">Mobile</label>
               </div>
@@ -634,6 +784,7 @@ export default function Form(props) {
                 <div className="optionbox-title">
                   Add Secondary Contact Details:{" "}
                 </div>
+
                 <div>
                   <button
                     type="button"
@@ -665,6 +816,7 @@ export default function Form(props) {
                       type="text"
                       className="form-control"
                       placeholder="name"
+                      value={contactname2}
                       onChange={(e) => setcontactname2(() => e.target.value)}
                     />
                     <label for="floatingInput">Name</label>
@@ -674,6 +826,7 @@ export default function Form(props) {
                       type="text"
                       className="form-control"
                       placeholder="designation"
+                      value={contactdesignation2}
                       onChange={(e) =>
                         setcontactdesignation2(() => e.target.value)
                       }
@@ -685,6 +838,7 @@ export default function Form(props) {
                       type="email"
                       className="form-control"
                       placeholder="name@example.com"
+                      value={contactemail2}
                       onChange={(e) => setcontactemail2(() => e.target.value)}
                     />
                     <label for="floatingInput">Email address</label>
@@ -695,6 +849,7 @@ export default function Form(props) {
                       type="text"
                       className="form-control"
                       placeholder="mobile"
+                      value={mobile2}
                       onChange={(e) => setmobile2(() => e.target.value)}
                     />
                     <label for="floatingInput">Mobile</label>
@@ -771,6 +926,7 @@ export default function Form(props) {
                               <input
                                 type="checkbox"
                                 value={item}
+                                checked={btecharray.includes(item)}
                                 onChange={(e) => handleChangeBtech(e)}
                               />
                               <span className="checkmark "></span>
@@ -819,6 +975,7 @@ export default function Form(props) {
                                 type="checkbox"
                                 value={item}
                                 onChange={(e) => handleChangedual_mtech(e)}
+                                checked={dual_mtecharray.includes(item)}
                               />
                               <span className="checkmark "></span>
                             </label>
@@ -866,6 +1023,7 @@ export default function Form(props) {
                               <input
                                 type="checkbox"
                                 value={item}
+                                checked={msc3array.includes(item)}
                                 onChange={(e) => handleChangemsc3(e)}
                               />
                               <span className="checkmark "></span>
@@ -913,6 +1071,7 @@ export default function Form(props) {
                               <input
                                 type="checkbox"
                                 value={item}
+                                checked={msc2array.includes(item)}
                                 onChange={(e) => handleChangemsc2(e)}
                               />
                               <span className="checkmark "></span>
@@ -960,6 +1119,7 @@ export default function Form(props) {
                               <input
                                 type="checkbox"
                                 value={item}
+                                checked={mbaarray.includes(item)}
                                 onChange={(e) => handleChangemba(e)}
                               />
                               <span className="checkmark "></span>
@@ -1007,6 +1167,7 @@ export default function Form(props) {
                               <input
                                 type="checkbox"
                                 value={item}
+                                checked={mtecharray.includes(item)}
                                 onChange={(e) => handleChangemtech(e)}
                               />
                               <span className="checkmark "></span>
@@ -1054,6 +1215,7 @@ export default function Form(props) {
                               <input
                                 type="checkbox"
                                 value={item}
+                                checked={phdarray.includes(item)}
                                 onChange={(e) => handleChangephd(e)}
                               />
                               <span className="checkmark "></span>
@@ -1117,6 +1279,7 @@ export default function Form(props) {
                           <input
                             type="checkbox"
                             value={item}
+                            checked={skillarray.includes(item)}
                             onChange={(e) => handleChangeSkill(e)}
                           />
                           <span className="checkmark "></span>
@@ -1129,6 +1292,7 @@ export default function Form(props) {
                       type="text"
                       className="form-control"
                       placeholder="other skill"
+                      value={otherskill}
                       onChange={(e) => setotherskill(() => e.target.value)}
                     />
                     <label for="floatingInput">
@@ -1283,6 +1447,7 @@ export default function Form(props) {
                                 <input
                                   type="checkbox"
                                   value={item}
+                                  checked={other_roundarray.includes(item)}
                                   onChange={(e) => handleChangeOtherRound(e)}
                                 />
                                 <span className="checkmark "></span>
@@ -1305,6 +1470,7 @@ export default function Form(props) {
                           type="number"
                           className="form-control"
                           placeholder="Total Rounds"
+                          value={total_rounds}
                           onChange={(e) =>
                             settotal_rounds(() => e.target.value)
                           }
@@ -1334,6 +1500,7 @@ export default function Form(props) {
                           type="text"
                           className="form-control"
                           placeholder="Number of offers"
+                          value={no_of_offers}
                           onChange={(e) =>
                             setno_of_offers(() => e.target.value)
                           }
@@ -1347,6 +1514,7 @@ export default function Form(props) {
                       type="text"
                       className="form-control"
                       placeholder="Eligibility Criteria"
+                      value={eligible_criteria}
                       onChange={(e) =>
                         seteligible_criteria(() => e.target.value)
                       }
