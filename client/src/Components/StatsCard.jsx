@@ -2,12 +2,12 @@ import React from 'react'
 import { Card } from 'react-bootstrap'
 import "../Styles/StatsCard.css"
 
-export default function () {
+export default function (props) {
     return (<>
         <div className="StatsCardcontainer ">
             <Card style={{ width: '15rem', height: '15rem' }}>
                 <Card.Body className='statsCardbody p-5'>
-                    <Card.Title className='statsCardTitle text-center'>275</Card.Title>
+                    <Card.Title className='statsCardTitle text-center'>{props.total}</Card.Title>
                     <hr style={{ color: 'black' }} />
                     <Card.Subtitle className="mb-2 text-muted text-center statsCardText">JNF Filled</Card.Subtitle>
 

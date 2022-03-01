@@ -11,11 +11,11 @@ route.get("/", function (req, res) {
     res.send(result);
   });
   route.get("/getSome",async function (req, res) {
-    const result=await FormData.find({company_overview:{name:'Amazon'}});
+    const result=await FormData.find({company_overview:{name:'cvbsgbgrtg'}});
     // const result=await FormData.find({type:req.body.type});
     // result.getFilter();
-    console.log(result);
-    res.send(result);
+    console.log(result.data);
+    res.send(result.data);
   });
   route.post("/save", function (req, res) {
     // console.log(req.body);

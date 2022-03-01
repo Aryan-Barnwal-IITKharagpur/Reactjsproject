@@ -55,16 +55,20 @@ export default function Admin_dashboard() {
     );
     console.log(result);
   };
-
   useEffect(() => {
     const fetchData = async () => {
       const result = await axios.get("http://localhost:3000/form/getAll");
       console.log(result.data)
+      const total=result.data.length;
+      console.log(total);
       setData(result.data);
     };
 
     fetchData();
   }, []);
+  // const total=data.length;
+  // console.log(total);
+
 
   const [showJNFINF, setShowJNFINF] = useState("JNF");
 
@@ -189,7 +193,7 @@ export default function Admin_dashboard() {
         </div>
       </div>
       <hr />
-      <StatsCard />
+      <StatsCard total={data.length}/>
       <hr />
       {/* <ListingSection /> */}
      
