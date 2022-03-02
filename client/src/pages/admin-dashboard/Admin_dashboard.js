@@ -260,11 +260,11 @@ export default function Admin_dashboard() {
             <h3 className="display-10 text-muted mb-4">CDC, IIT ISM Dhanbad</h3>
             <div className="col-lg-6 mx-auto">
               <p className="lead mb-4">
-                Quickly design and customize responsive mobile-first sites with
-                Bootstrap, the world’s most popular front-end open source
-                toolkit, featuring Sass variables and mixins, responsive grid
-                system, extensive prebuilt components, and powerful JavaScript
-                plugins.
+                Welcome to the recruitment website for IIT(ISM) Dhanbad.
+                <br />
+                IIT(ISM) Dhanbad is one of the leading institutes in the country, with its graduates all across the world.Our students are encouraged to strive for excellence by nurturing their abilities and talent through hardwork and providing them the right tools and expertise in the due course of their degree.
+                <br />
+                To give our students an opportunity to work with your esteemed organization, please continue.
               </p>
               <div className="d-grid gap-2 d-sm-flex justify-content-sm-center mb-2">
                 <button

@@ -432,6 +432,10 @@ export default function Form(props) {
         `${Base()}/form/update`,
         formData
       );
+      const mailResponse = await axios.post(
+        `${Base()}/email/send_update`,
+        formData
+      );
     }
     window.location.replace("./company_dashboard");
     // console.log(response.data, result);
