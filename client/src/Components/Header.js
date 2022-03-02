@@ -33,7 +33,7 @@ export default function Header() {
       sx={{ anchor: 'changePass', 'width': 500, 'height': 150 }}
       role="presentation"
     >
-      <ChangePassForm />
+      <ChangePassForm  setState={setState} />
     </Box>
   );
 

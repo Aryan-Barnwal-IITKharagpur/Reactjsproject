@@ -2,8 +2,10 @@ const express=require('express');
 const route=express.Router();
 const FormData=require('../models/form');
 var mongoose = require("mongoose");
+const fs=require('fs');
 var passport=require('passport');
 var jwt=require('jsonwebtoken');
+const XLSX=require('xlsx');
 // const passport = require('../config/passport');
 route.get("/", function (req, res) {
     res.send("okk check");
@@ -39,16 +41,50 @@ route.post("/update",passport.authenticate('jwt', { session: false }),async  fun
       await formData.updateOne({_id:req.body._id }, formData).then(() => res.send("unique_id"));
  
   });
+  // ,passport.authenticate('jwt', { session: false })
+  route.post("/getExcel",async  function (req, res) {
+    const result=await FormData.find({},'contact_detail company_overview');
 
-  route.post("/getExcel",passport.authenticate('jwt', { session: false }),async  function (req, res) {
-    const result=await FormData.find();
     console.log(result);
     const users=[
-      {name:{firstName:"ashutosh",Lname:"Tripathi"},age:"37"},
-      {name:{firstName:"kavya",Lname:"saxena"},age:"73"}
+      {name:"ashutosh"}
     ]
 
     let dataArray=[];
+    let tempObj={
+      Company_Name:"",
+      Name1:"",
+      Designation1:"",
+      Email1:"",
+      Mobile1:"",
+      Name2:"",
+      Designation2:"",
+      Email2:"",
+      Mobile2:""
+    };
+ 
+    console.log(dataArray);
+    for(var i=0;i<result.length;i++)
+    {
+tempObj.Company_Name=result[i].company_overview.name;
+      if(result[i].contact_detail.length>=1)
+      {
+        tempObj.Name1=result[i].contact_detail[0].name;
+        tempObj.Designation1=result[i].contact_detail[0].designation,
+        tempObj.Email1=result[i].contact_detail[0].email,
+        tempObj.Mobile1=result[i].contact_detail[0].mobile
+      }
+       if(result[i].contact_detail.length===2)
+      {
+        tempObj.Name2=result[i].contact_detail[1].name;
+        tempObj.Designation2=result[i].contact_detail[1].designation,
+        tempObj.Email2=result[i].contact_detail[1].email,
+        tempObj.Mobile2=result[i].contact_detail[1].mobile
+      }
+      dataArray.push(tempObj);
+    }
+    
+console.log(dataArray);
  
 
   //   "contact_detail": [
@@ -94,11 +130,19 @@ route.post("/update",passport.authenticate('jwt', { session: false }),async  fun
       const workBook=XLSX.utils.book_new();
       XLSX.utils.book_append_sheet(workBook,workSheet,"FORM DATA");
       XLSX.write(workBook,{bookType:'xlsx',type:'buffer'})
-      XLSX.write(workBook,{bookType:'xlsx',type:'binary'})
+      // XLSX.write(workBook,{bookType:'xlsx',type:'binary'})
       XLSX.writeFile(workBook,"formdata.xlsx");
+      return "File created"
     }
-    // createExcelSheet();
-
+   const response2= await createExcelSheet();
+   res.download(`formdata.xlsx`);
+   const deleteExcelSheet=()=>{
+    fs.unlink(`formdata.xlsx`, function (err) {
+      if (err) throw err;
+      console.log('File deleted!');
+    });
+   }
+  //  const response3= await deleteExcelSheet();
     res.send(result);
 });
 

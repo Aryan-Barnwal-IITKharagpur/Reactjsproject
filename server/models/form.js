@@ -12,7 +12,7 @@ var DataInfJnfSchema = new mongoose.Schema({
     designation: String,
     place_of_posting: String,
     description: String,
-    duration: String,
+    duration: [String],
     mode: String,
   },
   stipend_detail: {
@@ -52,8 +52,10 @@ var DataInfJnfSchema = new mongoose.Schema({
   doc_link: String,
   DateTime: Date,
   pdf_id: String,
+  pdf_id_student: String,
   pdf_viewlink: String,
   pdf_downloadlink: String,
+  pdf_downloadlink_student:String
 });
 const FormData = new mongoose.model("FormData", DataInfJnfSchema);
 module.exports = FormData;

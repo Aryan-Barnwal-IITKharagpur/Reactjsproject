@@ -7,7 +7,11 @@ function CardContainer() {
   const company_user_id="bdsjchjue3wc7494";
   useEffect(() => {
     const fetchData = async () =>{
-      const result = await axios.post("http://localhost:3000/form/getSome", {company_user_id});
+      const headers={
+        Authorization:localStorage.getItem('token')
+      }
+const params= {company_user_id:localStorage.getItem('user_id')};
+      const result = await axios.post("http://localhost:3000/form/getSome",params,{headers:headers});
       console.log(result.data)
       setData(result.data);
     };

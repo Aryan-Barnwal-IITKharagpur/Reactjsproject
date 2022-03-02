@@ -33,7 +33,11 @@ route.post("/download", function (req, res) {
   );
 });
 
-route.post("/uploadToDrive", async function (req, res) {
+route.post("/uploadToDrive/:reciever", async function (req, res) {
+
+  const type=req.body.type;
+  const reciever=req.params.reciever;
+  console.log(req.body);
   const CLIENT_ID =process.env.CLIENT_ID;
     // "566774882475-lnodlg2brm4tu3r71s9hin3m6l52eaek.apps.googleusercontent.com";
   const CLIENT_SECRET = process.env.CLIENT_SECRET;
@@ -58,7 +62,7 @@ route.post("/uploadToDrive", async function (req, res) {
   const filePath = path.join(__dirname, "../exp-4.pdf");
  async function make_pdf(data) {
   const doc = new PDFDocument({autoFirstPage: false});
-    doc.pipe(fs.createWriteStream(`invoice.${req.body.unique_id}.pdf`));
+    doc.pipe(fs.createWriteStream(`${req.body.company_overview.name}.${req.body.job_detail.designation}.pdf`));
 
     doc.addPage({
       margins: {
@@ -167,6 +171,8 @@ route.post("/uploadToDrive", async function (req, res) {
    doc.addPage()
   
     //"CONTACT PERSONNEL DETAILS"
+    if(reciever==="cdc")
+    {
     doc.font('Helvetica-Bold');
     doc.fontSize(18).fillColor('#000000');
     doc.text("CONTACT PERSONNEL DETAILS",{align:'left'})
@@ -183,6 +189,7 @@ route.post("/uploadToDrive", async function (req, res) {
    main_heading="Secondary Contact"
   make_doc(main_heading,keys,values);
   }
+   }
   
   
   
@@ -235,16 +242,19 @@ route.post("/uploadToDrive", async function (req, res) {
 
 
 
-    return `invoice.${req.body.unique_id}.pdf`;
+    return `${req.body.company_overview.name}.${req.body.job_detail.designation}.pdf`;
   }
-  async function uploadFile(file_name) {
+  async function uploadFile(file_name,duration,parents) {
     // res.send(filePath);
-    const filePath=`./invoice.${req.body.unique_id}.pdf`
+    // const filePath=`./invoice.${req.body.unique_id}.pdf`
+    
+    const filePath=`./${file_name}`;
     try {
       const response = await drive.files.create({
         requestBody: {
-          name: `invoice.${req.body.unique_id}.pdf`,//comapany_name_inf/jnf
+          name: file_name,//comapany_name_inf/jnf
           mimeType: "application/pdf",
+          parents:[parents]
         },
         media: {
           mimeType: "application/pdf",
@@ -260,18 +270,19 @@ route.post("/uploadToDrive", async function (req, res) {
   }
   // uploadFile();
   async function deleteFromserver() {
-    fs.unlink(`invoice.${req.body.unique_id}.pdf`, function (err) {
+    fs.unlink(`${req.body.company_overview.name}.${req.body.job_detail.designation}.pdf`, function (err) {
     if (err) throw err;
     console.log('File deleted!');
   });
 }
 
   //delete file
-  async function deleteFile(pdf_id) {
+  async function deleteFile(pdf_id,parents) {
     try {
       const response = await drive.files.delete({
         // fileId: "1yIBvkihsGzkikOQ8PCHBqW5FTZWoRzP1", //get pdf file id from database
-         fileId: `${pdf_id}`
+         fileId: `${pdf_id}`,
+         parents:[parents]
       });
       // res.send(response.data, response.status);
     } catch (error) {
@@ -305,10 +316,53 @@ route.post("/uploadToDrive", async function (req, res) {
       // res.send(error.message);
     }
   }
-  if(false)
-  await deleteFile(pdf_id);
+  const category1=  "Jan - June 2022: Dual Degree/ Integrated M. Tech courses only (2022 batch)";
+  const category2="May - July 2022: Pre-final year students of ALL courses (2023 batch)";
+  const category3="July - Dec 2022: M. Tech/ MBA – Business Analytics courses only (2023 batch)";
+
+  let parents="";
+  if(reciever=="cdc")
+  {
+    if(duration==2)
+    parents="1XKRrnIU7c0j7c3JAvwqHEpJ1APaS5hRy"
+    if(duration==6)
+    parents="1XQEAGvlLjCHJHD5SWrKTYs1SGpdBVGU0"
+    else
+    parents="1gDsSe46277uV2IIUF6CE3TgS66niCGyD"
+  }
+  else
+  {
+    if(duration==2)
+    parents="17doTuc9S7wgT-0Ai0lholyxSCLhI_IUT"
+    if(duration==6)
+    parents="1c9HIKazQ4lstIt6yRyIyTY2Z2PMR0XRv"
+    if(duration==null)
+    parents="1O4roOPxvu4rSwcy25LDm56kWLGg3HjqH"
+  }
+
+
+  if(Object.keys(req.body).includes('_id'))
+  {
+    if(reciever==="cdc")
+    {
+      await deleteFile(req.body.pdf_id,parents);
+    }
+    else
+    {
+      await deleteFile(req.body.pdf_id_student,parents);
+    }
+  
+  }
+  
+  let data={};
   const file_name=await make_pdf(req.body);
-  const data =await uploadFile(file_name);
+  if(req.body.type==="INF"&&(req.body.job_detail.duration.includes(category1)||req.body.job_detail.duration.includes(category3)))
+   data =await uploadFile(file_name,6,parents);
+  else if(req.body.type==="INF")
+   data =await uploadFile(file_name,2,"INF",parents);
+  else
+   data =await uploadFile(file_name,null,"JNF",parents);
+
   const pdf_id=data.id;
   const url= await generateUrl(pdf_id);
   await deleteFromserver();

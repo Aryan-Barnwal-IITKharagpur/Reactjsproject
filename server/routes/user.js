@@ -53,7 +53,7 @@ route.post("/authenticate", function (req, res) {
   //     res.send("wrong password")
   // })
 })
-route.post("/save", function (req, res) {
+route.post("/save", async function  (req, res) {
   console.log(req.body);
   //  {
   //   user_id: req.body.user_id,
@@ -61,8 +61,14 @@ route.post("/save", function (req, res) {
   //   company_name: req.body.company_name,
   //   email_id: req.body.email_id,0.
   // }
-
-
+const userData=await User.find({user_id:req.body.user_id});
+console.log(userData);
+if(userData.length>0)
+{
+  res.send("User already Exists");
+}
+else
+{
   const user = new User({
     user_id: req.body.user_id,
     email_id: req.body.email_id,
@@ -71,12 +77,15 @@ route.post("/save", function (req, res) {
     username: req.body.user_id
   });
   user.save().then(() => res.send("Saved"));;
+}
+
+  
 });
-route.post("/change_password", async function (req, res) {
+route.post("/change_password",passport.authenticate('jwt', { session: false }), async function (req, res) {
   console.log(req.body);
-  await User.updateOne({ user_d: req.body.user_id }, { password: req.body.password })
-  // const user = new User(req.body);
-  //  user.save().then(() => res.send("Saved"));;
+  await User.updateOne({ user_id: req.body.user_id }, { password: hashSync(req.body.password, 10) })
+  const userData= await User.find({ user_id: req.body.user_id });
+  res.send(userData);
 });
 module.exports = route
 

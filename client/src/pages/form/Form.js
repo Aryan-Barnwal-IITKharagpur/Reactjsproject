@@ -382,17 +382,31 @@ export default function Form(props) {
       pdf_viewlink: "",
       pdf_downloadlink: "",
     };
-    const response = await axios.post(
-      "http://localhost:3000/pdf/uploadToDrive",
+    // const params={
+
+    // }
+    const response1 = await axios.post(
+      "http://localhost:3000/pdf/uploadToDrive/cdc",
       formData
     );
-    formData.pdf_viewlink = response.data.url.webViewLink;
-    formData.pdf_downloadlink = response.data.url.webContentLink;
-    formData.pdf_id = response.data.pdf_id;
+    const response2 = await axios.post(
+      "http://localhost:3000/pdf/uploadToDrive/student",
+      formData
+    );
+    console.log("response1=",response1.data);
+    console.log("response2=",response2.data);
+
+
+    formData.pdf_viewlink = response1.data.url.webViewLink;
+    formData.pdf_downloadlink = response1.data.url.webContentLink;
+    formData.pdf_downloadlink_student = response2.data.url.webContentLink;
+    formData.pdf_id = response1.data.pdf_id;
+    formData.pdf_id_student= response2.data.pdf_id;
     const result = await axios.post(
       "http://localhost:3000/form/save",
       formData
     );
+    window.location.replace("./company_dashboard");
     // console.log(response.data, result);
   }
   useEffect(() => {
