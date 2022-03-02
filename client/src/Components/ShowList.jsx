@@ -12,7 +12,7 @@ export default function ShowList( data) {
   const handleModalShow = () => setModal(true);
 
   return (<>
-  {console.log(data)}
+  {/* {console.log(data)} */}
 <div className="dataContainer ">
     <div className="mainData">
       <div className="lead p-4"><strong>{data.company_overview.name}</strong></div>

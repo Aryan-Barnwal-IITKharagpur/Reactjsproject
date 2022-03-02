@@ -169,7 +169,7 @@ route.post("/uploadToDrive/:reciever", async function (req, res) {
     }
    make_doc(main_heading,keys,values);
    doc.addPage()
-  
+  console.log("contact details===", data.contact_detail[0].name);
     //"CONTACT PERSONNEL DETAILS"
     if(reciever==="cdc")
     {
@@ -321,6 +321,7 @@ route.post("/uploadToDrive/:reciever", async function (req, res) {
   const category3="July - Dec 2022: M. Tech/ MBA – Business Analytics courses only (2023 batch)";
 
   let parents="";
+  let duration =0;
   if(reciever=="cdc")
   {
     if(duration==2)

@@ -76,7 +76,7 @@ else
     company_name: req.body.company_name,
     username: req.body.user_id
   });
-  user.save().then(() => res.send("Saved"));;
+  user.save().then(() => res.send("Saved"));
 }
 
   

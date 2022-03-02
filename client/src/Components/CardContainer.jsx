@@ -3,16 +3,18 @@ import Inf_Jnf_Card from "./Inf_Jnf_Card";
 import axios from "axios";
 
 function CardContainer() {
+  
   const [data, setData] = useState([]);
   const company_user_id="bdsjchjue3wc7494";
   useEffect(() => {
+    console.log("card container")
     const fetchData = async () =>{
       const headers={
         Authorization:localStorage.getItem('token')
       }
-const params= {company_user_id:localStorage.getItem('user_id')};
+const params= {user_id:localStorage.getItem('user_id')};
       const result = await axios.post("http://localhost:3000/form/getSome",params,{headers:headers});
-      console.log(result.data)
+      console.log(result)
       setData(result.data);
     };
 

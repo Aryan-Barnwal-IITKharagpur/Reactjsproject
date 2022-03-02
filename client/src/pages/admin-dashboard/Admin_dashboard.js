@@ -74,7 +74,10 @@ export default function Admin_dashboard() {
   }
   useEffect(() => {
     const fetchData = async () => {
-      const result = await axios.get("http://localhost:3000/form/getAll");
+      const headers={
+        Authorization:localStorage.getItem('token')
+      }
+      const result = await axios.post("http://localhost:3000/form/getAll",{},{headers});
       console.log(result.data)
       const total = result.data.length;
       console.log(total);
