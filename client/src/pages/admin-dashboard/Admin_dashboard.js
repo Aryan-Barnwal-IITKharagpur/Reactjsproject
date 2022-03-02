@@ -33,6 +33,8 @@ export default function Admin_dashboard() {
       user: "indulge1239@gmail.com",
       pass: "Indulge@12#",
     };
+
+
     const email_data = {
       user: testAccount.user,
       pass: testAccount.pass,
@@ -51,7 +53,7 @@ export default function Admin_dashboard() {
       user_id: response.data.user_id,
       password: response.data.password,
       company_name: companyName,
-      hr_name: hrname,
+      // hr_name: hrname,
       email_id: email,
     };
     const result = await axios.post(

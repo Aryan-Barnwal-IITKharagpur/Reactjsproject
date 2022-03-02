@@ -1,5 +1,7 @@
 const express = require("express");
 const route = express.Router();
+var passport=require('passport');
+var jwt=require('jsonwebtoken');
 const path = require("path");
 const PDFDocument = require("pdfkit");
 const fs = require("fs");

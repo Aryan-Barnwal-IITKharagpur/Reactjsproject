@@ -8,10 +8,15 @@ const PDFDocument = require('pdfkit');
 const fs = require('fs');
 // const mongoose = require("mongoose");
 
-app.use(cors())
+app.use(cors());
 const cookieParser = require("cookie-parser");
 const LocalStrategy = require("passport-local");
 const methodOverride = require("method-override");
+
+//jwt
+
+app.use(passport.initialize());
+require('./config/passport')(passport);
 // Models
 const Auth = require("./models/auth");
 const DataInfJnf = require("./models/form")

@@ -1,5 +1,7 @@
 const express=require('express');
 const route=express.Router();
+var passport=require('passport');
+var jwt=require('jsonwebtoken');
 "use strict";
 const nodemailer = require("nodemailer");
 // route.get("/", function (req, res) {
@@ -17,7 +19,7 @@ if(req.body.user===testAccount.user&&req.body.pass===testAccount.pass)
         host: "smtp.ethereal.email",
         // port: 587,
         port:465,
-        secure: true, // true for 465, false for other ports
+        secure: true, 
         service:'gmail',
         auth: {
           user: testAccount.user, // generated ethereal user
