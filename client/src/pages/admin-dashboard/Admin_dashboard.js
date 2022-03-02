@@ -15,13 +15,18 @@ import AdminHeader from "../../Components/AdminHeader.jsx";
 
 
 export default function Admin_dashboard() {
-  const [data, setData] = useState([]);
+  const [dataByName, setDataByName] = useState([]);
+  const [dataByDate, setDataByDate] = useState([]);
+  const [dataByCTC, setDataByCTC] = useState([]);
   //for opening/closing automated mail form  
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const [data2, setData2] = useState([]);
+
+  const [sort, setSort]=useState("Date");
+  console.log(sort);
+
   //for opening/closing automated mail form  
   const [show2, setShow2] = useState(false);
   const handleClose2 = () => setShow2(false);
@@ -76,9 +81,9 @@ export default function Admin_dashboard() {
       }
       const result = await axios.post(`${Base()}/form/getAll`, {}, { headers });
       console.log(result.data)
-      const total = result.data.length;
-      console.log(total);
-      setData(result.data);
+      setDataByCTC(result.data.resultCTC);
+      setDataByDate(result.data.resultDate);
+      setDataByName(result.data.resultName);
     };
 
     fetchData();
@@ -86,15 +91,15 @@ export default function Admin_dashboard() {
   // const total=data.length;
   // console.log(total);
   var maxStipend = 0, inf = 0, jnf = 0;
-  data.forEach((data) => {
-    if (data.stipend_detail > maxStipend) {
-      maxStipend = data.stipend_detail
-    }
-    if (data.type === "INF") {
-      inf++;
-    }
-    else { jnf++; }
-  })
+  // data.forEach((data) => {
+  //   if (data.stipend_detail > maxStipend) {
+  //     maxStipend = data.stipend_detail
+  //   }
+  //   if (data.type === "INF") {
+  //     inf++;
+  //   }
+  //   else { jnf++; }
+  // })
   const statsData = { inf: inf, jnf: jnf, maxStipend: maxStipend }
 
 
@@ -374,28 +379,42 @@ export default function Admin_dashboard() {
           </Button>
           <Button
             className="border m-2 mx-3"
+            onClick={()=>{setSort("Name")}}
             variant="outline-primary searchBarButton" id='btn4'>
             Sort By Name
           </Button>
           <Button
             className="border m-2 mx-3"
+            onClick={()=>{setSort("Date")}}
             variant="outline-primary searchBarButton" id='btn5'>
             Sort By Date
           </Button>
           <Button
             className="border m-2 mx-3"
+            onClick={()=>{setSort("CTC")}}
             variant="outline-primary searchBarButton" id='btn6'>
             Sort By CTC
           </Button>
 
         </div>
-
-
-        {data.map((data) => {
+         {sort==="Date" ?  (dataByDate).map((data) => {
           return (
             (showJNFINF === data.type) ? <ShowList key={data._id} show={"JNF"} {...data} /> : <></>
           )
-        })}
+        }) : 
+        
+        sort==="Name" ? 
+        (dataByName).map((data) => {
+          return (
+            (showJNFINF === data.type) ? <ShowList key={data._id} show={"JNF"} {...data} /> : <></>
+          )
+          }) :
+          (dataByCTC).map((data)=>{
+            return (
+            (showJNFINF === data.type) ? <ShowList key={data._id} show={"JNF"} {...data} /> : <></>
+            )
+          })
+          }        
       </div>
       <Footer />
     </Suspense>

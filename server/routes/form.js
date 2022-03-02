@@ -11,9 +11,13 @@ route.get("/", function (req, res) {
   res.send("okk check");
 });
 route.post("/getAll", passport.authenticate('jwt', { session: false }), async function (req, res) {
-  const result = await FormData.find();
+  const resultGeneral = await FormData.find();
+  const resultName = await FormData.find().sort( { 'company_overview.name': 1 } )
+  const resultDate = await FormData.find().sort( { DateTime: -1 } )
+  const resultCTC = await FormData.find().sort( { 'stipend_detail.ctc': -1 } )
+  const allResult={resultName:resultName, resultDate:resultDate, resultCTC:resultCTC}
   // console.log(result);
-  res.send(result);
+  res.send(allResult);
 });
 route.post("/getSome", passport.authenticate('jwt', { session: false }), async function (req, res) {
   const result = await FormData.find({ company_user_id: req.body.company_user_id });
