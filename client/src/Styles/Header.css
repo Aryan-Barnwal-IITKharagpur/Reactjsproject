@@ -8,10 +8,10 @@
     font-weight: 700;
 
 }
-.me-2{
+/* .me-2{
     height:50%;
 
-}
+} */
 .basic-navbar-nav{
     display: flex;
     justify-content: space-around;

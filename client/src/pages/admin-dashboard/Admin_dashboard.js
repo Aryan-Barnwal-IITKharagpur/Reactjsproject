@@ -14,6 +14,8 @@ import ShowList from "../../Components/ShowList.jsx";
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import Base from "../../base.js";
+import AdminHeader from "../../Components/AdminHeader.jsx";
+
 
 export default function Admin_dashboard() {
   const [data, setData] = useState([]);
@@ -89,12 +91,25 @@ export default function Admin_dashboard() {
   }, []);
   // const total=data.length;
   // console.log(total);
+  var maxStipend=0,inf=0,jnf=0;
+  data.forEach((data)=>{
+    if(data.stipend_detail > maxStipend){
+      maxStipend=data.stipend_detail
+    }
+    if(data.type ==="INF"){
+      inf++;
+    }
+    else 
+    {jnf++;}
+  })
+  const statsData={inf:inf,jnf:jnf, maxStipend:maxStipend}
 
 
   const [showJNFINF, setShowJNFINF] = useState("JNF");
 
   return (
     <>
+          <AdminHeader/>
       {/* modal for automated email */}
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
@@ -323,7 +338,7 @@ export default function Admin_dashboard() {
         </div>
       </div>
       <hr />
-      <StatsCard total={data.length} />
+      <StatsCard statsData={statsData} />
       <hr />
       {/* <ListingSection /> */}
 
