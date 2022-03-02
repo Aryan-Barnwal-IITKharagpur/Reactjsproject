@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Base from "../base";
 import {
     TextField,
     Grid,
@@ -9,24 +10,25 @@ import {
 } from "@mui/material";
 import axios from "axios";
 
+
 export default function Form(props) {
     const handleSubmit = async (event) => {
         event.preventDefault();
         console.log({
             password: document.getElementById("newPassword").value
         });
-const params={
-    user_id: localStorage.getItem('user_id'),
-    password: document.getElementById("newPassword").value
-}
-const headers={
-    Authorization:localStorage.getItem('token'),
-}
-       const response= await axios.post("http://localhost:3000/user/change_password",params,{headers});
-console.log(response);
-props.setState(()=>false);
-//toastify
-// .click();
+        const params = {
+            user_id: localStorage.getItem('user_id'),
+            password: document.getElementById("newPassword").value
+        }
+        const headers = {
+            Authorization: localStorage.getItem('token'),
+        }
+        const response = await axios.post(`${Base()}/user/change_password`, params, { headers });
+        console.log(response);
+        props.setState(() => false);
+        //toastify
+        // .click();
 
     };
 

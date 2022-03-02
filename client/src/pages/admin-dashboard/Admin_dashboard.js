@@ -13,6 +13,7 @@ import { Link } from "react-router-dom";
 import ShowList from "../../Components/ShowList.jsx";
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
+import Base from "../../base.js";
 
 export default function Admin_dashboard() {
   const [data, setData] = useState([]);
@@ -49,7 +50,7 @@ export default function Admin_dashboard() {
       invitation_type: internView === false ? "JNF" : "INF",
     };
     const response = await axios.post(
-      `http://localhost:3000/email/send_invite`,
+      `${Base()}/email/send_invite`,
       email_data
     );
     localStorage.setItem('company_user_id', response.data.user_id)
@@ -63,7 +64,7 @@ export default function Admin_dashboard() {
       email_id: email,
     };
     const result = await axios.post(
-      "http://localhost:3000/user/save",
+      `${Base()}/user/save`,
       user_data
     );
     console.log(result);
@@ -74,10 +75,10 @@ export default function Admin_dashboard() {
   }
   useEffect(() => {
     const fetchData = async () => {
-      const headers={
-        Authorization:localStorage.getItem('token')
+      const headers = {
+        Authorization: localStorage.getItem('token')
       }
-      const result = await axios.post("http://localhost:3000/form/getAll",{},{headers});
+      const result = await axios.post(`${Base()}/form/getAll`, {}, { headers });
       console.log(result.data)
       const total = result.data.length;
       console.log(total);

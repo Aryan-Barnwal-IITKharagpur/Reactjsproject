@@ -16,6 +16,7 @@ import 'react-toastify/dist/ReactToastify.css'
 // import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import Base from "../../base";
 import axios from "axios";
 
 function Copyright(props) {
@@ -66,7 +67,7 @@ export default function SignInSide() {
       password: data.get("password"),
     });
     const response = await axios.post(
-      "http://localhost:3000/user/authenticate",
+      `${Base()}user/authenticate`,
       userData
     );
     console.log(response)
@@ -79,9 +80,9 @@ export default function SignInSide() {
       localStorage.setItem("user_id", userData.user_id)
       notify("Welcome");
       if (userData.user_id == process.env.REACT_APP_CDC_USERID)
-        window.location.href = "http://localhost:3001/admin_dashboard"
+        window.location.href = `${Base()}/admin_dashboard`
       else
-        window.location.href = "http://localhost:3001/company_dashboard"
+        window.location.href = `${Base()}/company_dashboard`
     }
     console.log(response.data);
   };

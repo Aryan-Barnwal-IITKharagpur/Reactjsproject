@@ -17,6 +17,7 @@ import { phd } from "../../constants/Phd";
 import { skill } from "../../constants/Skill";
 import { testtype } from "../../constants/TypeofTest";
 import { otherround } from "../../constants/OtherRounds";
+import Base from "../../base";
 
 import "animate.css";
 import "./form.css";
@@ -386,24 +387,24 @@ export default function Form(props) {
 
     // }
     const response1 = await axios.post(
-      "http://localhost:3000/pdf/uploadToDrive/cdc",
+      `${Base()}/pdf/uploadToDrive/cdc`,
       formData
     );
     const response2 = await axios.post(
-      "http://localhost:3000/pdf/uploadToDrive/student",
+      `${Base()}/pdf/uploadToDrive/student`,
       formData
     );
-    console.log("response1=",response1.data);
-    console.log("response2=",response2.data);
+    console.log("response1=", response1.data);
+    console.log("response2=", response2.data);
 
 
     formData.pdf_viewlink = response1.data.url.webViewLink;
     formData.pdf_downloadlink = response1.data.url.webContentLink;
     formData.pdf_downloadlink_student = response2.data.url.webContentLink;
     formData.pdf_id = response1.data.pdf_id;
-    formData.pdf_id_student= response2.data.pdf_id;
+    formData.pdf_id_student = response2.data.pdf_id;
     const result = await axios.post(
-      "http://localhost:3000/form/save",
+      `${Base()}/form/save`,
       formData
     );
     window.location.replace("./company_dashboard");
