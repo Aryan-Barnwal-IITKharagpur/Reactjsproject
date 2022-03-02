@@ -52,7 +52,7 @@ app.use('/user',require('./routes/user'));
 app.use('/form',require('./routes/form'));
 app.use('/email',require('./routes/email'));
 app.use('/pdf',require('./routes/pdf'));
-
+app.use('/graduation_year',require('./routes/graduation_year'));
 app.get("/", function (req, res) {
     res.send("okk");
   });
