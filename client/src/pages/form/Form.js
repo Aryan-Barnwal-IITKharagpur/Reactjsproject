@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { useParams } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import { FaAngleDoubleDown, FaAngleDoubleUp } from "react-icons/fa";
+
+import { Internduration } from "../../constants/InternDuration";
 import { btech } from "../../constants/Btech";
 import { dual_mtech } from "../../constants/Dual_Mtech";
 import { mbacourse } from "../../constants/Mba";
@@ -13,11 +17,23 @@ import { phd } from "../../constants/Phd";
 import { skill } from "../../constants/Skill";
 import { testtype } from "../../constants/TypeofTest";
 import { otherround } from "../../constants/OtherRounds";
+
 import "animate.css";
 import "./form.css";
 
 export default function Form(props) {
   // console.log(props.type);
+  const notify = () => {
+    toast.success("The data is being saved", {
+      position: "top-center",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  };
 
   const [prevData, setPrevData] = useState({
     user_id: "",
@@ -31,7 +47,7 @@ export default function Form(props) {
       designation: "",
       place_of_posting: "",
       description: "",
-      duration: "",
+      duration: [],
       mode: "",
     },
     stipend_detail: {
@@ -51,19 +67,19 @@ export default function Form(props) {
       },
     ],
     eligible_branch: {
-      btech: [""],
-      dd_mtech: [""],
-      msc2: [""],
-      msc3: [""],
-      mtech: [""],
-      mba: [""],
-      phd: [""],
+      btech: [],
+      dd_mtech: [],
+      msc2: [],
+      msc3: [],
+      mtech: [],
+      mba: [],
+      phd: [],
     },
-    skill_based: [""],
+    skill_based: [],
     selection_pr: {
       resume_short_listing: "",
       type_of_test: "",
-      other_round: [""],
+      other_round: [],
       total_rounds: 0,
       no_of_offers: "",
       eligible_criteria: "",
@@ -80,6 +96,7 @@ export default function Form(props) {
   const [contact, setContact] = useState(false);
   const [stipenddetail, setStipenddetail] = useState(false);
   const [eligible, setEligible] = useState(false);
+  const [durationdiv, setdurationdiv] = useState(false);
   const [btechdiv, setBtechdiv] = useState(false);
   const [dual_mtechdiv, setdual_mtechdiv] = useState(false);
   const [mbadiv, setmbadiv] = useState(false);
@@ -192,7 +209,15 @@ export default function Form(props) {
       setmobile2(() => prevData.contact_detail[1].mobile);
     }
   }
-
+  function handleChangeDuration(e) {
+    var updatedList = [...duration];
+    if (e.target.checked) {
+      updatedList = [...duration, e.target.value];
+    } else {
+      updatedList = duration.filter((item) => item !== e.target.value);
+    }
+    setduration(() => updatedList);
+  }
   function handleChangeBtech(e) {
     var updatedList = [...btecharray];
     if (e.target.checked) {
@@ -368,7 +393,7 @@ export default function Form(props) {
       "http://localhost:3000/form/save",
       formData
     );
-    console.log(response.data, result);
+    // console.log(response.data, result);
   }
   useEffect(() => {
     // console.log(obj_id);
@@ -520,32 +545,17 @@ export default function Form(props) {
               <div className="form-floating mb-3 ">
                 <textarea
                   type="text"
-                  className="form-control textbox"
+                  className="form-control"
                   placeholder="Description"
-                  style={{ height: 100 }}
                   onChange={(e) => setdescription(() => e.target.value)}
                   value={description}
                 ></textarea>
                 <label>Description</label>
               </div>
-              {props.type === "INF" ? (
-                <div className="form-floating my-5 ">
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Duration"
-                    onChange={(e) => setduration(() => e.target.value)}
-                    value={duration}
-                  />
-                  <label for="floatingInput">Duration</label>
-                </div>
-              ) : (
-                <div></div>
-              )}
 
               {props.type === "INF" ? (
-                <div className="optionbox mb-3 ">
-                  <div className="optionbox-title">Mode of Intern: </div>
+                <div className="form-floating optionbox mb-3 ">
+                  <div className="optionbox-title pt-1">Mode of Intern: </div>
                   {/* {setModebutton(() => prevData.job_detail.mode)} */}
                   <div>
                     <button
@@ -575,6 +585,54 @@ export default function Form(props) {
                       Physical
                     </button>
                   </div>
+                </div>
+              ) : (
+                <div></div>
+              )}
+              {props.type === "INF" ? (
+                <div className="eligible-type mb-3 ">
+                  <div
+                    onClick={() => {
+                      setTimeout(() => {
+                        if (durationdiv) {
+                          setdurationdiv(false);
+                        } else {
+                          setdurationdiv(true);
+                        }
+                      }, 200);
+                    }}
+                  >
+                    <div className="eligible-heading d-flex justify-content-between">
+                      <h3>Internship Duration</h3>
+                      {durationdiv === true ? (
+                        <FaAngleDoubleUp />
+                      ) : (
+                        <FaAngleDoubleDown />
+                      )}
+                    </div>
+                  </div>
+                  {durationdiv ? (
+                    <div className="eligible-options m-2 p-2">
+                      {Internduration.map((item) => {
+                        return (
+                          <div className="m-3 ">
+                            <label className="container form-check">
+                              {item}
+                              <input
+                                type="checkbox"
+                                value={item}
+                                checked={duration.includes(item)}
+                                onChange={(e) => handleChangeDuration(e)}
+                              />
+                              <span className="checkmark "></span>
+                            </label>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  ) : (
+                    <div></div>
+                  )}
                 </div>
               ) : (
                 <div></div>
@@ -660,8 +718,8 @@ export default function Form(props) {
                     <label for="floatingInput">Stipend(Per Month)</label>
                   </div>
 
-                  <div className="optionbox mb-3">
-                    <div className="optionbox-title">PPO Provision: </div>
+                  <div className="form-floating optionbox  mb-3">
+                    <div className="optionbox-title pt-1">PPO Provision: </div>
                     <div>
                       <button
                         type="button"
@@ -780,8 +838,8 @@ export default function Form(props) {
                 <label for="floatingInput">Mobile</label>
               </div>
 
-              <div className="mb-3 optionbox">
-                <div className="optionbox-title">
+              <div className="mb-3 form-floating optionbox">
+                <div className="optionbox-title pt-1">
                   Add Secondary Contact Details:{" "}
                 </div>
 
@@ -1270,34 +1328,36 @@ export default function Form(props) {
           {skilldiv === true ? (
             <div className="lower">
               {skilldiv ? (
-                <div className="eligible-options m-2 p-2">
-                  {skill.map((item) => {
-                    return (
-                      <div className="m-3 ">
-                        <label className="container form-check">
-                          {item}
-                          <input
-                            type="checkbox"
-                            value={item}
-                            checked={skillarray.includes(item)}
-                            onChange={(e) => handleChangeSkill(e)}
-                          />
-                          <span className="checkmark "></span>
-                        </label>
-                      </div>
-                    );
-                  })}
-                  <div className="form-floating mb-3">
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="other skill"
-                      value={otherskill}
-                      onChange={(e) => setotherskill(() => e.target.value)}
-                    />
-                    <label for="floatingInput">
-                      Other Skills (Please specify)
-                    </label>
+                <div className="eligible-type my-2">
+                  <div className="eligible-options p-2">
+                    {skill.map((item) => {
+                      return (
+                        <div className="m-2 ">
+                          <label className="container form-check">
+                            {item}
+                            <input
+                              type="checkbox"
+                              value={item}
+                              checked={skillarray.includes(item)}
+                              onChange={(e) => handleChangeSkill(e)}
+                            />
+                            <span className="checkmark"></span>
+                          </label>
+                        </div>
+                      );
+                    })}
+                    <div className="form-floating mb-3">
+                      <input
+                        type="text"
+                        className="form-control"
+                        placeholder="other skill"
+                        value={otherskill}
+                        onChange={(e) => setotherskill(() => e.target.value)}
+                      />
+                      <label for="floatingInput">
+                        Other Skills (Please specify)
+                      </label>
+                    </div>
                   </div>
                 </div>
               ) : (
@@ -1389,7 +1449,7 @@ export default function Form(props) {
                     {typeoftestdiv ? (
                       <div className="eligible-options m-2 p-2">
                         {testtype.map((item) => {
-                          console.log(typeoftest);
+                          // console.log(typeoftest);
                           return (
                             <div className="m-3 ">
                               <label className="container form-check">
@@ -1534,11 +1594,25 @@ export default function Form(props) {
         </div>
         <div className="d-flex justify-content-center m-3">
           <Button
-            onClick={(e) => handleSubmit(e)}
+            onClick={(e) => {
+              handleSubmit(e);
+              notify();
+            }}
             variant="outline-primary mx-4"
           >
             Submit
           </Button>{" "}
+          <ToastContainer
+            position="top-center"
+            autoClose={4000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+          />
         </div>
       </div>
     </>
