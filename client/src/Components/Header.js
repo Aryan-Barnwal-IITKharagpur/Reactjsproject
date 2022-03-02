@@ -1,4 +1,5 @@
 import React from "react";
+import { Route, Redirect } from "react-router";
 import { Navbar, Nav, Container, Form, FormControl, NavDropdown } from "react-bootstrap";
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
@@ -17,6 +18,15 @@ export default function Header() {
     }
     setState({ ...state, [anchor]: open });
   };
+
+  const logOut = () => {
+    console.log("log out");
+    localStorage.removeItem('token');
+    localStorage.removeItem('user_id');
+    // Toast
+    window.location.replace("/");
+  };
+
 
   const list = (anchor) => (
     <Box
@@ -46,6 +56,8 @@ export default function Header() {
                   {list("changePass")}
                 </Drawer>
               </React.Fragment></NavDropdown.Item>
+              <NavDropdown.Item>
+                <Button onClick={logOut}>Log Out</Button></NavDropdown.Item>
             </NavDropdown>
           </Nav>
         </Navbar.Collapse>

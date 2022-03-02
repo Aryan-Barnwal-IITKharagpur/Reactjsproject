@@ -21,6 +21,12 @@ export default function Admin_dashboard() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  const [data2, setData2] = useState([]);
+  //for opening/closing automated mail form  
+  const [show2, setShow2] = useState(false);
+  const handleClose2 = () => setShow2(false);
+  const handleShow2 = () => setShow2(true);
+
 
   const [hrname, sethrName] = useState("");
   const [email, setEmail] = useState("");
@@ -63,6 +69,9 @@ export default function Admin_dashboard() {
     console.log(result);
   };
 
+  const handleSubmit2 = async () => {
+    console.log("handled submission")
+  }
   useEffect(() => {
     const fetchData = async () => {
       const result = await axios.get("http://localhost:3000/form/getAll");
@@ -123,7 +132,7 @@ export default function Admin_dashboard() {
           <option value="1">For Internship</option>
           <option value="2">For Jobs</option>
         </select>
-        {internView === "1" ? (
+        {/* {internView === "1" ? (
           <select
             onChange={(e) => setInternTimePeriod(() => e.target.value)}
             class="form-select"
@@ -135,7 +144,7 @@ export default function Admin_dashboard() {
           </select>
         ) : (
           <></>
-        )}
+        )} */}
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close
@@ -146,7 +155,99 @@ export default function Admin_dashboard() {
         </Modal.Footer>
       </Modal>
 
-      
+      {/* modal for setting graduation year */}
+      <Modal show={show2} onHide={handleClose2}>
+        <Modal.Header closeButton>
+          <Modal.Title>Set Graduation Year</Modal.Title>
+        </Modal.Header>
+        <select
+          class="form-select"
+          aria-label="Default select example"
+        // onChange={(e) => setGraduationYearForJobs(() => e.target.value)}
+        >
+          <option selected>For Jobs</option>
+          <option value="2014">2014</option>
+          <option value="2015">2015</option>
+          <option value="2016">2016</option>
+          <option value="2017">2017</option>
+          <option value="2018">2018</option>
+          <option value="2019">2019</option>
+          <option value="2020">2020</option>
+          <option value="2021">2021</option>
+          <option value="2022">2022</option>
+          <option value="2023">2023</option>
+          <option value="2024">2024</option>
+          <option value="2025">2025</option>
+        </select>
+        <select
+          class="form-select"
+          aria-label="Default select example"
+        // onChange={(e) => setGraduationYearForJobs(() => e.target.value)}
+        >
+          <option selected>For Dual Degree/ Integrated M. Tech courses only</option>
+          <option value="2014">2014</option>
+          <option value="2015">2015</option>
+          <option value="2016">2016</option>
+          <option value="2017">2017</option>
+          <option value="2018">2018</option>
+          <option value="2019">2019</option>
+          <option value="2020">2020</option>
+          <option value="2021">2021</option>
+          <option value="2022">2022</option>
+          <option value="2023">2023</option>
+          <option value="2024">2024</option>
+          <option value="2025">2025</option>
+        </select>
+        <select
+          class="form-select"
+          aria-label="Default select example"
+        // onChange={(e) => setGraduationYearForJobs(() => e.target.value)}
+        >
+          <option selected>For Pre-final year students of ALL courses</option>
+          <option value="2014">2014</option>
+          <option value="2015">2015</option>
+          <option value="2016">2016</option>
+          <option value="2017">2017</option>
+          <option value="2018">2018</option>
+          <option value="2019">2019</option>
+          <option value="2020">2020</option>
+          <option value="2021">2021</option>
+          <option value="2022">2022</option>
+          <option value="2023">2023</option>
+          <option value="2024">2024</option>
+          <option value="2025">2025</option>
+        </select>
+        <select
+          class="form-select"
+          aria-label="Default select example"
+        // onChange={(e) => setGraduationYearForJobs(() => e.target.value)}
+        >
+          <option selected>For M. Tech/ MBA – Business Analytics courses only</option>
+          <option value="2014">2014</option>
+          <option value="2015">2015</option>
+          <option value="2016">2016</option>
+          <option value="2017">2017</option>
+          <option value="2018">2018</option>
+          <option value="2019">2019</option>
+          <option value="2020">2020</option>
+          <option value="2021">2021</option>
+          <option value="2022">2022</option>
+          <option value="2023">2023</option>
+          <option value="2024">2024</option>
+          <option value="2025">2025</option>
+        </select>
+
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose2}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleSubmit2}>
+            Submit
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+
       <div className="row">
         <div className="col">
           {/* <!-- hero section  --> */}
@@ -161,6 +262,23 @@ export default function Admin_dashboard() {
                 system, extensive prebuilt components, and powerful JavaScript
                 plugins.
               </p>
+              <div className="d-grid gap-2 d-sm-flex justify-content-sm-center mb-2">
+                <button
+                  type="button"
+                  onClick={handleShow2}
+                  className="btn btn-lg px-4 me-sm-3 bg-light border d-flex align-items-center"
+                >
+                  Set Graduation Year &nbsp;
+                  <svg
+                    style={{ height: "20px" }}
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 448 512"
+                  >
+                    {/* <!--! Font Awesome Pro 6.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --> */}
+                    <path d="M438.6 278.6l-160 160C272.4 444.9 264.2 448 256 448s-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L338.8 288H32C14.33 288 .0016 273.7 .0016 256S14.33 224 32 224h306.8l-105.4-105.4c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l160 160C451.1 245.9 451.1 266.1 438.6 278.6z" />
+                  </svg>
+                </button>
+              </div>
               <div className="d-grid gap-2 d-sm-flex justify-content-sm-center mb-5">
                 <button
                   type="button"
