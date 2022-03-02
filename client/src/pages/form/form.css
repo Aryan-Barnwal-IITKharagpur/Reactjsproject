@@ -8,7 +8,7 @@
   box-sizing: inherit;
 }
 body {
-  /* background-image: url("../../../public/Images/admin_cover.jpg"); */
+  background-image: url("../../../public/Images/background_image.jpg");
 }
 .formHeader {
   height: 300px;

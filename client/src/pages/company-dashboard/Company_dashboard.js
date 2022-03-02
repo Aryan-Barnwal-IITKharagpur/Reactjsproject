@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import "./Company_dashboard.css";
 import Header from "../../Components/Header";
 import { Link } from "react-router-dom";
@@ -11,7 +11,9 @@ export default function Company_dashboard() {
     <div className="company-dashboard-container">
       <Header />
       <Hero_section />
+      <Suspense fallback={<Loader />}>
       <CardContainer />
+      </Suspense>
     </div>
   );
 }

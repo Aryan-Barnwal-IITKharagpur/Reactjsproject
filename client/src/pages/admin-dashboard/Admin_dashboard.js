@@ -1,16 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,Suspense } from "react";
 import axios from "axios";
-// import Base from "../../base.js";
 import { Button, Card, Modal, Form, FormControl, Badge, Dropdown } from "react-bootstrap";
 import { FaDownload, FaGlobe, FaList, FaSearch } from "react-icons/fa";
 import Footer from "../../Components/Footer.jsx";
-import Header from "../../Components/Header.js";
-import FormModal from "../../Components/FormModal.js"
-// import ListingSection from "../../Components/ListingSection.jsx";
 import StatsCard from "../../Components/StatsCard.jsx";
 import "./Admin_dashboard.css";
 import { Link } from "react-router-dom";
 import ShowList from "../../Components/ShowList.jsx";
+import Loader from "../../Components/Loader.jsx";
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import Base from "../../base.js";
@@ -30,7 +27,6 @@ export default function Admin_dashboard() {
   const handleClose2 = () => setShow2(false);
   const handleShow2 = () => setShow2(true);
 
-
   const [hrname, sethrName] = useState("");
   const [email, setEmail] = useState("");
   const [companyName, setCompanyName] = useState("");
@@ -42,8 +38,6 @@ export default function Admin_dashboard() {
       user: "indulge1239@gmail.com",
       pass: "Indulge@12#",
     };
-
-
     const email_data = {
       user: testAccount.user,
       pass: testAccount.pass,
@@ -107,7 +101,7 @@ export default function Admin_dashboard() {
   const [showJNFINF, setShowJNFINF] = useState("JNF");
 
   return (
-    <>
+    <Suspense fallback={<Loader />}>
       <AdminHeader />
       {/* modal for automated email */}
       <Modal show={show} onHide={handleClose}>
@@ -387,15 +381,10 @@ export default function Admin_dashboard() {
         {data.map((data) => {
           return (
             (showJNFINF === data.type) ? <ShowList key={data._id} show={"JNF"} {...data} /> : <></>
-            // (showJNFINF === "JNF") ?  
-            // ((data.type==="JNF") ? <ShowList key={data._id} show={"JNF"} {...data}  /> :
-            // <span>No JNF to be shown</span>) : 
-            // ((data.type==="INF") ? <ShowList key={data._id} show={"INF"} {...data} /> :
-            // <span> No INF to be shown</span>)
           )
         })}
       </div>
       <Footer />
-    </>
+      </Suspense>
   );
 }
