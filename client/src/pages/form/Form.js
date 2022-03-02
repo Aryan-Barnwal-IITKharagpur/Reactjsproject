@@ -409,6 +409,7 @@ export default function Form(props) {
         `${Base()}/form/save`,
         formData
       );
+      window.location.href="/company_dashboard";
     }
     else {
       const response1 = await axios.post(
@@ -436,8 +437,9 @@ export default function Form(props) {
         `${Base()}/email/send_update`,
         formData
       );
+      window.location.href="/company_dashboard";
     }
-    window.location.replace("./company_dashboard");
+    // window.location.replace("./company_dashboard");
     // console.log(response.data, result);
   }
   useEffect(() => {
@@ -499,7 +501,7 @@ export default function Form(props) {
             </div>
           </div>
           {companyoverview === true ? (
-            <div className="lower">
+            <div className="lower animate_animated  animate_zoomIn">
               <div className="form-floating mb-3">
                 <input
                   type="text"
@@ -566,7 +568,7 @@ export default function Form(props) {
             </div>
           </div>
           {jobdetail === true ? (
-            <div className="lower">
+            <div className="lower animate_animated  animate_zoomIn">
               <div className="form-floating mb-3">
                 <input
                   type="text"
@@ -715,7 +717,7 @@ export default function Form(props) {
             </div>
           </div>
           {stipenddetail === true ? (
-            <div className="lower">
+            <div className="lower animate_animated  animate_zoomIn">
               {props.type === "JNF" ? (
                 <div>
                   <div className="form-floating mb-3">
@@ -840,7 +842,7 @@ export default function Form(props) {
             </div>
           </div>
           {contact === true ? (
-            <div className="lower">
+            <div className="lower animate_animated  animate_zoomIn">
               <div className="form-floating mb-3">
                 <input
                   type="text"
@@ -992,7 +994,7 @@ export default function Form(props) {
             </div>
           </div>
           {eligible === true ? (
-            <div className="lower">
+            <div className="lower animate_animated  animate_zoomIn">
               <div>
                 <div className="eligible-type">
                   <div
@@ -1371,7 +1373,7 @@ export default function Form(props) {
             )}
           </div>
           {skilldiv === true ? (
-            <div className="lower">
+            <div className="lower animate_animated  animate_zoomIn">
               {skilldiv ? (
                 <div className="eligible-type my-2">
                   <div className="eligible-options p-2">
@@ -1440,7 +1442,7 @@ export default function Form(props) {
             </div>
           </div>
           {selectiondiv === true ? (
-            <div className="lower">
+            <div className="lower animate_animated  animate_zoomIn">
               {selectiondiv ? (
                 <div>
                   <div className="mb-3 optionbox">

@@ -67,7 +67,7 @@ export default function SignInSide() {
       password: data.get("password"),
     });
     const response = await axios.post(
-      `${Base()}user/authenticate`,
+      `${Base()}/user/authenticate`,
       userData
     );
     console.log(response)
@@ -80,9 +80,9 @@ export default function SignInSide() {
       localStorage.setItem("user_id", userData.user_id)
       notify("Welcome");
       if (userData.user_id == process.env.REACT_APP_CDC_USERID)
-        window.location.href = `${Base()}/admin_dashboard`
+        window.location.href = `/admin_dashboard`
       else
-        window.location.href = `${Base()}/company_dashboard`
+        window.location.href = `/company_dashboard`
     }
     console.log(response.data);
   };

@@ -36,7 +36,7 @@ route.post("/save", function (req, res) {
   formData.save().then(() => res.send("unique_id"));
 });
 
-route.post("/update", passport.authenticate('jwt', { session: false }), async function (req, res) {
+route.post("/update", async function (req, res) {
   // const result = await
   await formData.updateOne({ _id: req.body._id }, formData).then(() => res.send("unique_id"));
 

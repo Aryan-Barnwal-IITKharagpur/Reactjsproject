@@ -45,7 +45,7 @@ export default function Header() {
         <Navbar.Collapse id="basic-navbar-nav">
           <div className="me-auto"></div>
           <Nav className="">
-            <NavDropdown className="fs-4" title="Amazon" id="basic-nav-dropdown">
+            <NavDropdown className="fs-4" title={localStorage.getItem('user_id')} id="basic-nav-dropdown">
               <NavDropdown.Item><React.Fragment key="changePass">
                 <Button onClick={toggleDrawer("changePass", true)}>Change Password</Button>
                 <Drawer
