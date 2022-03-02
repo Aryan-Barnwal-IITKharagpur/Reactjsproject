@@ -91,25 +91,24 @@ export default function Admin_dashboard() {
   }, []);
   // const total=data.length;
   // console.log(total);
-  var maxStipend=0,inf=0,jnf=0;
-  data.forEach((data)=>{
-    if(data.stipend_detail > maxStipend){
-      maxStipend=data.stipend_detail
+  var maxStipend = 0, inf = 0, jnf = 0;
+  data.forEach((data) => {
+    if (data.stipend_detail > maxStipend) {
+      maxStipend = data.stipend_detail
     }
-    if(data.type ==="INF"){
+    if (data.type === "INF") {
       inf++;
     }
-    else 
-    {jnf++;}
+    else { jnf++; }
   })
-  const statsData={inf:inf,jnf:jnf, maxStipend:maxStipend}
+  const statsData = { inf: inf, jnf: jnf, maxStipend: maxStipend }
 
 
   const [showJNFINF, setShowJNFINF] = useState("JNF");
 
   return (
     <>
-          <AdminHeader/>
+      <AdminHeader />
       {/* modal for automated email */}
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
@@ -273,7 +272,7 @@ export default function Admin_dashboard() {
           <div className="px-4 pt-5 my-5 text-center">
             <h1 className="display-4 fw-bold">Career Development Center</h1>
             <h3 className="display-10 text-muted mb-4">CDC, IIT ISM Dhanbad</h3>
-            <div className="col-lg-6 mx-auto">
+            <div className="mx-auto">
               <p className="lead mb-4">
                 Welcome to the recruitment website for IIT(ISM) Dhanbad.
                 <br />
@@ -323,14 +322,14 @@ export default function Admin_dashboard() {
           <div className="overflow-hidden my-5 rounded">
             <div
               className="container my-5 px-5"
-              style={{ width: "700px", height: "500px" }}
+              style={{ width: "700px", height: "550px" }}
             >
               <img
                 src="https://images.unsplash.com/photo-1535957998253-26ae1ef29506?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=436&q=80"
                 className="img-fluid border rounded-3 shadow-lg mb-4"
                 alt="Example image"
                 width="700"
-                height="700px"
+                height="550px"
                 loading="lazy"
               />
             </div>

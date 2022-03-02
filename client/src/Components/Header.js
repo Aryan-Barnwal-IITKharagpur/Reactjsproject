@@ -33,12 +33,12 @@ export default function Header() {
       sx={{ anchor: 'changePass', 'width': 500, 'height': 150 }}
       role="presentation"
     >
-      <ChangePassForm  setState={setState} />
+      <ChangePassForm setState={setState} />
     </Box>
   );
 
   return (
-    <Navbar className="p-3 sticky-top" expand="lg">
+    <Navbar className="p-3 sticky-top" expand="lg" style={{ background: "#F8F8F8" }}>
       <Container className="navbarContainer">
         <Navbar.Brand href="#home" className="navbarBrand"><strong>Career Development Center <br /></strong><span className="fw-light fs-5">IIT ISM Dhanbad</span></Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
