@@ -1,4 +1,4 @@
-import React, { useState, useEffect,Suspense } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import axios from "axios";
 import { Button, Card, Modal, Form, FormControl, Badge, Dropdown } from "react-bootstrap";
 import { FaDownload, FaGlobe, FaList, FaSearch } from "react-icons/fa";
@@ -99,6 +99,7 @@ export default function Admin_dashboard() {
 
 
   const [showJNFINF, setShowJNFINF] = useState("JNF");
+
 
   return (
     <Suspense fallback={<Loader />}>
@@ -330,7 +331,6 @@ export default function Admin_dashboard() {
           </div>
         </div>
       </div>
-      <hr />
       <StatsCard statsData={statsData} />
       <hr />
       {/* <ListingSection /> */}
@@ -355,25 +355,38 @@ export default function Admin_dashboard() {
               document.getElementById("btn2").style.backgroundColor = "#0257d8";
               document.getElementById("btn2").style.color = "white";
               document.getElementById("btn3").style.backgroundColor = "white";
+              document.getElementById("btn3").style.color = "#0257d8";
               setShowJNFINF("INF")
             }} variant="outline-primary searchBarButton" id='btn2'>
             INF
           </Button>
           <Button
+            style={{ color: "white", backgroundColor: "#0257d8" }}
             onClick={() => {
               document.getElementById("btn3").style.backgroundColor = "#0257d8";
               document.getElementById("btn3").style.color = "white";
               document.getElementById("btn2").style.backgroundColor = "white ";
+              document.getElementById("btn2").style.color = "#0257d8";
               setShowJNFINF("JNF")
             }}
             variant="outline-primary searchBarButton" id='btn3'>
             JNF
           </Button>
-          <div className="filterBar p-4">
-            <span>Sorting options</span>
-
-          </div>
-
+          <Button
+            className="border m-2 mx-3"
+            variant="outline-primary searchBarButton" id='btn4'>
+            Sort By Name
+          </Button>
+          <Button
+            className="border m-2 mx-3"
+            variant="outline-primary searchBarButton" id='btn5'>
+            Sort By Date
+          </Button>
+          <Button
+            className="border m-2 mx-3"
+            variant="outline-primary searchBarButton" id='btn6'>
+            Sort By CTC
+          </Button>
 
         </div>
 
@@ -385,6 +398,6 @@ export default function Admin_dashboard() {
         })}
       </div>
       <Footer />
-      </Suspense>
+    </Suspense>
   );
 }
