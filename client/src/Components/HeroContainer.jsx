@@ -16,12 +16,12 @@ const Hero_section = () => {
                         <h1 className="display-1 fw-bold pt-5 animate__animated animate__fadeInDownBig" style={{ letterSpacing: -3 }}>Career Development Center</h1>
                         <p className='main-heading-secondary animate__animated animate__fadeInUpBig'>Welcome to the Career Development Centre Portal of Indian Institute of Technology. <br /> Click the suitable option below to fill the Notification Form.</p>
                         <Stack spacing={2} className="pt-5 d-flex justify-content-center" direction="row">
-                            <Link to="/JNF_form/null" className='link-button animate_animated animatezoomIn animate_delay-1s'>
+                            <Link to="/JNF_form/new" className='link-button animate_animated animatezoomIn animate_delay-1s'>
                                 <Button className="contained text-white" to="/form">
                                     FILL JNF
                                 </Button>
                             </Link>
-                            <Link to="/INF_form/null" className='link-button animate_animated animatezoomIn animate_delay-1s'>
+                            <Link to="/INF_form/new" className='link-button animate_animated animatezoomIn animate_delay-1s'>
                                 <Button className="contained text-white" to="/form">
                                     FILL INF
                                 </Button>

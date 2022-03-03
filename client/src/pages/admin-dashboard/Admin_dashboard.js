@@ -63,16 +63,21 @@ export default function Admin_dashboard() {
       company_name: companyName,
       // hr_name: hrname,
       email_id: email,
+      username:response.data.user_id
     };
     const result = await axios.post(
       `${Base()}/user/save`,
       user_data
     );
     console.log(result);
+    handleClose();
   };
 
-  const handleSubmit2 = async () => {
+  const handleSubmit2 = async (e) => {
+    console.log(e.target)
+    // const result = await axios.post(`${Base()}/graduation_year/save`,);
     console.log("handled submission")
+    handleClose2();
   }
   useEffect(() => {
     const fetchData = async () => {

@@ -26,7 +26,7 @@ route.post("/getSome", passport.authenticate('jwt', { session: false }), async f
   console.log(result.data);
   res.send(result);
 });
-route.get("/getPrevData", passport.authenticate('jwt', { session: false }), async function (req, res) {
+route.post("/getPrevData", passport.authenticate('jwt', { session: false }), async function (req, res) {
   const result = await FormData.find({ _id: req.body.objId });
   // const result=await FormData.find({type:req.body.type});
   // result.getFilter();
@@ -42,17 +42,17 @@ route.post("/save", function (req, res) {
 
 route.post("/update", async function (req, res) {
   // const result = await
-  await formData.updateOne({ _id: req.body._id }, formData).then(() => res.send("unique_id"));
+  await formData.updateOne({ _id: req.body._id }, formData).then(() => res.send("updated successfully"));
 
 });
-// ,passport.authenticate('jwt', { session: false })
-route.post("/getExcel", async function (req, res) {
+// 
+route.post("/getExcel", passport.authenticate('jwt', { session: false }),async function (req, res) {
   const result = await FormData.find({}, 'contact_detail company_overview');
 
   console.log(result);
-  const users = [
-    { name: "ashutosh" }
-  ]
+  // const users = [
+  //   { name: "ashutosh" }
+  // ]
 
   let dataArray = [];
   let tempObj = {
@@ -97,15 +97,17 @@ route.post("/getExcel", async function (req, res) {
     return "File created"
   }
   const response2 = await createExcelSheet();
-  res.download(`formdata.xlsx`);
+  // const filePath="server/formdata.xlsx"
+  // res.sendFile(filePath);
   const deleteExcelSheet = () => {
     fs.unlink(`formdata.xlsx`, function (err) {
       if (err) throw err;
       console.log('File deleted!');
     });
   }
+
   //  const response3= await deleteExcelSheet();
-  res.send(result);
+  // res.send(result);
 });
 
 module.exports = route

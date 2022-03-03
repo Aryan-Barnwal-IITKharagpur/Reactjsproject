@@ -23,7 +23,7 @@ import "animate.css";
 import "./form.css";
 
 export default function Form(props) {
-  // console.log(props.type);
+  console.log(props.type);
   const notify = () => {
     toast.success("The data is being saved", {
       position: "top-center",
@@ -35,6 +35,7 @@ export default function Form(props) {
       progress: undefined,
     });
   };
+
 
   const [prevData, setPrevData] = useState({
     user_id: "",
@@ -49,7 +50,7 @@ export default function Form(props) {
       place_of_posting: "",
       description: "",
       duration: [],
-      mode: "",
+      mode: ""
     },
     stipend_detail: {
       ctc: "",
@@ -88,8 +89,13 @@ export default function Form(props) {
     doc_link: "",
     DateTime: "",
     pdf_id: "",
+    pdf_id_student:"",
     pdf_link: "",
+    pdf_downloadlink:"",
+    pdf_downloadlink_student:""
   });
+
+
   const { obj_id } = useParams();
   const [allData, setAllData] = useState({});
   const [companyoverview, setCompanyoverview] = useState(false);
@@ -112,76 +118,77 @@ export default function Form(props) {
 
   const [secondarycontact, setSecondarycontact] = useState();
 
-  const [modebutton, setModebutton] = useState(prevData.job_detail.mode);
-  const [ppo, setPpo] = useState(prevData.stipend_detail.ppo_provision);
+  const [modebutton, setModebutton] = useState("");
 
-  const [name, setname] = useState(prevData.company_overview.name);
-  const [website, setwebsite] = useState(prevData.company_overview.website);
-  const [sector, setsector] = useState(prevData.company_overview.sector);
+  const [ppo, setPpo] = useState("");
+
+  const [name, setname] = useState("");
+  const [website, setwebsite] = useState("");
+  const [sector, setsector] = useState("");
   const [designation, setDesignation] = useState(
-    prevData.job_detail.designation
+   ""
   );
   const [place_of_posting, setplace_of_posting] = useState(
-    prevData.job_detail.place_of_posting
+    ""
   );
   const [description, setdescription] = useState(
-    prevData.job_detail.description
+    ""
   );
-  const [duration, setduration] = useState(prevData.job_detail.duration);
+  const [duration, setduration] = useState([]);
   const [mode, setmode] = useState("");
-  const [ctc, setctc] = useState(prevData.stipend_detail.ctc);
+  const [ctc, setctc] = useState("");
   const [ctc_breakup, setctc_breakup] = useState(
-    prevData.stipend_detail.ctc_breakup
+    ""
   );
   const [bond_detail, setbond_detail] = useState(
-    prevData.stipend_detail.bond_detail
+    ""
   );
-  const [stipend, setstipend] = useState(prevData.stipend_detail.stipend);
+  const [stipend, setstipend] = useState("");
   const [ppo_provision, setppo_provision] = useState("");
-  const [ctc_ppo, setctc_ppo] = useState(prevData.stipend_detail.ctc_ppo);
+  const [ctc_ppo, setctc_ppo] = useState("");
   const [contactname1, setcontactname1] = useState(
-    prevData.contact_detail[0].name
+    ""
   );
   const [contactdesignation1, setcontactdesignation1] = useState(
-    prevData.contact_detail[0].designation
+    ""
   );
   const [contactemail1, setcontactemail1] = useState(
-    prevData.contact_detail[0].email
+    ""
   );
-  const [mobile1, setmobile1] = useState(prevData.contact_detail[0].mobile);
+  const [mobile1, setmobile1] = useState("");
   const [contactname2, setcontactname2] = useState("");
   const [contactdesignation2, setcontactdesignation2] = useState("");
   const [contactemail2, setcontactemail2] = useState("");
   const [mobile2, setmobile2] = useState("");
   const [otherskill, setotherskill] = useState("");
   const [resumeshort, setresumeshort] = useState(
-    prevData.selection_pr.resume_short_listing
+    ""
   );
   const [typeoftest, settypeoftest] = useState(
-    prevData.selection_pr.type_of_test
+   ""
   );
   const [total_rounds, settotal_rounds] = useState(
-    prevData.selection_pr.total_rounds
+   0
   );
   const [no_of_offers, setno_of_offers] = useState(
-    prevData.selection_pr.no_of_offers
+    ""
   );
   const [eligible_criteria, seteligible_criteria] = useState(
-    prevData.selection_pr.eligible_criteria
+    ""
   );
 
-  const [btecharray, setbtecharray] = useState(prevData.eligible_branch.btech);
+  const [btecharray, setbtecharray] = useState([]);
   const [dual_mtecharray, setdual_mtecharray] = useState(
-    prevData.eligible_branch.dd_mtech
+    []
   );
-  const [mbaarray, setmbaarray] = useState(prevData.eligible_branch.mba);
-  const [msc2array, setmsc2array] = useState(prevData.eligible_branch.msc2);
-  const [msc3array, setmsc3array] = useState(prevData.eligible_branch.msc3);
-  const [mtecharray, setmtecharray] = useState(prevData.eligible_branch.mtech);
-  const [phdarray, setphdarray] = useState(prevData.eligible_branch.phd);
-  const [skillarray, setskillarray] = useState(prevData.skill_based);
+  const [mbaarray, setmbaarray] = useState([]);
+  const [msc2array, setmsc2array] = useState([]);
+  const [msc3array, setmsc3array] = useState([]);
+  const [mtecharray, setmtecharray] = useState([]);
+  const [phdarray, setphdarray] = useState([]);
+  const [skillarray, setskillarray] = useState([]);
   const [other_roundarray, setother_roundarray] = useState(
-    prevData.selection_pr.other_round
+    []
   );
   const [contactdetail, setcontactdetail] = useState([]);
   // setotherskill(() => {
@@ -381,23 +388,32 @@ export default function Form(props) {
       doc_link: "",
       DateTime: date,
       pdf_id: "",
+      pdf_id_student:"",
       pdf_viewlink: "",
       pdf_downloadlink: "",
+      pdf_downloadlink_student:""
     };
+
     // const params={
 
     // }
-    if (obj_id == null) {
+    console.log(formData.contact_detail[0].name);
+    
+    if (obj_id==='new') {
+      console.log("obj id=" , obj_id)
+      console.log("obj id=" , obj_id)
       const response1 = await axios.post(
         `${Base()}/pdf/uploadToDrive/cdc/save`,
         formData
       );
+
       const response2 = await axios.post(
         `${Base()}/pdf/uploadToDrive/student/save`,
         formData
       );
-      console.log("response1=", response1.data);
-      console.log("response2=", response2.data);
+
+      console.log("response1=", response1.data.url.webContentLink);
+      console.log("response2=", response2.data.url.webContentLink);
 
 
       formData.pdf_viewlink = response1.data.url.webViewLink;
@@ -409,19 +425,24 @@ export default function Form(props) {
         `${Base()}/form/save`,
         formData
       );
+      console.log(result);
       window.location.href="/company_dashboard";
     }
     else {
+      console.log("obj id=" , obj_id)
+      console.log("obj id=" , obj_id)
       const response1 = await axios.post(
-        `${Base()}/pdf/uploadToDrive/cdc/update`,
+        `${Base()}/pdf/uploadToDrive/cdc/save`,
         formData
       );
+
       const response2 = await axios.post(
         `${Base()}/pdf/uploadToDrive/student/update`,
         formData
       );
-      console.log("response1=", response1.data);
-      console.log("response2=", response2.data);
+
+      console.log("response1=", response1.data.url.webContentLink);
+      console.log("response2=", response2.data.url.webContentLink);
 
 
       formData.pdf_viewlink = response1.data.url.webViewLink;
@@ -430,33 +451,84 @@ export default function Form(props) {
       formData.pdf_id = response1.data.pdf_id;
       formData.pdf_id_student = response2.data.pdf_id;
       const result = await axios.post(
-        `${Base()}/form/update`,
+        `${Base()}/form/save`,
         formData
       );
-      const mailResponse = await axios.post(
-        `${Base()}/email/send_update`,
-        formData
-      );
+      console.log(result);
       window.location.href="/company_dashboard";
     }
     // window.location.replace("./company_dashboard");
     // console.log(response.data, result);
   }
+
+
+  const fetchPrevData = async () => {
+    const headers = {
+      Authorization: localStorage.getItem('token')
+    }
+    const params = { obj_id: obj_id };
+    const result = await axios.post(`${Base()}/form/getPrevData`, params, { headers: headers });
+    console.log("result.data==",result.data[0])
+    setPrevData(() => result.data[0]);
+console.log("prevData=",prevData);
+console.log("result.data.company_overview.name = ",result.data[0].company_overview.name)
+    setname(() =>  result.data[0].company_overview.name);
+    setwebsite(() =>  result.data[0].company_overview.website);
+    setsector(() =>  result.data[0].company_overview.sector);
+    setDesignation(() =>  result.data[0].job_detail.designation);
+    setplace_of_posting(() => result.data[0].job_detail.place_of_posting);
+    setdescription(() =>  result.data[0].job_detail.description);
+    setduration(() =>  result.data[0].job_detail.duration);
+    setModebutton(() =>  result.data[0].job_detail.mode);
+    setmode(() =>  result.data[0].job_detail.mode);
+
+    setctc(() =>  result.data[0].stipend_detail.ctc);
+    setctc_breakup(() =>  result.data[0].stipend_detail.ctc_breakup);
+    setbond_detail(() =>  result.data[0].stipend_detail.bond_detail);
+    setstipend(() =>  result.data[0].stipend_detail.stipend);
+    setPpo(() =>  result.data[0].stipend_detail.ppo_provision);
+    setppo_provision(() =>  result.data[0].stipend_detail.ppo_provision);
+
+    setctc_ppo(() =>  result.data[0].stipend_detail.ctc_ppo);
+    setcontactname1(() =>  result.data[0].contact_detail[0].name);
+    setcontactdesignation1(() =>  result.data[0].contact_detail[0].designation);
+    setcontactemail1(() =>  result.data[0].contact_detail[0].email);
+    setmobile1(() =>  result.data[0].contact_detail[0].mobile);
+    setresumeshort(() =>  result.data[0].selection_pr.resume_short_listing);
+    settypeoftest(() =>  result.data[0].selection_pr.type_of_test);
+    settotal_rounds(() => result.data[0].selection_pr.total_rounds);
+    setno_of_offers(() =>  result.data[0].selection_pr.no_of_offers);
+    seteligible_criteria(() =>  result.data[0].selection_pr.eligible_criteria);
+
+    setbtecharray(() =>  result.data[0].eligible_branch.btech);
+    setdual_mtecharray(() =>  result.data[0].eligible_branch.dd_mtech);
+    setmbaarray(() =>  result.data[0].eligible_branch.mba);
+    setmsc2array(() =>  result.data[0].eligible_branch.msc2);
+    setmsc3array(() =>  result.data[0].eligible_branch.msc3);
+    setmtecharray(() =>  result.data[0].eligible_branch.mtech);
+    setphdarray(() =>  result.data[0].eligible_branch.phd);
+    setskillarray(() =>  result.data[0].skill_based);
+    setother_roundarray(() =>  result.data[0].selection_pr.other_round);
+  };
+
+
+
   useEffect(() => {
     // console.log(obj_id);
+    // console.log(stipenddetail);
+
+    console.log("prevData.job_detail.mode",prevData.job_detail.mode);
     findotherskill();
     findsecondarycontact();
-    async function fetchPrevData() {
-      // const url = "localhost:3000/getpreviousdata";
-      // const response = await axios.post(url, obj_id);
-      // setPrevData(() => response);
-      // const response2 = await axios.get("localhost:3000/getAll");
-      // console.log(response2);
-      // setAllData(() => response2);
+
+    if(obj_id!=="new")
+    {
+      fetchPrevData();
     }
-    fetchPrevData();
+    
+    // console.log("previousdata.job_detail.mode=",prevdata)
     // prevData.eligible_branch.btech;
-  }, []);
+  },[]);
   return (
     <>
       <div>
